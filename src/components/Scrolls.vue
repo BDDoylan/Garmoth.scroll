@@ -4,32 +4,20 @@
 			{{ title }}
 		</h1>
 
-		<div class="flex justify-center items-center">
+		<div class="flex gap-4 justify-center items-center">
 			<button
-				@click="
-					keep = !keep;
-					if (sell) {
-						sell = !sell;
-					}
-				"
-				class="bg-600 text-center text-0 text-2xl inline w-20 mb-10 mr-2 p-1 rounded"
+				@click="keep = true"
+				class="bg-600 text-center text-0 text-2xl inline w-20 mb-10 p-1 rounded"
 				:class="keep && 'text-green'"
 			>
 				KEEP
-				<span class="text-xs">memes</span>
 			</button>
 			<button
-				@click="
-					sell = !sell;
-					if (keep) {
-						keep = !keep;
-					}
-				"
-				class="bg-600 text-center text-0 text-2xl inline w-20 mb-10 mr-2 p-1 rounded"
-				:class="sell && 'text-red'"
+				@click="keep = false"
+				class="bg-600 text-center text-0 text-2xl inline w-20 mb-10 p-1 rounded"
+				:class="!keep && 'text-red'"
 			>
 				SELL
-				<span class="text-xs">memes</span>
 			</button>
 		</div>
 
@@ -62,32 +50,28 @@ export default {
 	data() {
 		return {
 			keep: false,
-			sell: true,
 
 			memoryScrolls: [
 				{
-					name: "Ancient Relic Crystal",
-					fullIcon: "ancient_relic_crystal_summon_scroll.png",
+					name: "Ancient Relic",
+					fullIconKey: 41583,
 					main_key: 40218,
 					secondsPerScroll: null,
 					memoryFragment: 5,
-					partIcon: "ancient_relic_crystal_shard.png",
 				},
 				{
 					name: "Cartian Spell",
-					fullIcon: "cartian_spell.png",
+					fullIconKey: 41587,
 					main_key: 40220,
 					secondsPerScroll: null,
 					memoryFragment: 6,
-					partIcon: "forbidden_book.png",
 				},
 				{
 					name: "Pila Fe Scroll",
-					fullIcon: "pila_fe_scroll.png",
+					fullIconKey: 41595,
 					main_key: 40228,
 					secondsPerScroll: null,
 					memoryFragment: 7,
-					partIcon: "scroll_written_in_ancient_language.png",
 				},
 			],
 			memoryPrice: null,

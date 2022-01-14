@@ -1,15 +1,18 @@
 <template>
 	<div class="text-center">
-		<div class="bg-600 text-0 rounded h-44 text-xl relative">
-			<h1
-				class="my-3 pt-4 font-bold text-2xl"
-				:class="!toggle && 'text-4xl pt-11'"
-			>
+		<div class="bg-600 text-0 rounded h-44 text-xl relative p-4">
+			<div class="flex justify-center items-center my-1">
 				<img
-					:src="scroll.fullIcon"
-					class="inline object-scale-down h-9 relative bottom-2"
-				/>{{ scroll.name }}
-			</h1>
+					:src="
+						'https://assets.garmoth.com/items/' + scroll.fullIconKey + '.png'
+					"
+					:class="['inline object-scale-down h-9 relative mr-2', {'mt-6': !toggle}]"
+				/>
+				<h1 :class="['font-bold text-2xl', { 'text-4xl mt-6': !toggle }]">
+					{{ scroll.name }}
+				</h1>
+			</div>
+
 			<input
 				type="number"
 				placeholder="Seconds Per Scroll"
@@ -21,26 +24,25 @@
 				<h1>
 					Average
 					<img
-						src="../assets/memory_fragment.png"
+						src="https://assets.garmoth.com/items/44195.png"
 						class="inline object-scale-down h-6"
 					/>
 					per scroll:
 					<span class="font-bold text-red">{{ scroll.memoryFragment }}</span>
 				</h1>
 			</div>
-			<button
-				@click="toggle = !toggle"
-				class="absolute top-0 right-5 text-5xl text-green rounded bg-700 w-10"
-			>
-				+
-			</button>
-			<button
-				@click="toggle = !toggle"
-				v-show="toggle"
-				class="absolute top-0 right-5 text-5xl text-red rounded bg-700 w-10"
-			>
-				-
-			</button>
+			
+			<div class="flex items-center justify-center absolute w-10 top-2 right-0">
+				<button
+					@click="toggle = !toggle"
+					:class="[
+						'text-5xl rounded leading-3',
+						toggle ? 'text-red' : 'text-green',
+					]"
+				>
+					{{ toggle ? "-" : "+" }}
+				</button>
+			</div>
 		</div>
 		<div
 			v-show="toggle"
@@ -50,7 +52,9 @@
 				<h2 class="py-3">
 					Number of
 					<img
-						:src="scroll.partIcon"
+						:src="
+							'https://assets.garmoth.com/items/' + scroll.main_key + '.png'
+						"
 						class="inline object-scale-down h-6"
 					/>
 					for 1 hour: <span class="text-green">{{ numPartsPerHour }}</span>
@@ -59,7 +63,12 @@
 			<div class="bg-600 text-0 rounded h-56 text-xl relative">
 				<h2 class="py-3">
 					Average silver spent per
-					<img :src="scroll.partIcon" class="inline object-scale-down h-6" />
+					<img
+						:src="
+							'https://assets.garmoth.com/items/' + scroll.main_key + '.png'
+						"
+						class="inline object-scale-down h-6"
+					/>
 					:
 				</h2>
 				<input
@@ -71,7 +80,7 @@
 				<h2 class="py-3">
 					Average silver per
 					<img
-						src="../assets/memory_fragment.png"
+						:src="'https://assets.garmoth.com/items/44195.png'"
 						class="inline object-scale-down h-6"
 					/>
 					:
@@ -115,8 +124,8 @@ export default {
 		return {
 			toggle: false,
 
-            fullIcon: this.scroll.fullIcon,
-            partIcon: this.scroll.partIcon,
+			fullIcon: this.scroll.fullIcon,
+			partIcon: this.scroll.partIcon,
 
 			costPerPiece: this.prices[this.scroll.main_key].sub_items[0].price,
 		};
