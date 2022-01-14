@@ -6,7 +6,6 @@
 
 		<div class="flex justify-center items-center">
 			<button
-				v-if="keep === false"
 				@click="
 					keep = !keep;
 					if (sell) {
@@ -14,35 +13,20 @@
 					}
 				"
 				class="bg-600 text-center text-0 text-2xl inline w-20 mb-10 mr-2 p-1 rounded"
+				:class="keep && 'text-green'"
 			>
 				KEEP
 				<span class="text-xs">memes</span>
 			</button>
 			<button
-				v-if="keep === true"
-				@click="keep = !keep"
-				class="bg-600 text-center text-green text-2xl inline w-20 mb-10 mr-2 p-1 rounded"
-			>
-				KEEP
-				<span class="text-xs">memes</span>
-			</button>
-			<button
-				v-if="sell === false"
 				@click="
 					sell = !sell;
 					if (keep) {
 						keep = !keep;
 					}
 				"
-				class="bg-600 text-center text-0 text-2xl inline w-20 mb-10 ml-2 p-1 rounded"
-			>
-				SELL
-				<span class="text-xs">memes</span>
-			</button>
-			<button
-				v-if="sell === true"
-				@click="sell = !sell"
-				class="bg-600 text-center text-red text-2xl inline w-20 mb-10 ml-2 p-1 rounded"
+				class="bg-600 text-center text-0 text-2xl inline w-20 mb-10 mr-2 p-1 rounded"
+				:class="sell && 'text-red'"
 			>
 				SELL
 				<span class="text-xs">memes</span>
@@ -52,6 +36,7 @@
 		<div class="grid grid-cols-1 gap-4 mx-10 sm:grid-cols-3">
 			<template v-for="scroll in memoryScrolls" :key="scroll.main_key">
 				<Memory
+					v-if="prices"
 					:scroll="scroll"
 					:prices="prices"
 					:memoryPrice="memoryPrice"
@@ -82,24 +67,27 @@ export default {
 			memoryScrolls: [
 				{
 					name: "Ancient Relic Crystal",
+					fullIcon: "ancient_relic_crystal_summon_scroll.png",
 					main_key: 40218,
 					secondsPerScroll: null,
 					memoryFragment: 5,
-					costPerPiece: 1760000,
+					partIcon: "ancient_relic_crystal_shard.png",
 				},
 				{
 					name: "Cartian Spell",
+					fullIcon: "cartian_spell.png",
 					main_key: 40220,
 					secondsPerScroll: null,
 					memoryFragment: 6,
-					costPerPiece: 1690000,
+					partIcon: "forbidden_book.png",
 				},
 				{
 					name: "Pila Fe Scroll",
+					fullIcon: "pila_fe_scroll.png",
 					main_key: 40228,
 					secondsPerScroll: null,
 					memoryFragment: 7,
-					costPerPiece: 2450000,
+					partIcon: "scroll_written_in_ancient_language.png",
 				},
 			],
 			memoryPrice: null,
@@ -115,8 +103,6 @@ export default {
 			this.prices = res.data.items;
 
 			this.memoryPrice = this.prices[44195].sub_items[0].price;
-
-			console.log(this.prices[40218])
 		});
 	},
 

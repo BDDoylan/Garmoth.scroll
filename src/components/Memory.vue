@@ -6,7 +6,7 @@
 				:class="!toggle && 'text-4xl pt-11'"
 			>
 				<img
-					src="../assets/ancient_relic_crystal_summon_scroll.png"
+					:src="scroll.fullIcon"
 					class="inline object-scale-down h-9 relative bottom-2"
 				/>{{ scroll.name }}
 			</h1>
@@ -50,7 +50,7 @@
 				<h2 class="py-3">
 					Number of
 					<img
-						src="../assets/ancient_relic_crystal_shard.png"
+						:src="scroll.partIcon"
 						class="inline object-scale-down h-6"
 					/>
 					for 1 hour: <span class="text-green">{{ numPartsPerHour }}</span>
@@ -59,16 +59,13 @@
 			<div class="bg-600 text-0 rounded h-56 text-xl relative">
 				<h2 class="py-3">
 					Average silver spent per
-					<img
-						src="../assets/ancient_relic_crystal_shard.png"
-						class="inline object-scale-down h-6"
-					/>
+					<img :src="scroll.partIcon" class="inline object-scale-down h-6" />
 					:
 				</h2>
 				<input
 					type="number"
 					placeholder="Silver"
-					v-model="scroll.costPerPiece/*prices[scroll.main_key].sub_items[0].price*/"
+					v-model="costPerPiece"
 					class="text-center rounded bg-700 text-0 my-2 p-1 focus:outline-none"
 				/>
 				<h2 class="py-3">
@@ -103,6 +100,7 @@
 		</div>
 	</div>
 </template>
+
 <script>
 export default {
 	props: {
@@ -116,9 +114,14 @@ export default {
 	data() {
 		return {
 			toggle: false,
+
+            fullIcon: this.scroll.fullIcon,
+            partIcon: this.scroll.partIcon,
+
+			costPerPiece: this.prices[this.scroll.main_key].sub_items[0].price,
 		};
 	},
-    
+
 	computed: {
 		numPartsPerHour() {
 			return Math.round((3600 / this.scroll.secondsPerScroll) * 5);
@@ -127,13 +130,12 @@ export default {
 		profitPerScroll() {
 			if (this.keep) {
 				return (
-					this.scroll.memoryFragment * this.memoryPrice -
-					this.scroll.costPerPiece * 5
+					this.scroll.memoryFragment * this.memoryPrice - this.costPerPiece * 5
 				);
 			} else {
 				return (
 					this.scroll.memoryFragment * this.memoryPrice * this.tax -
-					this.scroll.costPerPiece * 5
+					this.costPerPiece * 5
 				);
 			}
 		},
