@@ -57,24 +57,56 @@ export default {
 					fullIconKey: 41583,
 					main_key: 40218,
 					secondsPerScroll: null,
-					memoryFragment: 5,
+					drops: [
+						{
+							name: "Memory Fragment",
+							key: 44195,
+							dropRate: 5,
+						},
+						{
+							name: "Hunter's Seal",
+							key: 44186,
+							dropRate: 6.25,
+						},
+					],
 				},
 				{
 					name: "Cartian Spell",
 					fullIconKey: 41587,
 					main_key: 40220,
 					secondsPerScroll: null,
-					memoryFragment: 6,
+					drops: [
+						{
+							name: "Memory Fragment",
+							key: 44195,
+							dropRate: 6,
+						},
+						{
+							name: "Hunter's Seal",
+							key: 44186,
+							dropRate: 6,
+						},
+					],
 				},
 				{
 					name: "Pila Fe Scroll",
 					fullIconKey: 41595,
 					main_key: 40228,
 					secondsPerScroll: null,
-					memoryFragment: 7,
+					drops: [
+						{
+							name: "Memory Fragment",
+							key: 44195,
+							dropRate: 7,
+						},
+						{
+							name: "Hunter's Seal",
+							key: 44186,
+							dropRate: 3,
+						},
+					],
 				},
 			],
-			memoryPrice: null,
 
 			tax: 0.845,
 
@@ -85,12 +117,8 @@ export default {
 	created() {
 		axios.get("market.json").then((res) => {
 			this.prices = res.data.items;
-
-			this.memoryPrice = this.prices[44195].sub_items[0].price;
 		});
 	},
-
-	methods: {},
 };
 </script>
 
