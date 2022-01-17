@@ -3,7 +3,9 @@
 		<div class="bg-600 text-0 rounded h-auto text-xl relative p-4 pb-8">
 			<div class="flex justify-center items-center my-1">
 				<img
-					:src="'https://assets.garmoth.com/items/' + scroll.fullIconKey + '.png'"
+					:src="
+						'https://assets.garmoth.com/items/' + scroll.fullIconKey + '.png'
+					"
 					:class="[
 						'inline object-scale-down h-9 relative mr-2 mt-5',
 						{ 'mt-6': !toggle },
@@ -22,7 +24,10 @@
 				class="text-center rounded bg-700 text-0 my-2 p-1 focus:outline-none"
 			/>
 			<div></div>
-			<div class="hover:bg-700 rounded inline-block py-2 px-4" @click="dropsToggle = !dropsToggle">
+			<div
+				class="hover:bg-700 rounded inline-block py-2 px-4"
+				@click="dropsToggle = !dropsToggle"
+			>
 				<h1 v-for="(item, key) in dropsRender" :key="key" class="">
 					Average
 					<img
@@ -62,7 +67,7 @@
 					for 1 hour: <span class="text-green">{{ numPartsPerHour }}</span>
 				</h2>
 			</div>
-			<div class="bg-600 text-0 rounded h-56 text-xl relative">
+			<div class="bg-600 text-0 rounded h-auto text-xl relative pb-2">
 				<h2 class="py-3">
 					Average silver spent per
 					<img
@@ -79,20 +84,22 @@
 					v-model="costPerPiece"
 					class="text-center rounded bg-700 text-0 my-2 p-1 focus:outline-none"
 				/>
-				<h2 class="py-3">
-					Average silver per
-					<img
-						:src="'https://assets.garmoth.com/items/44195.png'"
-						class="inline object-scale-down h-6"
+				<div v-if="scroll.name != 'Narcs Stone'">
+					<h2 class="py-3">
+						Average silver per
+						<img
+							:src="'https://assets.garmoth.com/items/44195.png'"
+							class="inline object-scale-down h-6"
+						/>
+						:
+					</h2>
+					<input
+						type="number"
+						placeholder="Silver"
+						v-model="memoryPrice"
+						class="text-center rounded bg-700 text-0 my-2 p-1 focus:outline-none"
 					/>
-					:
-				</h2>
-				<input
-					type="number"
-					placeholder="Silver"
-					v-model="memoryPrice"
-					class="text-center rounded bg-700 text-0 my-2 p-1 focus:outline-none"
-				/>
+				</div>
 			</div>
 			<div class="bg-600 text-0 rounded h-56 text-xl relative">
 				<h1 class="text-green text-2xl mt-2 p-4 font-bold">PROFITS</h1>
@@ -128,7 +135,6 @@ export default {
 			dropsToggle: false,
 
 			fullIcon: this.scroll.fullIcon,
-			partIcon: this.scroll.partIcon,
 
 			costPerPiece: this.prices[this.scroll.main_key].sub_items[0].price,
 			memoryPrice: this.prices[44195].sub_items[0].price,
@@ -142,14 +148,9 @@ export default {
 
 		profitPerScroll() {
 			if (this.keep) {
-				return (
-					this.scroll.drops[0].dropRate * this.memoryPrice - this.costPerPiece * 5
-				);
+				return this.profitPerDrop() - this.costPerPiece * 5;
 			} else {
-				return (
-					this.scroll.drops[0].dropRate * this.memoryPrice * this.tax -
-					this.costPerPiece * 5
-				);
+				return this.profitPerDrop() * this.tax - this.costPerPiece * 5;
 			}
 		},
 
@@ -158,6 +159,31 @@ export default {
 				return this.scroll.drops;
 			}
 			return [this.scroll.drops[0]];
+		},
+	},
+
+	methods: {
+		profitPerDrop() {
+			let totalDropValue = 0;
+
+			this.scroll.drops.forEach((item) => {
+				if (item.key === 44186) {
+					totalDropValue +=
+						(item.dropRate / 2) * this.prices[16002].sub_items[0].price;
+					return;
+				} else if (item.key === 44328) {
+					totalDropValue +=
+						(item.dropRate / 10) * this.prices[50808].sub_items[0].price;
+					return;
+				} else if (item.key === 44306) {
+					totalDropValue += item.dropRate * 50000;
+					return;
+				}
+				totalDropValue +=
+					item.dropRate * this.prices[item.key].sub_items[0].price;
+			});
+
+			return totalDropValue;
 		},
 	},
 };

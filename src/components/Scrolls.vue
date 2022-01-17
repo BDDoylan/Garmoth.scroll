@@ -106,6 +106,52 @@ export default {
 						},
 					],
 				},
+				{
+					name: "Narcs Stone",
+					fullIconKey: 41619,
+					main_key: 40383,
+					secondsPerScroll: null,
+					drops: [
+						{
+							name: "Narc Ear Accessory",
+							key: 11834,
+							dropRate: 0.006,
+						},
+						{
+							name: "Forest Fury",
+							key: 4917,
+							dropRate: 0.04,
+						},
+						{
+							name: "Caphras Stone",
+							key: 721003,
+							dropRate: 0.53,
+						},
+						{
+							name: "Water Spirit Stone Fragment",
+							key: 44306,
+							dropRate: 1.49,
+						},
+						{
+							name: "Black Stone (Weapon)",
+							key: 16001,
+							dropRate: 4,
+						},
+						{
+							name: "Black Stone (Armor)",
+							key: 16002,
+							dropRate: 9,
+						},{
+							name: "Peridot Petal",
+							key: 44328,
+							dropRate: 3,
+						},{
+							name: "Hunter's Seal",
+							key: 44186,
+							dropRate: 1,
+						},
+					],
+				},
 			],
 
 			tax: 0.845,
