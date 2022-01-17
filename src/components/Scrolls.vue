@@ -23,14 +23,14 @@
 
 		<div class="grid grid-cols-1 gap-4 mx-10 sm:grid-cols-3">
 			<template v-for="scroll in memoryScrolls" :key="scroll.main_key">
-				<Memory
+				<Scroll
 					v-if="prices"
 					:scroll="scroll"
 					:prices="prices"
 					:memoryPrice="memoryPrice"
 					:keep="keep"
 					:tax="tax"
-				></Memory>
+				></Scroll>
 			</template>
 		</div>
 	</div>
@@ -38,11 +38,11 @@
 
 <script>
 import axios from "axios";
-import Memory from "./Memory.vue";
+import Scroll from "./Scroll.vue";
 
 export default {
 	name: "Scrolls",
-	components: { Memory },
+	components: { Scroll },
 	props: {
 		title: String,
 	},
