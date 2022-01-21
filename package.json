@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-currency-input": "^2.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",

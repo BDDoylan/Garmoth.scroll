@@ -1,44 +1,69 @@
 <template>
 	<div class="text-center">
-		<div class="bg-600 text-0 rounded h-auto text-xl relative p-4 pb-8">
+		<div class="bg-600 text-0 rounded h-auto text-xl relative p-2 pb-4">
 			<div class="flex justify-center items-center my-1">
 				<img
 					:src="
 						'https://assets.garmoth.com/items/' + scroll.fullIconKey + '.png'
 					"
 					:class="[
-						'inline object-scale-down h-9 relative mr-2 mt-5',
-						{ 'mt-6': !toggle },
+						'inline object-scale-down h-9 relative mr-2 mt-2',
+						{ 'mt-2': !toggle },
 					]"
 				/>
-				<h1 :class="['font-bold text-2xl mt-6', { 'text-4xl mt-6': !toggle }]">
+				<h2
+					:class="['font-bold text-2xl mt-2 truncate', { 'text-4xl': !toggle }]"
+				>
 					{{ scroll.name }}
-				</h1>
+				</h2>
 			</div>
 
-			<input
-				type="number"
-				placeholder="Seconds Per Scroll"
+			<Input
+				class="mt-4 mb-2"
 				v-if="toggle"
+				placeholder="Seconds Per Scroll"
 				v-model="scroll.secondsPerScroll"
-				class="text-center rounded bg-700 text-0 my-2 p-1 focus:outline-none"
+				:options="{
+					currency: 'USD',
+					currencyDisplay: 'hidden',
+					hideGroupingSeparatorOnFocus: false,
+				}"
 			/>
 			<div></div>
 			<div
-				class="hover:bg-700 rounded inline-block py-2 px-4"
+				class="hover:bg-700 rounded inline-block py-2 px-4 cursor-point"
 				@click="dropsToggle = !dropsToggle"
 			>
-				<h1 v-for="(item, key) in dropsRender" :key="key" class="">
-					Average
-					<img
-						:src="'https://assets.garmoth.com/items/' + item.key + '.png'"
-						class="inline object-scale-down h-6"
-					/>
-					per scroll:
-					<span class="font-bold text-red">{{ item.dropRate }}</span>
-				</h1>
+				<div class="inline-block">
+					<p class="m-0.5" v-for="(item, key) in dropsRender" :key="key">
+						Average
+						<img
+							:src="'https://assets.garmoth.com/items/' + item.key + '.png'"
+							class="inline object-scale-down h-6"
+						/>
+						per scroll:
+						<!-- <span class="font-bold text-red" @click.stop.prevent>{{
+							item.dropRate
+						}}</span> -->
+						<Input
+							@click.stop.prevent
+							class="w-16 text-center text-red"
+							v-model="item.dropRate"
+							:options="{
+								currency: 'USD',
+								currencyDisplay: 'hidden',
+								hideGroupingSeparatorOnFocus: false,
+								precision: {min: 0, max: 4},
+							}"
+						/>
+					</p>
+				</div>
+				<i
+					v-if="!dropsToggle"
+					class="fas fa-level-down-alt text-green ml-2"
+				></i>
+				<i v-if="dropsToggle" class="fas fa-level-up-alt text-red ml-2"></i>
 			</div>
-
 			<div class="flex items-center justify-center absolute w-10 top-2 right-0">
 				<button
 					@click="toggle = !toggle"
@@ -56,7 +81,7 @@
 			class="sm:col-start-1 sm:col-end-2 xxs:row-start-2 mt-2"
 		>
 			<div class="bg-600 text-0 rounded h-13 text-xl relative mb-2">
-				<h2 class="py-3">
+				<p class="py-3">
 					Number of
 					<img
 						:src="
@@ -65,41 +90,30 @@
 						class="inline object-scale-down h-6"
 					/>
 					for 1 hour: <span class="text-green">{{ numPartsPerHour }}</span>
-				</h2>
+				</p>
 			</div>
-			<div class="bg-600 text-0 rounded h-auto text-xl relative pb-2">
-				<h2 class="py-3">
-					Average silver spent per
-					<img
-						:src="
-							'https://assets.garmoth.com/items/' + scroll.main_key + '.png'
-						"
-						class="inline object-scale-down h-6"
-					/>
-					:
-				</h2>
-				<input
-					type="number"
-					placeholder="Silver"
-					v-model="costPerPiece"
-					class="text-center rounded bg-700 text-0 my-2 p-1 focus:outline-none"
-				/>
-				<div v-if="scroll.name != 'Narcs Stone'">
-					<h2 class="py-3">
-						Average silver per
-						<img
-							:src="'https://assets.garmoth.com/items/44195.png'"
-							class="inline object-scale-down h-6"
-						/>
-						:
-					</h2>
-					<input
-						type="number"
-						placeholder="Silver"
-						v-model="memoryPrice"
-						class="text-center rounded bg-700 text-0 my-2 p-1 focus:outline-none"
-					/>
-				</div>
+			<div class="bg-600 text-0 rounded h-auto text-xl relative p-2">
+				<table class="w-full table-fixed">
+					<tr v-for="(drop, index) in scroll.drops" :key="index">
+						<td class="pr-2 w-10 column-sticky">
+							<img
+								:src="'https://assets.garmoth.com/items/' + drop.key + '.png'"
+							/>
+						</td>
+						<td class="text-left px-2 truncate">{{ drop.name }}</td>
+						<td class="w-28">
+							<Input
+								class="w-28"
+								v-model="drop.price"
+								:options="{
+									currency: 'USD',
+									currencyDisplay: 'hidden',
+									hideGroupingSeparatorOnFocus: false,
+								}"
+							/>
+						</td>
+					</tr>
+				</table>
 			</div>
 			<div class="bg-600 text-0 rounded h-56 text-xl relative">
 				<h1 class="text-green text-2xl mt-2 p-4 font-bold">PROFITS</h1>
@@ -108,10 +122,10 @@
 						<h1>{{ profitPerScroll.toLocaleString() }} per scroll</h1>
 					</div>
 					<div class="bg-700 text-0 rounded w-auto mx-12 mt-4 p-4">
-						<h1>
+						<p>
 							{{ (profitPerScroll * (numPartsPerHour / 5)).toLocaleString() }}
 							per hour
-						</h1>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -120,7 +134,13 @@
 </template>
 
 <script>
+import Input from "./Input.vue";
+
 export default {
+	name: "Scroll",
+
+	components: { Input },
+
 	props: {
 		scroll: { required: true },
 		prices: { required: true },
@@ -141,6 +161,10 @@ export default {
 		};
 	},
 
+	created() {
+		this.setDropPrices();
+	},
+
 	computed: {
 		numPartsPerHour() {
 			return Math.round((3600 / this.scroll.secondsPerScroll) * 5);
@@ -148,9 +172,9 @@ export default {
 
 		profitPerScroll() {
 			if (this.keep) {
-				return this.profitPerDrop() - this.costPerPiece * 5;
+				return this.totalDropValue - this.costPerPiece * 5;
 			} else {
-				return this.profitPerDrop() * this.tax - this.costPerPiece * 5;
+				return this.totalDropValue * this.tax - this.costPerPiece * 5;
 			}
 		},
 
@@ -160,30 +184,37 @@ export default {
 			}
 			return [this.scroll.drops[0]];
 		},
+
+		totalDropValue() {
+			let totalDropValue = 0;
+			this.scroll.drops.forEach((item) => {
+				if (item.key === 44186) {
+					totalDropValue += (item.dropRate * item.price) / 2;
+				} else if (item.key === 44328) {
+					totalDropValue += (item.dropRate * item.price) / 10;
+				} else if (item.key === 44306) {
+					totalDropValue += item.dropRate * item.price;
+				} else {
+					totalDropValue += item.dropRate * item.price;
+				}
+			});
+			return totalDropValue;
+		},
 	},
 
 	methods: {
-		profitPerDrop() {
-			let totalDropValue = 0;
-
+		setDropPrices() {
 			this.scroll.drops.forEach((item) => {
 				if (item.key === 44186) {
-					totalDropValue +=
-						(item.dropRate / 2) * this.prices[16002].sub_items[0].price;
-					return;
+					item.price = this.prices[16002].sub_items[0].price;
 				} else if (item.key === 44328) {
-					totalDropValue +=
-						(item.dropRate / 10) * this.prices[50808].sub_items[0].price;
-					return;
+					item.price = this.prices[50808].sub_items[0].price;
 				} else if (item.key === 44306) {
-					totalDropValue += item.dropRate * 50000;
-					return;
+					item.price = 50000;
+				} else {
+					item.price = this.prices[item.key].sub_items[0].price;
 				}
-				totalDropValue +=
-					item.dropRate * this.prices[item.key].sub_items[0].price;
 			});
-
-			return totalDropValue;
 		},
 	},
 };

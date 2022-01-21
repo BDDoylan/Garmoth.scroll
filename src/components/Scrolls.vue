@@ -21,7 +21,7 @@
 			</button>
 		</div>
 
-		<div class="grid grid-cols-1 gap-4 mx-10 sm:grid-cols-3">
+		<div class="grid grid-cols-1 gap-4 mx-4 sm:grid-cols-3">
 			<template v-for="scroll in memoryScrolls" :key="scroll.main_key">
 				<Scroll
 					v-if="prices"
@@ -53,7 +53,7 @@ export default {
 
 			memoryScrolls: [
 				{
-					name: "Ancient Relic",
+					name: "Ancient Relic Crystal",
 					fullIconKey: 41583,
 					main_key: 40218,
 					secondsPerScroll: null,
@@ -107,7 +107,7 @@ export default {
 					],
 				},
 				{
-					name: "Narcs Stone",
+					name: "Manshaum Narc's Stone",
 					fullIconKey: 41619,
 					main_key: 40383,
 					secondsPerScroll: null,
