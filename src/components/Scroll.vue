@@ -42,9 +42,6 @@
 							class="inline object-scale-down h-6"
 						/>
 						per scroll:
-						<!-- <span class="font-bold text-red" @click.stop.prevent>{{
-							item.dropRate
-						}}</span> -->
 						<Input
 							@click.stop.prevent
 							class="w-16 text-center text-red"
@@ -53,7 +50,7 @@
 								currency: 'USD',
 								currencyDisplay: 'hidden',
 								hideGroupingSeparatorOnFocus: false,
-								precision: {min: 0, max: 4},
+								precision: { min: 0, max: 4 },
 							}"
 						/>
 					</p>

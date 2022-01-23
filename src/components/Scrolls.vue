@@ -21,7 +21,7 @@
 			</button>
 		</div>
 
-		<div class="grid grid-cols-1 gap-4 mx-4 sm:grid-cols-3">
+		<div class="grid grid-cols-1 gap-4 mx-4 sm:grid-cols-3 pb-3">
 			<template v-for="scroll in memoryScrolls" :key="scroll.main_key">
 				<Scroll
 					v-if="prices"
@@ -141,11 +141,13 @@ export default {
 							name: "Black Stone (Armor)",
 							key: 16002,
 							dropRate: 9,
-						},{
+						},
+						{
 							name: "Peridot Petal",
 							key: 44328,
 							dropRate: 3,
-						},{
+						},
+						{
 							name: "Hunter's Seal",
 							key: 44186,
 							dropRate: 1,
