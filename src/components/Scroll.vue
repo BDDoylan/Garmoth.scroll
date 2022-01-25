@@ -170,6 +170,10 @@ export default {
 			memoryPrice: this.prices[44195].sub_items[0].price,
 
 			secPerScroll: this.scroll.secondsPerScroll,
+
+			storage: {
+				secondsPS: { s1: null, s2: null, s3: null, s4: null, s5: null },
+			},
 		};
 	},
 
@@ -177,43 +181,50 @@ export default {
 		this.setDropPrices();
 		this.setScrollPiecePrice();
 
+		if (!localStorage.getItem("storage")) {
+			localStorage.setItem("storage", JSON.stringify(this.storage));
+		} else {
+			this.storage = JSON.parse(localStorage.getItem("storage"));
+		}
+
 		if (this.scroll.main_key === 40218) {
-			this.secPerScroll = localStorage.s1;
+			this.secPerScroll = this.storage.secondsPS.s1;
 		}
 		if (this.scroll.main_key === 40220) {
-			this.secPerScroll = localStorage.s2;
+			this.secPerScroll = this.storage.secondsPS.s2;
 		}
 		if (this.scroll.main_key === 40228) {
-			this.secPerScroll = localStorage.s3;
+			this.secPerScroll = this.storage.secondsPS.s3;
 		}
 		if (this.scroll.main_key === 40383) {
-			this.secPerScroll = localStorage.s4;
+			this.secPerScroll = this.storage.secondsPS.s4;
 		}
 		if (this.scroll.main_key === 65770) {
-			this.secPerScroll = localStorage.s5;
+			this.secPerScroll = this.storage.secondsPS.s5;
 		}
 	},
 
 	computed: {
 		numPartsPerHour() {
-
-
+			this.storage = JSON.parse(localStorage.getItem("storage"));
 
 			if (this.scroll.main_key === 40218) {
-				localStorage.s1 = this.secPerScroll;
+				this.storage.secondsPS.s1 = this.secPerScroll;
 			}
 			if (this.scroll.main_key === 40220) {
-				localStorage.s2 = this.secPerScroll;
+				this.storage.secondsPS.s2 = this.secPerScroll;
 			}
 			if (this.scroll.main_key === 40228) {
-				localStorage.s3 = this.secPerScroll;
+				this.storage.secondsPS.s3 = this.secPerScroll;
 			}
 			if (this.scroll.main_key === 40383) {
-				localStorage.s4 = this.secPerScroll;
+				this.storage.secondsPS.s4 = this.secPerScroll;
 			}
 			if (this.scroll.main_key === 65770) {
-				localStorage.s5 = this.secPerScroll;
+				this.storage.secondsPS.s5 = this.secPerScroll;
 			}
+
+			localStorage.setItem("storage", JSON.stringify(this.storage));
 
 			return Math.round((3600 / this.secPerScroll) * 5);
 		},
