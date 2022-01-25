@@ -22,12 +22,11 @@
 		</div>
 
 		<div class="grid grid-cols-1 gap-4 mx-4 sm:grid-cols-3 pb-3">
-			<template v-for="scroll in memoryScrolls" :key="scroll.main_key">
+			<template v-for="scroll in allScrolls" :key="scroll.main_key">
 				<Scroll
 					v-if="prices"
 					:scroll="scroll"
 					:prices="prices"
-					:memoryPrice="memoryPrice"
 					:keep="keep"
 					:tax="tax"
 				></Scroll>
@@ -51,7 +50,7 @@ export default {
 		return {
 			keep: false,
 
-			memoryScrolls: [
+			allScrolls: [
 				{
 					name: "Ancient Relic Crystal",
 					fullIconKey: 41583,
@@ -150,6 +149,77 @@ export default {
 						{
 							name: "Hunter's Seal",
 							key: 44186,
+							dropRate: 1,
+						},
+					],
+				},
+				{
+					name: "Ibedor's Scroll",
+					fullIconKey: 65771,
+					main_key: 65770,
+					secondsPerScroll: null,
+					drops: [
+						{
+							name: "Caphras Stone",
+							key: 721003,
+							dropRate: 14.21,
+						},
+						{
+							name: "Ancient Spirit Dust",
+							key: 721002,
+							dropRate: 101.8,
+						},
+						{
+							name: "Specter's Energy",
+							key: 721044,
+							dropRate: 0.016,
+						},
+						{
+							name: "Embers of Despair",
+							key: 44475,
+							dropRate: 0.006,
+						},
+						{
+							name: "Black Stone (Weapon)",
+							key: 16001,
+							dropRate: 5.22,
+						},
+						{
+							name: "Black Stone (Armor)",
+							key: 16002,
+							dropRate: 5.32,
+						},
+						{
+							name: "Broken Horn Fragment",
+							key: 44454,
+							dropRate: 109.6,
+						},
+						{
+							name: "Moonlight Spirit Powder",
+							key: 44451,
+							dropRate: 68.67,
+						},
+						{
+							name: "Golem's Heart Fragment",
+							key: 44456,
+							dropRate: 38.16,
+						},
+						{
+							name: "Silver",
+							key: 1,
+							dropRate: 487178,
+						},
+					],
+				},
+				{
+					name: "Coming Soon...",
+					fullIconKey: 1,
+					main_key: 1,
+					secondsPerScroll: null,
+					drops: [
+						{
+							name: "Coming Soon...",
+							key: 1,
 							dropRate: 1,
 						},
 					],

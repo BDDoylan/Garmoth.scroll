@@ -44,7 +44,7 @@
 						per scroll:
 						<Input
 							@click.stop.prevent
-							class="w-16 text-center text-red"
+							class="w-20 text-center text-red"
 							v-model="item.dropRate"
 							:options="{
 								currency: 'USD',
@@ -153,13 +153,14 @@ export default {
 
 			fullIcon: this.scroll.fullIcon,
 
-			costPerPiece: this.prices[this.scroll.main_key].sub_items[0].price,
+			costPerPiece: 0,
 			memoryPrice: this.prices[44195].sub_items[0].price,
 		};
 	},
 
 	created() {
 		this.setDropPrices();
+		this.setScrollPiecePrice();
 	},
 
 	computed: {
@@ -208,10 +209,38 @@ export default {
 					item.price = this.prices[50808].sub_items[0].price;
 				} else if (item.key === 44306) {
 					item.price = 50000;
+				} else if (item.key === 721002) {
+					item.price =
+						this.prices[721003].sub_items[0].price / 5 -
+						this.prices[16002].sub_items[0].price;
+				} else if (item.key === 721044) {
+					item.price = 30000000;
+				} else if (item.key === 44475) {
+					item.price = 16900000;
+				} else if (item.key === 44454) {
+					item.price = 18000;
+				} else if (item.key === 44451) {
+					item.price = 15000;
+				} else if (item.key === 44456) {
+					item.price = 107000;
+				} else if (item.key === 1) {
+					item.price = 1;
 				} else {
 					item.price = this.prices[item.key].sub_items[0].price;
 				}
 			});
+		},
+
+		setScrollPiecePrice() {
+			if (
+				this.scroll.name === "Ibedor's Scroll" ||
+				this.scroll.name === "Coming Soon..."
+			) {
+				this.costPerPiece = 0;
+			} else {
+				this.costPerPiece =
+					this.prices[this.scroll.main_key].sub_items[0].price;
+			}
 		},
 	},
 };
