@@ -56,6 +56,7 @@ export default {
 					fullIconKey: 41583,
 					main_key: 40218,
 					secondsPerScroll: null,
+					avgSecPerScroll: 90,
 					drops: [
 						{
 							name: "Memory Fragment",
@@ -74,6 +75,7 @@ export default {
 					fullIconKey: 41587,
 					main_key: 40220,
 					secondsPerScroll: null,
+					avgSecPerScroll: 90,
 					drops: [
 						{
 							name: "Memory Fragment",
@@ -92,6 +94,7 @@ export default {
 					fullIconKey: 41595,
 					main_key: 40228,
 					secondsPerScroll: null,
+					avgSecPerScroll: 60,
 					drops: [
 						{
 							name: "Memory Fragment",
@@ -110,6 +113,7 @@ export default {
 					fullIconKey: 41619,
 					main_key: 40383,
 					secondsPerScroll: null,
+					avgSecPerScroll: 120,
 					drops: [
 						{
 							name: "Narc Ear Accessory",
@@ -158,6 +162,7 @@ export default {
 					fullIconKey: 65771,
 					main_key: 65770,
 					secondsPerScroll: null,
+					avgSecPerScroll: 225,
 					drops: [
 						{
 							name: "Caphras Stone",
@@ -208,19 +213,6 @@ export default {
 							name: "Silver",
 							key: 1,
 							dropRate: 487178,
-						},
-					],
-				},
-				{
-					name: "Coming Soon...",
-					fullIconKey: 1,
-					main_key: 1,
-					secondsPerScroll: null,
-					drops: [
-						{
-							name: "Coming Soon...",
-							key: 1,
-							dropRate: 1,
 						},
 					],
 				},

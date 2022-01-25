@@ -17,18 +17,28 @@
 					{{ scroll.name }}
 				</h2>
 			</div>
+			<div class="relative w-60 m-auto">
+				<h3
+					v-if="toggle && displayAvg"
+					class="text-xs text-green bg-800 p-2 bottom-10 right-20 absolute opacity-80"
+				>
+					Avg: {{ scroll.avgSecPerScroll }} sec.
+				</h3>
+				<Input
+					class="mt-2 mb-2"
+					v-if="toggle"
+					@mouseover="displayAvg = true"
+					@mouseleave="displayAvg = false"
+					placeholder="Seconds Per Scroll"
+					v-model="secPerScroll"
+					:options="{
+						currency: 'USD',
+						currencyDisplay: 'hidden',
+						hideGroupingSeparatorOnFocus: false,
+					}"
+				/>
+			</div>
 
-			<Input
-				class="mt-4 mb-2"
-				v-if="toggle"
-				placeholder="Seconds Per Scroll"
-				v-model="scroll.secondsPerScroll"
-				:options="{
-					currency: 'USD',
-					currencyDisplay: 'hidden',
-					hideGroupingSeparatorOnFocus: false,
-				}"
-			/>
 			<div></div>
 			<div
 				class="hover:bg-700 rounded inline-block py-2 px-4 cursor-point"
@@ -149,23 +159,63 @@ export default {
 		return {
 			toggle: false,
 
+			displayAvg: false,
+
 			dropsToggle: false,
 
 			fullIcon: this.scroll.fullIcon,
 
 			costPerPiece: 0,
+
 			memoryPrice: this.prices[44195].sub_items[0].price,
+
+			secPerScroll: this.scroll.secondsPerScroll,
 		};
 	},
 
 	created() {
 		this.setDropPrices();
 		this.setScrollPiecePrice();
+
+		if (this.scroll.main_key === 40218) {
+			this.secPerScroll = localStorage.s1;
+		}
+		if (this.scroll.main_key === 40220) {
+			this.secPerScroll = localStorage.s2;
+		}
+		if (this.scroll.main_key === 40228) {
+			this.secPerScroll = localStorage.s3;
+		}
+		if (this.scroll.main_key === 40383) {
+			this.secPerScroll = localStorage.s4;
+		}
+		if (this.scroll.main_key === 65770) {
+			this.secPerScroll = localStorage.s5;
+		}
 	},
 
 	computed: {
 		numPartsPerHour() {
-			return Math.round((3600 / this.scroll.secondsPerScroll) * 5);
+
+
+
+			if (this.scroll.main_key === 40218) {
+				localStorage.s1 = this.secPerScroll;
+			}
+			if (this.scroll.main_key === 40220) {
+				localStorage.s2 = this.secPerScroll;
+			}
+			if (this.scroll.main_key === 40228) {
+				localStorage.s3 = this.secPerScroll;
+			}
+			if (this.scroll.main_key === 40383) {
+				localStorage.s4 = this.secPerScroll;
+			}
+			if (this.scroll.main_key === 65770) {
+				localStorage.s5 = this.secPerScroll;
+			}
+
+			return Math.round((3600 / this.secPerScroll) * 5);
 		},
 
 		profitPerScroll() {
