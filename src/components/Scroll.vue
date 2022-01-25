@@ -55,7 +55,8 @@
 						<Input
 							@click.stop.prevent
 							class="w-20 text-center text-red"
-							v-model="item.dropRate"
+							v-model="storage.items[scroll.main_key][item.key]"
+                            :placeholder="item.dropRate"
 							:options="{
 								currency: 'USD',
 								currencyDisplay: 'hidden',
@@ -178,6 +179,10 @@ export default {
 		if (localStorage.getItem("SCROLL_DATA")) {
             this.storage = JSON.parse(localStorage.getItem("SCROLL_DATA"))
 		}
+
+        if (!this.storage.items[this.scroll.main_key]) {
+            this.storage.items[this.scroll.main_key] = {}
+        }
 	},
 
 	computed: {
