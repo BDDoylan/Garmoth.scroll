@@ -30,7 +30,7 @@
 					@mouseover="displayAvg = true"
 					@mouseleave="displayAvg = false"
 					placeholder="Seconds Per Scroll"
-					v-model="secPerScroll"
+					v-model="storage.seconds[scroll.main_key]"
 					:options="{
 						currency: 'USD',
 						currencyDisplay: 'hidden',
@@ -168,12 +168,6 @@ export default {
 			costPerPiece: 0,
 
 			memoryPrice: this.prices[44195].sub_items[0].price,
-
-			secPerScroll: this.scroll.secondsPerScroll,
-
-			storage: {
-				secondsPS: { s1: null, s2: null, s3: null, s4: null, s5: null },
-			},
 		};
 	},
 
@@ -181,52 +175,25 @@ export default {
 		this.setDropPrices();
 		this.setScrollPiecePrice();
 
-		if (!localStorage.getItem("storage")) {
-			localStorage.setItem("storage", JSON.stringify(this.storage));
-		} else {
-			this.storage = JSON.parse(localStorage.getItem("storage"));
-		}
-
-		if (this.scroll.main_key === 40218) {
-			this.secPerScroll = this.storage.secondsPS.s1;
-		}
-		if (this.scroll.main_key === 40220) {
-			this.secPerScroll = this.storage.secondsPS.s2;
-		}
-		if (this.scroll.main_key === 40228) {
-			this.secPerScroll = this.storage.secondsPS.s3;
-		}
-		if (this.scroll.main_key === 40383) {
-			this.secPerScroll = this.storage.secondsPS.s4;
-		}
-		if (this.scroll.main_key === 65770) {
-			this.secPerScroll = this.storage.secondsPS.s5;
+		if (localStorage.getItem("SCROLL_DATA")) {
+            this.storage = JSON.parse(localStorage.getItem("SCROLL_DATA"))
 		}
 	},
 
 	computed: {
+        storage: {
+            get() {
+                return this.$store.state.scroll.storage
+            },
+            set(value) {
+                this.$store.commit('SET_STORAGE', value)
+            }
+        },
+
 		numPartsPerHour() {
-			this.storage = JSON.parse(localStorage.getItem("storage"));
+			localStorage.setItem("SCROLL_DATA", JSON.stringify(this.storage));
 
-			if (this.scroll.main_key === 40218) {
-				this.storage.secondsPS.s1 = this.secPerScroll;
-			}
-			if (this.scroll.main_key === 40220) {
-				this.storage.secondsPS.s2 = this.secPerScroll;
-			}
-			if (this.scroll.main_key === 40228) {
-				this.storage.secondsPS.s3 = this.secPerScroll;
-			}
-			if (this.scroll.main_key === 40383) {
-				this.storage.secondsPS.s4 = this.secPerScroll;
-			}
-			if (this.scroll.main_key === 65770) {
-				this.storage.secondsPS.s5 = this.secPerScroll;
-			}
-
-			localStorage.setItem("storage", JSON.stringify(this.storage));
-
-			return Math.round((3600 / this.secPerScroll) * 5);
+			return Math.round((3600 / this.storage.seconds[this.scroll.main_key]) * 5);
 		},
 
 		profitPerScroll() {
