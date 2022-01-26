@@ -1,44 +1,45 @@
 <template>
-	<input
-		class="text-center rounded bg-700 text-0 p-1 focus:outline-none"
-		type="text"
-		v-model="value"
-	/>
+    <input
+        class="text-center rounded bg-700 text-0 p-1 focus:outline-none"
+        type="text"
+        v-model="value"
+    />
 </template>
-
 <script>
-//import { useCurrencyInput } from "vue-currency-input";
-
 export default {
-	name: "Input",
-	props: {
-		modelValue: Number,
-		//options: Object,
-	},
+    name: "Input",
+    props: {
+        modelValue: Number,
+    },
 
-	// setup(props) {
-	// 	const { inputRef } = useCurrencyInput(props.options);
-
-	// 	return { inputRef };
-	// },
-
-	data() {
-		return {
-			vF: this.modelValue.toLocaleString('en-US'),
-		};
-	},
-	computed: {
-		value: {
-			get() {
-				console.log(this.vF)
-				return this.vF;
-			},
-
-			set(num) {
-				this.vF = num.toString().replace(/(\d)(?=(\d{3})+$)/g, '1,');
-				//this.$emit("getFormatted", vF);
-			},
-		},
-	},
+    data() {
+        return {
+            vF: this.modelValue
+        };
+    },
+    methods: {
+        format(value) {
+            var nStr = value + ''
+            nStr = nStr.replace(/\,/g, "")
+            let x = nStr.split('.')
+            let x1 = x[0]
+            let x2 = x.length > 1 ? '.' + x[1] : ''
+            var rgx = /(\d+)(\d{3})/
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2')
+            }
+            return x1 + x2
+        }
+    },
+    computed: {
+        value: {
+            get() {
+                return this.vF;
+            },
+            set(num) {
+                this.vF = this.format(num.toString())
+            },
+        },
+    },
 };
 </script>

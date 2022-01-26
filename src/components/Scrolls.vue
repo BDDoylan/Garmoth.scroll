@@ -225,7 +225,7 @@ export default {
 	},
 
 	created() {
-		axios.get("market.json").then((res) => {
+		axios.get("/market.json").then((res) => {
 			this.prices = res.data.items;
 		});
 	},
