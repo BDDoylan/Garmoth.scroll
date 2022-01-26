@@ -54,7 +54,7 @@
 						per scroll:
 						<Input
 							@click.stop.prevent
-							class="w-20 text-center text-red"
+							class="w-20 text-center text-red placeholder-red placeholder-opacity-70"
 							v-model="storage.items[scroll.main_key][item.key]"
                             :placeholder="item.dropRate"
 							:options="{
@@ -197,7 +197,7 @@ export default {
 
 		numPartsPerHour() {
 			localStorage.setItem("SCROLL_DATA", JSON.stringify(this.storage));
-
+			
 			return Math.round((3600 / this.storage.seconds[this.scroll.main_key]) * 5);
 		},
 
