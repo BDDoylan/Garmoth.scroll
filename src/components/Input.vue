@@ -11,12 +11,23 @@ export default {
 	name: "Input",
 	props: {
 		modelValue: Number,
+		valueName: String,
 	},
 
 	data() {
 		return {
-			valueF: this.modelValue.toLocaleString("en-US"),
+			valueF: null,
 		};
+	},
+
+	mounted() {
+		if (this.valueName === "itemRates") {
+			this.valueF = this.modelValue;
+		} else if (this.valueName === "seconds") {
+			this.valueF = this.modelValue;
+		} else {
+			this.valueF = this.modelValue.toLocaleString();
+		}
 	},
 
 	computed: {
@@ -27,7 +38,7 @@ export default {
 
 			set(num) {
 				this.valueF = this.formatter(num);
-				this.$emit("update:modelValue", Number((this.valueF).replace(/\,/g, "")));
+				this.$emit("update:modelValue", Number(this.valueF.replace(/\,/g, "")));
 			},
 		},
 	},

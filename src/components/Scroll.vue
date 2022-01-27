@@ -31,6 +31,7 @@
 					@mouseleave="displayAvg = false"
 					placeholder="Seconds Per Scroll"
 					v-model="storage.seconds[scroll.main_key]"
+					:valueName="'seconds'"
 				/>
 			</div>
 
@@ -48,10 +49,18 @@
 						/>
 						per scroll:
 						<Input
+							v-if="storage.items[scroll.main_key][item.key]"
 							@click.stop.prevent
-							class="w-20 text-center text-red placeholder-red placeholder-opacity-70"
+							class="w-20 text-center text-red placeholder-red"
 							v-model="storage.items[scroll.main_key][item.key]"
-                            :placeholder="item.dropRate"
+							:valueName="'itemRates'"
+						/>
+						<Input
+							v-else
+							@click.stop.prevent
+							class="w-20 text-center text-red placeholder-red text-opacity-70"
+							v-model="item.dropRate"
+							:valueName="'itemRates'"
 						/>
 					</p>
 				</div>
@@ -102,6 +111,7 @@
 							<Input
 								class="w-28"
 								v-model="drop.price"
+								:valueName="'dropPrice'"
 							/>
 						</td>
 					</tr>
@@ -161,28 +171,30 @@ export default {
 		this.setScrollPiecePrice();
 
 		if (localStorage.getItem("SCROLL_DATA")) {
-            this.storage = JSON.parse(localStorage.getItem("SCROLL_DATA"))
+			this.storage = JSON.parse(localStorage.getItem("SCROLL_DATA"));
 		}
 
-        if (!this.storage.items[this.scroll.main_key]) {
-            this.storage.items[this.scroll.main_key] = {}
-        }
+		if (!this.storage.items[this.scroll.main_key]) {
+			this.storage.items[this.scroll.main_key] = {};
+		}
 	},
 
 	computed: {
-        storage: {
-            get() {
-                return this.$store.state.scroll.storage
-            },
-            set(value) {
-                this.$store.commit('SET_STORAGE', value)
-            }
-        },
+		storage: {
+			get() {
+				return this.$store.state.scroll.storage;
+			},
+			set(value) {
+				this.$store.commit("SET_STORAGE", value);
+			},
+		},
 
 		numPartsPerHour() {
 			localStorage.setItem("SCROLL_DATA", JSON.stringify(this.storage));
-			
-			return Math.round((3600 / this.storage.seconds[this.scroll.main_key]) * 5);
+
+			return Math.round(
+				(3600 / this.storage.seconds[this.scroll.main_key]) * 5
+			);
 		},
 
 		profitPerScroll() {
