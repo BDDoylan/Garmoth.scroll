@@ -49,17 +49,10 @@
 						/>
 						per scroll:
 						<Input
-							v-if="storage.items[scroll.main_key][item.key]"
 							@click.stop.prevent
-							class="w-20 text-center text-red placeholder-red"
+							class="w-20 text-center text-red placeholder-red placeholder-opacity-70"
 							v-model="storage.items[scroll.main_key][item.key]"
-							:valueName="'itemRates'"
-						/>
-						<Input
-							v-else
-							@click.stop.prevent
-							class="w-20 text-center text-red placeholder-red text-opacity-70"
-							v-model="item.dropRate"
+							:placeholder="item.dropRate.toLocaleString()"
 							:valueName="'itemRates'"
 						/>
 					</p>
@@ -216,13 +209,29 @@ export default {
 			let totalDropValue = 0;
 			this.scroll.drops.forEach((item) => {
 				if (item.key === 44186) {
-					totalDropValue += (item.dropRate * item.price) / 2;
+					totalDropValue +=
+						((this.storage.items[this.scroll.main_key][item.key]
+							? this.storage.items[this.scroll.main_key][item.key]
+							: item.dropRate) *
+							item.price) /
+						2;
 				} else if (item.key === 44328) {
-					totalDropValue += (item.dropRate * item.price) / 10;
+					totalDropValue +=
+						((this.storage.items[this.scroll.main_key][item.key]
+							? this.storage.items[this.scroll.main_key][item.key]
+							: item.dropRate) *
+							item.price) /
+						10;
 				} else if (item.key === 44306) {
-					totalDropValue += item.dropRate * item.price;
+					totalDropValue +=
+						(this.storage.items[this.scroll.main_key][item.key]
+							? this.storage.items[this.scroll.main_key][item.key]
+							: item.dropRate) * item.price;
 				} else {
-					totalDropValue += item.dropRate * item.price;
+					totalDropValue +=
+						(this.storage.items[this.scroll.main_key][item.key]
+							? this.storage.items[this.scroll.main_key][item.key]
+							: item.dropRate) * item.price;
 				}
 			});
 			return totalDropValue;

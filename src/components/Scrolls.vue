@@ -12,6 +12,7 @@
 			>
 				KEEP
 			</button>
+			<button @click="restoreDefaultValues()" class="bg-600 text-center text-0 text-2xl inline w-52 mb-10 p-1 rounded">Restore Defaults</button>
 			<button
 				@click="keep = false"
 				class="bg-600 text-center text-0 text-2xl inline w-20 mb-10 p-1 rounded"
@@ -20,7 +21,7 @@
 				SELL
 			</button>
 		</div>
-
+		
 		<div class="grid grid-cols-1 gap-4 mx-4 sm:grid-cols-3 pb-3">
 			<template v-for="scroll in allScrolls" :key="scroll.main_key">
 				<Scroll
@@ -228,6 +229,12 @@ export default {
 		axios.get("market.json").then((res) => {
 			this.prices = res.data.items;
 		});
+	},
+
+	methods: {
+		restoreDefaultValues() {
+			localStorage.removeItem('SCROLL_DATA');
+		}
 	},
 };
 </script>
