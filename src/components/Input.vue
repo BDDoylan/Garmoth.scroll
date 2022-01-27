@@ -7,37 +7,46 @@
 </template>
 
 <script>
-//import { useCurrencyInput } from "vue-currency-input";
-
 export default {
 	name: "Input",
 	props: {
 		modelValue: Number,
-		//options: Object,
 	},
-
-	// setup(props) {
-	// 	const { inputRef } = useCurrencyInput(props.options);
-
-	// 	return { inputRef };
-	// },
 
 	data() {
 		return {
-			vF: this.modelValue.toLocaleString('en-US'),
+			valueF: this.modelValue.toLocaleString("en-US"),
 		};
 	},
+
 	computed: {
 		value: {
 			get() {
-				console.log(this.vF)
-				return this.vF;
+				return this.valueF;
 			},
 
 			set(num) {
-				this.vF = num.toString().replace(/(\d)(?=(\d{3})+$)/g, '1,');
-				//this.$emit("getFormatted", vF);
+				this.valueF = this.formatter(num);
+				this.$emit("update:modelValue", Number((this.valueF).replace(/\,/g, "")));
 			},
+		},
+	},
+
+	methods: {
+		formatter(number) {
+			number = number.replace(/\,/g, "");
+
+			let seperator = number.split(".");
+			let digits = seperator[0];
+			let decimals = seperator.length > 1 ? "." + seperator[1] : "";
+
+			const regex = /(\d+)(\d{3})/;
+
+			while (regex.test(digits)) {
+				digits = digits.replace(regex, "$1" + "," + "$2");
+			}
+
+			return digits + decimals;
 		},
 	},
 };

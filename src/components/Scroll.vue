@@ -31,11 +31,6 @@
 					@mouseleave="displayAvg = false"
 					placeholder="Seconds Per Scroll"
 					v-model="storage.seconds[scroll.main_key]"
-					:options="{
-						currency: 'USD',
-						currencyDisplay: 'hidden',
-						hideGroupingSeparatorOnFocus: false,
-					}"
 				/>
 			</div>
 
@@ -57,12 +52,6 @@
 							class="w-20 text-center text-red placeholder-red placeholder-opacity-70"
 							v-model="storage.items[scroll.main_key][item.key]"
                             :placeholder="item.dropRate"
-							:options="{
-								currency: 'USD',
-								currencyDisplay: 'hidden',
-								hideGroupingSeparatorOnFocus: false,
-								precision: { min: 0, max: 4 },
-							}"
 						/>
 					</p>
 				</div>
@@ -113,11 +102,6 @@
 							<Input
 								class="w-28"
 								v-model="drop.price"
-								:options="{
-									currency: 'USD',
-									currencyDisplay: 'hidden',
-									hideGroupingSeparatorOnFocus: false,
-								}"
 							/>
 						</td>
 					</tr>
