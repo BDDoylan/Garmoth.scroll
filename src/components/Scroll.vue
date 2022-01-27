@@ -113,12 +113,12 @@
 			<div class="bg-600 text-0 rounded h-56 text-xl relative">
 				<h1 class="text-green text-2xl mt-2 p-4 font-bold">PROFITS</h1>
 				<div>
-					<div class="bg-700 text-0 rounded w-auto mx-12 p-4">
-						<h1>{{ profitPerScroll.toLocaleString() }} per scroll</h1>
+					<div class="bg-700 text-0 rounded w-auto mx-12 p-4 truncate">
+						<h1>{{ Math.floor(profitPerScroll).toLocaleString() }} per scroll</h1>
 					</div>
-					<div class="bg-700 text-0 rounded w-auto mx-12 mt-4 p-4">
+					<div class="bg-700 text-0 rounded w-auto mx-12 mt-4 p-4 truncate">
 						<p>
-							{{ (profitPerScroll * (numPartsPerHour / 5)).toLocaleString() }}
+							{{ Math.floor(profitPerScroll * (numPartsPerHour / 5)).toLocaleString() }}
 							per hour
 						</p>
 					</div>
