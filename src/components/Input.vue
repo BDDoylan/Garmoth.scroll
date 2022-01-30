@@ -33,6 +33,11 @@ export default {
 	computed: {
 		value: {
 			get() {
+				if (this.valueName === "simulation") {
+					if (this.modelValue > 10000) {
+						this.valueF = "10,000";
+					}
+				}
 				return this.valueF;
 			},
 

@@ -4,7 +4,7 @@
 			{{ title }}
 		</h1>
 
-		<div class="flex gap-4 justify-center items-center">
+		<div class="flex gap-2 justify-center items-center">
 			<button
 				@click="keep = true"
 				class="bg-600 text-center text-0 text-2xl inline w-20 mb-10 p-1 rounded"
@@ -234,6 +234,7 @@ export default {
 	methods: {
 		restoreDefaultValues() {
 			localStorage.removeItem('SCROLL_DATA');
+			window.location.reload();
 		}
 	},
 };
