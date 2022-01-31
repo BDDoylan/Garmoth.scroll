@@ -1,14 +1,16 @@
 <template>
 	<div class="text-center">
 		<div class="text-left text-0 py-8 text-5xl font-bold ml-3">
-			<h1 class="inline">{{ title }}</h1>
-			<button
-				@click="realOrTestEnchancement = !realOrTestEnchancement"
-				class="inline text-2xl float-right mr-4 font-semibold text-green rounded bg-600 p-2"
-			>
-				<span v-if="realOrTestEnchancement" class="text-base text-red">not</span
-				>Real
-			</button>
+			<h1 class="inline">
+				{{ title }}
+				<button
+					@click="realEnchancement = !realEnchancement"
+					class="text-2xl mr-4 float-right font-semibold text-green rounded bg-600 p-2"
+				>
+					<span v-if="realEnchancement" class="text-base text-red">not</span
+					>Real
+				</button>
+			</h1>
 		</div>
 
 		<div class="grid grid-cols-2 gap-4 mx-4 pb-3 xsm:grid-cols-8">
@@ -47,13 +49,13 @@
 									'.png'
 								"
 								v-if="currentItemSelected.key"
-								class="h-12 m-auto"
+								class="h-12 m-auto rounded-xl"
 							/>
 							<p
-								class="absolute top-4 left-4 text-white text-1xl font-semibold w-12"
+								class="absolute top-4 left-4 text-white text-1xl font-semibold w-12 bg-600 bg-opacity-20"
 								v-if="currentItemSelected.key"
 							>
-								{{ currentItemSelected.lvl }}
+								{{ currentItemSelected.currTier.lvlName }}
 							</p>
 						</div>
 						<ul
@@ -74,7 +76,10 @@
 										(currentItemToggle = true),
 											(currentItemSelected.name = item.name),
 											(currentItemSelected.key = item.main_key),
-											(selectedLevel = null)
+											(currentItemSelected.tiers = item.levels),
+											(currentItemSelected.currTier = item.levels),
+											(currentItemSelected.prevTier = item.levels),
+											(currentItemSelected.nextTier = item.levels)
 									"
 								>
 									<img
@@ -95,16 +100,19 @@
 										:key="key2"
 										class="hover:bg-400 text-center"
 										@click="
-											(currentItemSelected.lvl = level.lvlName),
-												(currentItemSelected.baseC = level.baseChance),
-												(currentItemSelected.softC = level.softCap),
-												(currentItemSelected.crons = level.crons),
+											(currentItemSelected.prevTier = item.levels[key2 - 1]
+												? item.levels[key2 - 1]
+												: { lvlName: '' }),
+												(currentItemSelected.currTier = item.levels[key2]),
+												(currentItemSelected.nextTier = item.levels[key2 + 1]
+													? item.levels[key2 + 1]
+													: { lvlName: 'V' }),
 												(displayLeftItemDropDown = false),
 												setChance()
 										"
 										:class="{
 											'text-green bg-400':
-												currentItemSelected.lvl === level.lvlName,
+												currentItemSelected.currTier.lvlName === level.lvlName,
 										}"
 									>
 										<p
@@ -124,12 +132,20 @@
 					<div class="flex-auto w-full">
 						<div
 							class="mt-12 bg-600 h-4 w-full"
-							v-if="animationToggle || !justClicked"
+							v-if="
+								animationToggle ||
+								!justClicked ||
+								currentItemSelected.currTier.lvlName === 'V'
+							"
 						></div>
 						<transition name="anim">
 							<div
 								class="mt-12 bg-600 h-4 w-full"
-								v-if="!animationToggle && justClicked"
+								v-if="
+									!animationToggle &&
+									justClicked &&
+									currentItemSelected.currTier.lvlName != 'V'
+								"
 							></div>
 						</transition>
 					</div>
@@ -141,14 +157,20 @@
 									currentItemSelected.key +
 									'.png'
 								"
-								v-if="currentItemSelected.key"
-								class="h-12 m-auto"
+								v-if="
+									currentItemSelected.key &&
+									currentItemSelected.currTier.lvlName != 'V'
+								"
+								class="h-12 m-auto rounded-xl"
 							/>
 							<p
-								class="absolute top-4 left-4 text-white text-1xl font-semibold w-12"
-								v-if="currentItemSelected.key"
+								class="absolute top-4 left-4 text-white text-1xl font-semibold w-12 bg-600 bg-opacity-20"
+								v-if="
+									currentItemSelected.key &&
+									currentItemSelected.currTier.lvlName != 'V'
+								"
 							>
-								{{ nextTier(currentItemSelected.lvl) }}
+								{{ currentItemSelected.nextTier.lvlName }}
 							</p>
 						</div>
 					</div>
@@ -207,15 +229,32 @@
 					class="grid grid-cols-1 my-2 gap-2 lgx:grid-cols-3 xsm:grid-cols-2 xs:grid-cols-3"
 				>
 					<div class="rounded bg-700 h-14 w-auto font-semibold">
-						<p class="my-3">Success Rate: {{ chanceOfSuccess }} %</p>
+						<p class="my-3">
+							Success Rate:
+							{{
+								currentItemSelected.currTier.lvlName != "V"
+									? chanceOfSuccess + "%"
+									: "N/A"
+							}}
+						</p>
 					</div>
 					<div class="rounded bg-700 h-14 w-auto font-semibold">
-						<p class="my-3">Softcap: {{ softcap }}</p>
+						<p class="my-3">
+							Softcap:
+							{{
+								currentItemSelected.currTier.lvlName != "V" ? softcap : "N/A"
+							}}
+						</p>
 					</div>
 					<div
 						class="rounded font-semibold bg-700 h-18 w-auto lgx:row-span-1 row-span-1 xsm:row-span-2 lgx:pt-0 xsm:pt-9"
 					>
-						<p class="my-3">Avg. Clicks: {{ avgClicks }}</p>
+						<p class="my-3">
+							Avg. Clicks:
+							{{
+								currentItemSelected.currTier.lvlName != "V" ? avgClicks : "N/A"
+							}}
+						</p>
 					</div>
 					<div class="rounded bg-700 h-32 row-span-1 pt-1 xs:row-span-2">
 						<p
@@ -232,7 +271,7 @@
 						</p>
 						<div class="bg-600 rounded w-28 h-12 m-auto">
 							<p v-if="cronToggle" class="p-2 font-bold">
-								{{ currentItemSelected.crons }}
+								{{ currentItemSelected.currTier.crons }}
 							</p>
 							<p v-else class="p-2 font-bold">?</p>
 						</div>
@@ -337,15 +376,17 @@ export default {
 
 	data() {
 		return {
-			realOrTestEnchancement: false,
+			realEnchancement: false,
 
 			currentItemSelected: {
 				name: null,
 				key: null,
-				lvl: null,
-				baseC: null,
-				softC: null,
-				crons: null,
+
+				tiers: {},
+
+				prevTier: {},
+				currTier: {},
+				nextTier: {},
 			},
 
 			currentItemToggle: false,
@@ -555,31 +596,29 @@ export default {
 			return output;
 		},
 
-		nextTier(currentLevel) {
-			let output;
-			if (currentLevel === "+12") {
-				output = "+13";
-			} else if (currentLevel === "+13") {
-				output = "+14";
-			} else if (currentLevel === "+14") {
-				output = "+15";
-			} else if (currentLevel === "+15") {
-				output = "I";
-			} else if (currentLevel === "I" || currentLevel === "II") {
-				output = currentLevel + "I";
-			} else if (currentLevel === "III") {
-				output = "IV";
-			} else if (currentLevel === "IV") {
-				output = "V";
-			} else if (currentLevel === "") {
-				output = "I";
+		previousTier(currentTier) {
+			let indexOfCurr = this.currentItemSelected.tiers.findIndex(
+				(tier) => tier === currentTier
+			);
+			return this.currentItemSelected.tiers[indexOfCurr - 1];
+		},
+
+		nextTier(currentTier) {
+			if (currentTier.lvlName === "IV") {
+				return { lvlName: "V" };
+			} else if (currentTier.lvlName === "V") {
+				return { lvlName: "" };
+			} else if (currentTier.lvlName != "") {
+				let indexOfCurr = this.currentItemSelected.tiers.findIndex(
+					(tier) => tier === currentTier
+				);
+				return this.currentItemSelected.tiers[indexOfCurr + 1];
 			}
-			return output;
 		},
 
 		setChance() {
-			let baseChance = this.currentItemSelected.baseC;
-			this.softcap = this.currentItemSelected.softC;
+			let baseChance = this.currentItemSelected.currTier.baseChance;
+			this.softcap = this.currentItemSelected.currTier.softCap;
 
 			let failstackChance = baseChance / 10;
 			let failstackChanceAfterSoftcap = baseChance / 50;
@@ -598,50 +637,92 @@ export default {
 			this.avgClicks = (100 / this.chanceOfSuccess).toFixed(2);
 		},
 
+		degrade() {
+			let temp = this.currentItemSelected.currTier;
+
+			this.currentItemSelected.currTier = this.currentItemSelected.prevTier;
+			this.currentItemSelected.prevTier = this.previousTier(
+				this.currentItemSelected.prevTier
+			);
+			this.currentItemSelected.nextTier = temp;
+			this.setChance();
+		},
+
+		upgrade() {
+			let temp = this.currentItemSelected.currTier;
+
+			this.currentItemSelected.currTier = this.currentItemSelected.nextTier;
+			this.currentItemSelected.prevTier = temp;
+			this.currentItemSelected.nextTier = this.nextTier(
+				this.currentItemSelected.nextTier
+			);
+			this.setChance();
+		},
+
 		simulate(tapNum) {
 			for (let i = 0; i < tapNum; i++) {
-				let roll = Math.random();
+				if (this.currentItemSelected.currTier.lvlName != "V") {
+					let roll = Math.random();
 
-				if (roll >= this.chanceOfSuccess / 100) {
-					this.currentSuccessStreak = 0;
-					this.currentFailStreak++;
-					this.fails++;
+					if (roll >= this.chanceOfSuccess / 100) {
+						this.currentSuccessStreak = 0;
+						this.currentFailStreak++;
+						this.fails++;
+						this.attempts++;
 
-					this.simulations.unshift({
-						state: false,
-						text: "Failed: ",
-						roll: (roll * 100).toFixed(2),
-					});
-				} else {
-					this.currentFailStreak = 0;
-					this.currentSuccessStreak++;
-					this.success++;
+						this.simulations.unshift({
+							state: false,
+							text: "Failed: ",
+							roll: (roll * 100).toFixed(2),
+						});
 
-					this.simulations.unshift({
-						state: true,
-						text: "Success: ",
-						roll: (roll * 100).toFixed(2),
-					});
+						if (!this.realEnchancement) {
+							if (
+								this.currentItemSelected.prevTier.lvlName != "" &&
+								this.currentItemSelected.prevTier.lvlName != "+12" &&
+								this.currentItemSelected.prevTier.lvlName != "+13" &&
+								this.currentItemSelected.prevTier.lvlName != "+14" &&
+								this.currentItemSelected.prevTier.lvlName != "+15"
+							) {
+								this.degrade();
+							}
+						}
+					} else {
+						this.currentFailStreak = 0;
+						this.currentSuccessStreak++;
+						this.success++;
+						this.attempts++;
+
+						this.simulations.unshift({
+							state: true,
+							text: "Success: ",
+							roll: (roll * 100).toFixed(2),
+						});
+
+						if (!this.realEnchancement) {
+							this.upgrade();
+						}
+					}
+
+					if (this.currentSuccessStreak > this.highestSuccessStreak)
+						this.highestSuccessStreak = this.currentSuccessStreak;
+
+					if (this.currentFailStreak > this.highestFailStreak)
+						this.highestFailStreak = this.currentFailStreak;
+					this.simulations = this.simulations.slice(0, 50);
 				}
-
-				this.attempts++;
-
-				if (this.currentSuccessStreak > this.highestSuccessStreak)
-					this.highestSuccessStreak = this.currentSuccessStreak;
-
-				if (this.currentFailStreak > this.highestFailStreak)
-					this.highestFailStreak = this.currentFailStreak;
-				this.simulations = this.simulations.slice(0, 50);
 			}
 		},
 
 		skipOrNah() {
-			if (this.animationToggle) {
-				this.simulate(1);
-			} else {
-				setTimeout(() => {
+			if (this.currentItemSelected.currTier.lvlName != "V") {
+				if (this.animationToggle) {
 					this.simulate(1);
-				}, 4000);
+				} else {
+					setTimeout(() => {
+						this.simulate(1);
+					}, 4000);
+				}
 			}
 		},
 	},
