@@ -43,6 +43,8 @@ module.exports = {
 			},
 			height: {
 				128: "32rem",
+				90: "23.8rem",
+				65: "16.2rem",
 			},
 			fontFamily: {
 				poppins: ["Poppins"],
