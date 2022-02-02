@@ -49,6 +49,9 @@ module.exports = {
 			fontFamily: {
 				poppins: ["Poppins"],
 			},
+			inset: {
+				'popup': "45%",
+			},
 		},
 		container: {
 			center: true,
@@ -56,7 +59,7 @@ module.exports = {
 		},
 		screens: {
 			xxs: "300px",
-			xxsm: "600px",
+			xxsm: "500px",
 			xs: "800px",
 			xsm: "1100px",
 			sm: "1150px",

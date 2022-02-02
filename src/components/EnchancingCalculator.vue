@@ -1,16 +1,15 @@
 <template>
 	<div class="text-center">
 		<div class="text-left text-0 py-8 text-5xl font-bold ml-3">
-			<h1 class="inline">
+			<h1 class="inline xxsm:text-4xl xs:text-5xl">
 				{{ title }}
-				<button
-					@click="realEnchancement = !realEnchancement"
-					class="text-2xl mr-4 float-right font-semibold text-green rounded bg-600 p-2"
-				>
-					<span v-if="realEnchancement" class="text-base text-red">not</span
-					>Real
-				</button>
 			</h1>
+			<button
+				@click="realEnchancement = !realEnchancement"
+				class="text-2xl mr-4 font-semibold text-green rounded float-right bg-600 p-2"
+			>
+				<span v-if="realEnchancement" class="text-base text-red">not</span>Real
+			</button>
 		</div>
 
 		<div class="grid grid-cols-2 gap-4 mx-4 pb-3 xsm:grid-cols-8">
@@ -40,7 +39,7 @@
 					<div class="flex-initial w-24 z-10">
 						<div
 							class="mt-6 bg-600 rounded ml-4 p-2 w-20 relative h-16"
-							@click="displayLeftItemDropDown = true"
+							@click="displayLeftItemDropDown = !displayLeftItemDropDown"
 						>
 							<img
 								:src="
@@ -79,7 +78,10 @@
 											(currentItemSelected.tiers = item.levels),
 											(currentItemSelected.currTier = item.levels),
 											(currentItemSelected.prevTier = item.levels),
-											(currentItemSelected.nextTier = item.levels)
+											(currentItemSelected.nextTier = item.levels),
+											(cronToggle = false),
+											(silverSpent = 0),
+											clearSimulation()
 									"
 								>
 									<img
@@ -108,7 +110,10 @@
 													? item.levels[key2 + 1]
 													: { lvlName: 'V' }),
 												(displayLeftItemDropDown = false),
-												setChance()
+												setChance(),
+												(cronToggle = false),
+												(silverSpent = 0),
+												clearSimulation()
 										"
 										:class="{
 											'text-green bg-400':
@@ -176,16 +181,81 @@
 					</div>
 				</div>
 				<div class="bg-700 text-0 rounded h-24">
-					<p class="font-bold mb-5 pt-2">
-						Current Failstack:
-						<input
-							class="w-20 p-2 bg-500 h-7 text-center focus:outline-none"
-							type="number"
-							v-model="failstack"
-							:valueName="'failstack'"
-							@input="setChance()"
-						/>
-					</p>
+					<div class="relative">
+						<div
+							v-if="failstackDefaultTabToggle"
+							class="rounded bg-500 w-24 absolute right-1/2 bottom-10 translate-x-1/2 z-20 text-right"
+						>
+							<span
+								:class="[
+									'mr-0.5 font-semibold text-base',
+									{ 'text-green': failstackDefaultToggle },
+									{ 'text-red': !failstackDefaultToggle },
+								]"
+								@click="
+									(failstackDefaultToggle = !failstackDefaultToggle),
+										(failstackDefaultTabToggle = false)
+								"
+								>Use Defaults</span
+							>
+							<br />
+							I:
+							<input
+								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
+								type="number"
+								v-model="fsDefaultPri"
+							/>
+							<br />
+							II:
+							<input
+								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
+								type="number"
+								v-model="fsDefaultDuo"
+							/>
+							<br />
+							III:
+							<input
+								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
+								type="number"
+								v-model="fsDefaultTri"
+							/>
+							<br />
+							IV:
+							<input
+								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
+								type="number"
+								v-model="fsDefaultTet"
+							/>
+							<br />
+							V:
+							<input
+								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
+								type="number"
+								v-model="fsDefaultPen"
+							/>
+						</div>
+						<div class="font-bold mb-5 pt-2">
+							Current Failstack:
+							<input
+								class="w-16 p-2 bg-500 h-7 text-center focus:outline-none"
+								type="number"
+								v-model="failstack"
+								@input="setChance()"
+							/>
+							<button
+								:class="[
+									'text-sm ml-2 rounded bg-500 px-1',
+									{
+										'text-green': failstackDefaultTabToggle,
+										'text-red': !failstackDefaultTabToggle,
+									},
+								]"
+								@click="failstackDefaultTabToggle = !failstackDefaultTabToggle"
+							>
+								FS Defaults
+							</button>
+						</div>
+					</div>
 					<div class="mr-1">
 						<button
 							class="bg-500 text-red rounded w-11 h-7 ml-1 font-bold"
@@ -264,7 +334,12 @@
 							]"
 						>
 							CRONS
-							<label class="switch ml-1"
+							<label
+								class="switch ml-1"
+								v-if="
+									currentItemSelected.currTier.crons != null &&
+									currentItemSelected.currTier.crons != 0
+								"
 								><input @click="cronToggle = !cronToggle" type="checkbox" />
 								<span class="slider round"></span
 							></label>
@@ -279,9 +354,11 @@
 					<div
 						class="rounded bg-700 h-18 col-span-1 xsm:col-span-2 xs:col-span-2"
 					>
-						<p class="my-3 font-semibold">Silver Spent: {{ silverSpent }}</p>
+						<p class="my-3 font-semibold">
+							Silver Spent: {{ silverSpent.toLocaleString() }}
+						</p>
 					</div>
-					<button class="rounded bg-700 h-18 col-span-1 py-2">
+					<div class="rounded bg-700 h-18 col-span-1 py-2 pt-3">
 						<div
 							:class="[
 								'my-1 text-green font-bold',
@@ -296,9 +373,10 @@
 								<span class="slider round"></span
 							></label>
 						</div>
-					</button>
+					</div>
 					<button
 						class="rounded bg-700 h-18 col-span-1"
+						v-if="currentItemSelected.currTier"
 						@click="skipOrNah(), clicked()"
 					>
 						<p class="my-3 text-green font-bold">ENCHANCE</p>
@@ -333,12 +411,18 @@
 					<p
 						v-for="(attempt, key) in simulations"
 						:key="key"
-						v-text="attempt.text + attempt.roll"
 						:class="[
 							'ml-2',
 							{ 'text-red': !attempt.state, 'text-green': attempt.state },
 						]"
-					></p>
+					>
+						{{ attempt.lvlName }} <span class="text-400">|</span>
+						{{ attempt.text + attempt.roll }}
+						<span class="text-200"
+							><span class="text-400">|</span> FS used:
+							{{ attempt.failstack }}</span
+						>
+					</p>
 				</div>
 			</div>
 			<div
@@ -407,10 +491,18 @@ export default {
 			avgClicks: 0,
 
 			failstack: 0,
+			fsDefaultPri: 25,
+			fsDefaultDuo: 35,
+			fsDefaultTri: 50,
+			fsDefaultTet: 80,
+			fsDefaultPen: 110,
+
 			chanceOfSuccess: 0,
 
 			cronToggle: false,
 			animationToggle: false,
+			failstackDefaultTabToggle: false,
+			failstackDefaultToggle: false,
 			justClicked: false,
 
 			cronsNeeded: 0,
@@ -429,48 +521,56 @@ export default {
 							baseChance: 0.04,
 							softCap: 78,
 							crons: 0,
+							failstackGain: 1,
 						},
 						{
 							lvlName: "+13",
 							baseChance: 0.0286,
 							softCap: 84,
 							crons: 0,
+							failstackGain: 1,
 						},
 						{
 							lvlName: "+14",
 							baseChance: 0.02,
 							softCap: 107,
 							crons: 0,
+							failstackGain: 1,
 						},
 						{
 							lvlName: "+15",
 							baseChance: 0.1176,
 							softCap: 50,
 							crons: 0,
+							failstackGain: 2,
 						},
 						{
 							lvlName: "I",
 							baseChance: 0.0769,
 							softCap: 82,
 							crons: 0,
+							failstackGain: 3,
 						},
 						{
 							lvlName: "II",
 							baseChance: 0.0625,
 							softCap: 102,
 							crons: 38,
+							failstackGain: 4,
 						},
 						{
 							lvlName: "III",
 							baseChance: 0.02,
 							softCap: 340,
 							crons: 114,
+							failstackGain: 5,
 						},
 						{
 							lvlName: "IV",
 							baseChance: 0.003,
 							softCap: 2324,
 							crons: 429,
+							failstackGain: 6,
 						},
 					],
 				},
@@ -484,29 +584,34 @@ export default {
 							baseChance: 0.25,
 							softCap: 18,
 							crons: 0,
+							failstackGain: 1,
 						},
 						{
 							lvlName: "I",
 							baseChance: 0.1,
 							softCap: 40,
 							crons: 74,
+							failstackGain: 1,
 						},
 						{
 							lvlName: "II",
 							baseChance: 0.075,
 							softCap: 44,
 							crons: 224,
+							failstackGain: 1,
 						},
 						{
 							lvlName: "III",
 							baseChance: 0.025,
 							softCap: 110,
 							crons: 625,
+							failstackGain: 1,
 						},
 						{
 							lvlName: "IV",
 							baseChance: 0.005,
 							softCap: 2999,
+							failstackGain: 1,
 						},
 					],
 				},
@@ -520,30 +625,35 @@ export default {
 							baseChance: 0.02,
 							softCap: 340,
 							crons: 0,
+							failstackGain: 2,
 						},
 						{
 							lvlName: "I",
 							baseChance: 0.01,
 							softCap: 690,
 							crons: 1500,
+							failstackGain: 3,
 						},
 						{
 							lvlName: "II",
 							baseChance: 0.005,
 							softCap: 1390,
 							crons: 2100,
+							failstackGain: 4,
 						},
 						{
 							lvlName: "III",
 							baseChance: 0.002,
 							softCap: 3490,
 							crons: 2700,
+							failstackGain: 5,
 						},
 						{
 							lvlName: "IV",
 							baseChance: 0.000025,
 							softCap: 279990,
 							crons: 4000,
+							failstackGain: 6,
 						},
 					],
 				},
@@ -645,6 +755,7 @@ export default {
 				this.currentItemSelected.prevTier
 			);
 			this.currentItemSelected.nextTier = temp;
+
 			this.setChance();
 		},
 
@@ -656,6 +767,7 @@ export default {
 			this.currentItemSelected.nextTier = this.nextTier(
 				this.currentItemSelected.nextTier
 			);
+
 			this.setChance();
 		},
 
@@ -663,6 +775,45 @@ export default {
 			for (let i = 0; i < tapNum; i++) {
 				if (this.currentItemSelected.currTier.lvlName != "V") {
 					let roll = Math.random();
+
+					if (this.failstackDefaultToggle) {
+						if (this.currentItemSelected.currTier.lvlName === "I") {
+							if (
+								this.simulations.length === 0 ||
+								this.simulations[0].text === "S: " ||
+								this.failstack > this.fsDefaultTri
+							) {
+								this.failstack = this.fsDefaultDuo;
+								this.setChance();
+							}
+						} else if (this.currentItemSelected.currTier.lvlName === "II") {
+							if (
+								this.simulations.length === 0 ||
+								this.simulations[0].text === "S: " ||
+								this.failstack > this.fsDefaultTet
+							) {
+								this.failstack = this.fsDefaultTri;
+								this.setChance();
+							}
+						} else if (this.currentItemSelected.currTier.lvlName === "III") {
+							if (
+								this.simulations.length === 0 ||
+								this.simulations[0].text === "S: " ||
+								this.failstack > this.fsDefaultPen
+							) {
+								this.failstack = this.fsDefaultTet;
+								this.setChance();
+							}
+						} else if (this.currentItemSelected.currTier.lvlName === "IV") {
+							if (
+								this.simulations.length === 0 ||
+								this.simulations[0].text === "S: "
+							) {
+								this.failstack = this.fsDefaultPen;
+								this.setChance();
+							}
+						}
+					}
 
 					if (roll >= this.chanceOfSuccess / 100) {
 						this.currentSuccessStreak = 0;
@@ -672,8 +823,10 @@ export default {
 
 						this.simulations.unshift({
 							state: false,
-							text: "Failed: ",
+							text: "F: ",
 							roll: (roll * 100).toFixed(2),
+							failstack: this.failstack,
+							lvlName: this.currentItemSelected.nextTier.lvlName,
 						});
 
 						if (!this.realEnchancement) {
@@ -681,10 +834,28 @@ export default {
 								this.currentItemSelected.prevTier.lvlName != "" &&
 								this.currentItemSelected.prevTier.lvlName != "+12" &&
 								this.currentItemSelected.prevTier.lvlName != "+13" &&
-								this.currentItemSelected.prevTier.lvlName != "+14" &&
-								this.currentItemSelected.prevTier.lvlName != "+15"
+								this.currentItemSelected.prevTier.lvlName != "+14"
 							) {
-								this.degrade();
+								if (
+									this.currentItemSelected.prevTier.lvlName === "+15" &&
+									this.currentItemSelected.currTier.lvlName === "I" &&
+									this.currentItemSelected.nextTier.lvlName === "II"
+								) {
+									this.addToFailstack(
+										this.currentItemSelected.currTier.failstackGain
+									);
+									this.setChance();
+								} else {
+									if (!this.cronToggle) {
+										this.addToFailstack(
+											this.currentItemSelected.currTier.failstackGain
+										);
+										this.degrade();
+									} else {
+										this.silverSpent +=
+											this.currentItemSelected.currTier.crons * 1126190;
+									}
+								}
 							}
 						}
 					} else {
@@ -695,11 +866,16 @@ export default {
 
 						this.simulations.unshift({
 							state: true,
-							text: "Success: ",
+							text: "S: ",
 							roll: (roll * 100).toFixed(2),
+							failstack: this.failstack,
+							lvlName: this.currentItemSelected.nextTier.lvlName,
 						});
 
 						if (!this.realEnchancement) {
+							if (!this.failstackDefaultToggle) {
+								this.failstack = 0;
+							}
 							this.upgrade();
 						}
 					}
@@ -721,7 +897,7 @@ export default {
 				} else {
 					setTimeout(() => {
 						this.simulate(1);
-					}, 4000);
+					}, 3000);
 				}
 			}
 		},
@@ -738,7 +914,7 @@ export default {
 	);
 	background-size: 200% auto;
 	background-position: 0 100%;
-	animation: slide 4s;
+	animation: slide 3s;
 	animation-fill-mode: forwards;
 	animation-timing-function: linear;
 }
