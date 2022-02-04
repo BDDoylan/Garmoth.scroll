@@ -1,0 +1,3338 @@
+{
+    "items": [
+        {
+            "main_key": 730408,
+            "name": "Naru Ring",
+            "rarity": 3,
+            "type": 8,
+            "cron": 1,
+            "chance": 1,
+            "material": 1
+        },
+        {
+            "main_key": 730407,
+            "name": "Naru Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 1,
+            "chance": 1,
+            "material": 1
+        },
+        {
+            "main_key": 730406,
+            "name": "Naru Necklace",
+            "rarity": 3,
+            "type": 9,
+            "cron": 1,
+            "chance": 1,
+            "material": 1
+        },
+        {
+            "main_key": 732053,
+            "name": "Obsidian Blackstar Gloves",
+            "rarity": 5,
+            "type": 3,
+            "cron": 2,
+            "chance": 2,
+            "material": 2
+        },
+        {
+            "main_key": 732052,
+            "name": "Obsidian Blackstar Armor",
+            "rarity": 5,
+            "type": 2,
+            "cron": 3,
+            "chance": 2,
+            "material": 2
+        },
+        {
+            "main_key": 732051,
+            "name": "Obsidian Blackstar Helmet",
+            "rarity": 5,
+            "type": 1,
+            "cron": 2,
+            "chance": 2,
+            "material": 2
+        },
+        {
+            "main_key": 730405,
+            "name": "Naru Shoes",
+            "rarity": 3,
+            "type": 4,
+            "cron": 4,
+            "chance": 1,
+            "material": 3
+        },
+        {
+            "main_key": 730404,
+            "name": "Naru Gloves",
+            "rarity": 3,
+            "type": 3,
+            "cron": 4,
+            "chance": 1,
+            "material": 3
+        },
+        {
+            "main_key": 730403,
+            "name": "Naru Armor",
+            "rarity": 3,
+            "type": 2,
+            "cron": 4,
+            "chance": 1,
+            "material": 3
+        },
+        {
+            "main_key": 730402,
+            "name": "Naru Helmet",
+            "rarity": 3,
+            "type": 1,
+            "cron": 4,
+            "chance": 1,
+            "material": 3
+        },
+        {
+            "main_key": 694112,
+            "name": "Tuvala Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 5,
+            "chance": 3,
+            "material": 1
+        },
+        {
+            "main_key": 694111,
+            "name": "Tuvala Ring",
+            "rarity": 4,
+            "type": 8,
+            "cron": 5,
+            "chance": 3,
+            "material": 1
+        },
+        {
+            "main_key": 694110,
+            "name": "Tuvala Earring",
+            "rarity": 4,
+            "type": 11,
+            "cron": 5,
+            "chance": 3,
+            "material": 1
+        },
+        {
+            "main_key": 694109,
+            "name": "Tuvala Necklace",
+            "rarity": 4,
+            "type": 9,
+            "cron": 5,
+            "chance": 3,
+            "material": 1
+        },
+        {
+            "main_key": 705512,
+            "name": "Manos Belt",
+            "rarity": 5,
+            "type": 10,
+            "cron": 0,
+            "chance": 4,
+            "material": 4
+        },
+        {
+            "main_key": 705511,
+            "name": "Manos Ring",
+            "rarity": 5,
+            "type": 8,
+            "cron": 0,
+            "chance": 4,
+            "material": 4
+        },
+        {
+            "main_key": 705510,
+            "name": "Manos Earring",
+            "rarity": 5,
+            "type": 11,
+            "cron": 0,
+            "chance": 4,
+            "material": 4
+        },
+        {
+            "main_key": 705509,
+            "name": "Manos Necklace",
+            "rarity": 5,
+            "type": 9,
+            "cron": 0,
+            "chance": 4,
+            "material": 4
+        },
+        {
+            "main_key": 705508,
+            "name": "Geranoa Belt",
+            "rarity": 3,
+            "type": 10,
+            "cron": 0,
+            "chance": 5,
+            "material": 5
+        },
+        {
+            "main_key": 705507,
+            "name": "Geranoa Ring",
+            "rarity": 3,
+            "type": 8,
+            "cron": 0,
+            "chance": 5,
+            "material": 5
+        },
+        {
+            "main_key": 705506,
+            "name": "Geranoa Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 0,
+            "chance": 5,
+            "material": 5
+        },
+        {
+            "main_key": 705505,
+            "name": "Geranoa Necklace",
+            "rarity": 3,
+            "type": 9,
+            "cron": 0,
+            "chance": 5,
+            "material": 5
+        },
+        {
+            "main_key": 701080,
+            "name": "Ultimate Akum Shoes",
+            "rarity": 4,
+            "type": 4,
+            "cron": 6,
+            "chance": 6,
+            "material": 6
+        },
+        {
+            "main_key": 705504,
+            "name": "Loggia Belt",
+            "rarity": 2,
+            "type": 10,
+            "cron": 0,
+            "chance": 7,
+            "material": 7
+        },
+        {
+            "main_key": 701079,
+            "name": "Ultimate Akum Gloves",
+            "rarity": 4,
+            "type": 3,
+            "cron": 6,
+            "chance": 6,
+            "material": 6
+        },
+        {
+            "main_key": 705503,
+            "name": "Loggia Ring",
+            "rarity": 2,
+            "type": 8,
+            "cron": 0,
+            "chance": 7,
+            "material": 7
+        },
+        {
+            "main_key": 701078,
+            "name": "Ultimate Akum Armor",
+            "rarity": 4,
+            "type": 2,
+            "cron": 6,
+            "chance": 6,
+            "material": 6
+        },
+        {
+            "main_key": 705502,
+            "name": "Loggia Earring",
+            "rarity": 2,
+            "type": 11,
+            "cron": 0,
+            "chance": 7,
+            "material": 7
+        },
+        {
+            "main_key": 701077,
+            "name": "Ultimate Akum Helmet",
+            "rarity": 4,
+            "type": 1,
+            "cron": 6,
+            "chance": 6,
+            "material": 6
+        },
+        {
+            "main_key": 705501,
+            "name": "Loggia Necklace",
+            "rarity": 2,
+            "type": 9,
+            "cron": 0,
+            "chance": 7,
+            "material": 7
+        },
+        {
+            "main_key": 12330,
+            "name": "Manos White Coral Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 7,
+            "chance": 8,
+            "material": 1
+        },
+        {
+            "main_key": 701014,
+            "name": "Akum Shoes",
+            "rarity": 3,
+            "type": 4,
+            "cron": 6,
+            "chance": 6,
+            "material": 6
+        },
+        {
+            "main_key": 12329,
+            "name": "Manos Golden Coral Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 7,
+            "chance": 8,
+            "material": 1
+        },
+        {
+            "main_key": 701013,
+            "name": "Akum Gloves",
+            "rarity": 3,
+            "type": 3,
+            "cron": 6,
+            "chance": 6,
+            "material": 6
+        },
+        {
+            "main_key": 12328,
+            "name": "Manos Green Coral Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 7,
+            "chance": 8,
+            "material": 1
+        },
+        {
+            "main_key": 701012,
+            "name": "Akum Armor",
+            "rarity": 3,
+            "type": 2,
+            "cron": 6,
+            "chance": 6,
+            "material": 6
+        },
+        {
+            "main_key": 12327,
+            "name": "Manos Blue Coral Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 7,
+            "chance": 8,
+            "material": 1
+        },
+        {
+            "main_key": 701011,
+            "name": "Akum Helmet",
+            "rarity": 3,
+            "type": 1,
+            "cron": 6,
+            "chance": 6,
+            "material": 6
+        },
+        {
+            "main_key": 12326,
+            "name": "Manos Red Coral Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 7,
+            "chance": 8,
+            "material": 1
+        },
+        {
+            "main_key": 697108,
+            "name": "Combatant's Tuvala Shoes",
+            "rarity": 4,
+            "type": 4,
+            "cron": 0,
+            "chance": 9,
+            "material": 8
+        },
+        {
+            "main_key": 697107,
+            "name": "Combatant's Tuvala Gloves",
+            "rarity": 4,
+            "type": 3,
+            "cron": 0,
+            "chance": 9,
+            "material": 8
+        },
+        {
+            "main_key": 697106,
+            "name": "Combatant's Tuvala Armor",
+            "rarity": 4,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 8
+        },
+        {
+            "main_key": 695108,
+            "name": "Tuvala Shoes",
+            "rarity": 4,
+            "type": 4,
+            "cron": 0,
+            "chance": 9,
+            "material": 8
+        },
+        {
+            "main_key": 694107,
+            "name": "Tuvala Gloves",
+            "rarity": 4,
+            "type": 3,
+            "cron": 8,
+            "chance": 9,
+            "material": 9
+        },
+        {
+            "main_key": 694106,
+            "name": "Tuvala Armor",
+            "rarity": 4,
+            "type": 2,
+            "cron": 8,
+            "chance": 9,
+            "material": 9
+        },
+        {
+            "main_key": 719903,
+            "name": "Blackstar Gloves",
+            "rarity": 5,
+            "type": 3,
+            "cron": 2,
+            "chance": 9,
+            "material": 2
+        },
+        {
+            "main_key": 719901,
+            "name": "Blackstar Helmet",
+            "rarity": 5,
+            "type": 1,
+            "cron": 2,
+            "chance": 9,
+            "material": 2
+        },
+        {
+            "main_key": 719898,
+            "name": "Fallen God's Armor",
+            "rarity": 5,
+            "type": 2,
+            "cron": 9,
+            "chance": 10,
+            "material": 10
+        },
+        {
+            "main_key": 12015,
+            "name": "Ring of Sealed Magical Power",
+            "rarity": 3,
+            "type": 8,
+            "cron": 0,
+            "chance": 11,
+            "material": 1
+        },
+        {
+            "main_key": 705153,
+            "name": "Izaro Trainer's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 705148,
+            "name": "Loggia Trainer's Clothes",
+            "rarity": 2,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 12012,
+            "name": "Outlaw's Ring",
+            "rarity": 3,
+            "type": 8,
+            "cron": 10,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 705119,
+            "name": "Loggia Cook's Clothes",
+            "rarity": 2,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 12011,
+            "name": "Nert Ring",
+            "rarity": 3,
+            "type": 8,
+            "cron": 11,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 705114,
+            "name": "Loggia Alchemist's Clothes",
+            "rarity": 2,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 12010,
+            "name": "Ring of Good Deeds",
+            "rarity": 2,
+            "type": 8,
+            "cron": 12,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 705109,
+            "name": "Loggia Hunter's Clothes",
+            "rarity": 2,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 12007,
+            "name": "Mark of Shadow",
+            "rarity": 3,
+            "type": 8,
+            "cron": 13,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 705108,
+            "name": "Loggia Sailor's Clothes",
+            "rarity": 2,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 12006,
+            "name": "Talis Ring",
+            "rarity": 2,
+            "type": 8,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 12005,
+            "name": "Kalis Ring",
+            "rarity": 2,
+            "type": 8,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 705107,
+            "name": "Loggia Fisher's Clothes",
+            "rarity": 2,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 12004,
+            "name": "Elisha Ring",
+            "rarity": 2,
+            "type": 8,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 705086,
+            "name": "Roroju Cook's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 12003,
+            "name": "Hesus Ring",
+            "rarity": 2,
+            "type": 8,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 705081,
+            "name": "Gorgath Alchemist's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 12002,
+            "name": "Bares Ring",
+            "rarity": 2,
+            "type": 8,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 705076,
+            "name": "Robeau Hunter's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 12001,
+            "name": "Yuria Ring",
+            "rarity": 2,
+            "type": 8,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 705075,
+            "name": "Srulk Sailor's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 705037,
+            "name": "Manos Cook's Clothes",
+            "rarity": 5,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 12
+        },
+        {
+            "main_key": 705032,
+            "name": "Manos Sailor's Clothes",
+            "rarity": 5,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 12
+        },
+        {
+            "main_key": 12018,
+            "name": "Red Coral Ring",
+            "rarity": 3,
+            "type": 8,
+            "cron": 15,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 705052,
+            "name": "Manos Fisher's Clothes",
+            "rarity": 5,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 12
+        },
+        {
+            "main_key": 12017,
+            "name": "Blue Coral Ring",
+            "rarity": 3,
+            "type": 8,
+            "cron": 16,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 705047,
+            "name": "Manos Alchemist's Clothes",
+            "rarity": 5,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 12
+        },
+        {
+            "main_key": 705517,
+            "name": "Manos Gatherer's Clothes",
+            "rarity": 5,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 12
+        },
+        {
+            "main_key": 705515,
+            "name": "Carta Gatherer's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 705513,
+            "name": "Loggia Gatherer's Clothes",
+            "rarity": 2,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 11
+        },
+        {
+            "main_key": 705022,
+            "name": "Manos Hunter's Clothes",
+            "rarity": 5,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 12
+        },
+        {
+            "main_key": 705015,
+            "name": "Manos Trainer's Clothes",
+            "rarity": 5,
+            "type": 2,
+            "cron": 0,
+            "chance": 9,
+            "material": 12
+        },
+        {
+            "main_key": 11928,
+            "name": "Manos Topaz Earring",
+            "rarity": 4,
+            "type": 11,
+            "cron": 17,
+            "chance": 8,
+            "material": 1
+        },
+        {
+            "main_key": 11927,
+            "name": "Manos Sapphire Earring",
+            "rarity": 4,
+            "type": 11,
+            "cron": 18,
+            "chance": 8,
+            "material": 1
+        },
+        {
+            "main_key": 14028,
+            "name": "Silver Embroidered Farmer's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 13,
+            "material": 13
+        },
+        {
+            "main_key": 14027,
+            "name": "Fine Horse Trainer's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 13,
+            "material": 13
+        },
+        {
+            "main_key": 14026,
+            "name": "Silver Embroidered Craftsman's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 13,
+            "material": 13
+        },
+        {
+            "main_key": 14025,
+            "name": "Silver Embroidered Alchemist's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 13,
+            "material": 13
+        },
+        {
+            "main_key": 14024,
+            "name": "Silver Embroidered Hunter's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 13,
+            "material": 13
+        },
+        {
+            "main_key": 14023,
+            "name": "Silver Embroidered Trainer's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 13,
+            "material": 13
+        },
+        {
+            "main_key": 11855,
+            "name": "Dawn Earring",
+            "rarity": 4,
+            "type": 11,
+            "cron": 19,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 14022,
+            "name": "Silver Embroidered Gatherer's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 13,
+            "material": 13
+        },
+        {
+            "main_key": 11854,
+            "name": "Forest's Eye Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 0,
+            "chance": 14,
+            "material": 14
+        },
+        {
+            "main_key": 11848,
+            "name": "General's Earring",
+            "rarity": 4,
+            "type": 11,
+            "cron": 0,
+            "chance": 9,
+            "material": 15
+        },
+        {
+            "main_key": 11847,
+            "name": "Capotia Earring",
+            "rarity": 4,
+            "type": 11,
+            "cron": 0,
+            "chance": 15,
+            "material": 1
+        },
+        {
+            "main_key": 14019,
+            "name": "Silver Embroidered Cook's Clothes",
+            "rarity": 3,
+            "type": 2,
+            "cron": 0,
+            "chance": 13,
+            "material": 13
+        },
+        {
+            "main_key": 11856,
+            "name": "Ethereal Earring",
+            "rarity": 4,
+            "type": 11,
+            "cron": 20,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 11817,
+            "name": "Red Coral Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 21,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 11816,
+            "name": "Blue Coral Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 22,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 11815,
+            "name": "Blue Whale Molar Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 23,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 11814,
+            "name": "Earring of Sealed Magical Power",
+            "rarity": 3,
+            "type": 11,
+            "cron": 0,
+            "chance": 11,
+            "material": 1
+        },
+        {
+            "main_key": 11811,
+            "name": "Ridell Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 24,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 11810,
+            "name": "Mesto Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 16,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 14124,
+            "name": "Ultimate Steel Taritas Shoes",
+            "rarity": 4,
+            "type": 4,
+            "cron": 25,
+            "chance": 9,
+            "material": 6
+        },
+        {
+            "main_key": 11838,
+            "name": "Asula's Crimson Eye Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 0,
+            "chance": 11,
+            "material": 16
+        },
+        {
+            "main_key": 14123,
+            "name": "Ultimate Steel Taritas Gloves",
+            "rarity": 4,
+            "type": 3,
+            "cron": 25,
+            "chance": 9,
+            "material": 6
+        },
+        {
+            "main_key": 14122,
+            "name": "Ultimate Steel Taritas Armor",
+            "rarity": 4,
+            "type": 2,
+            "cron": 25,
+            "chance": 9,
+            "material": 6
+        },
+        {
+            "main_key": 11834,
+            "name": "Narc Ear Accessory",
+            "rarity": 4,
+            "type": 11,
+            "cron": 26,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 14121,
+            "name": "Ultimate Steel Taritas Helmet",
+            "rarity": 4,
+            "type": 1,
+            "cron": 25,
+            "chance": 9,
+            "material": 6
+        },
+        {
+            "main_key": 14104,
+            "name": "Steel Taritas Shoes",
+            "rarity": 2,
+            "type": 4,
+            "cron": 25,
+            "chance": 9,
+            "material": 6
+        },
+        {
+            "main_key": 14103,
+            "name": "Steel Taritas Gloves",
+            "rarity": 2,
+            "type": 3,
+            "cron": 25,
+            "chance": 9,
+            "material": 6
+        },
+        {
+            "main_key": 14102,
+            "name": "Steel Taritas Armor",
+            "rarity": 2,
+            "type": 2,
+            "cron": 25,
+            "chance": 9,
+            "material": 6
+        },
+        {
+            "main_key": 14101,
+            "name": "Steel Taritas Helmet",
+            "rarity": 2,
+            "type": 1,
+            "cron": 25,
+            "chance": 9,
+            "material": 6
+        },
+        {
+            "main_key": 11828,
+            "name": "Tungrad Earring",
+            "rarity": 4,
+            "type": 11,
+            "cron": 20,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 11827,
+            "name": "Fugitive Khalk's Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 23,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 11826,
+            "name": "Sealed Spirit's Earring",
+            "rarity": 3,
+            "type": 11,
+            "cron": 0,
+            "chance": 9,
+            "material": 17
+        },
+        {
+            "main_key": 11807,
+            "name": "Token of Friendship",
+            "rarity": 3,
+            "type": 11,
+            "cron": 16,
+            "chance": 12,
+            "material": 1
+        },
+        {
+            "main_key": 11806,
+            "name": "Talis Earring",
+            "rarity": 2,
+            "type": 11,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 11805,
+            "name": "Kalis Earring",
+            "rarity": 2,
+            "type": 11,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 11804,
+            "name": "Elisha Earring",
+            "rarity": 2,
+            "type": 11,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 11803,
+            "name": "Hesus Earring",
+            "rarity": 2,
+            "type": 11,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 11802,
+            "name": "Bares Earring",
+            "rarity": 2,
+            "type": 11,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 11801,
+            "name": "Yuria Earring",
+            "rarity": 2,
+            "type": 11,
+            "cron": 14,
+            "chance": 13,
+            "material": 1
+        },
+        {
+            "main_key": 12271,
+            "name": "Nightfallen Valtarra Eclipsed Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 20,
+            "chance": 12,
+            "material": 18
+        },
+        {
+            "main_key": 12270,
+            "name": "Nightfallen Basilisk's Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 26,
+            "chance": 12,
+            "material": 19
+        },
+        {
+            "main_key": 12269,
+            "name": "Nightfallen Centaurus Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 27,
+            "chance": 12,
+            "material": 20
+        },
+        {
+            "main_key": 12268,
+            "name": "Tidal Turo's Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 19,
+            "chance": 12,
+            "material": 21
+        },
+        {
+            "main_key": 12267,
+            "name": "Tidal Orkinrad's Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 20,
+            "chance": 12,
+            "material": 22
+        },
+        {
+            "main_key": 12266,
+            "name": "Tidal Capotia Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 0,
+            "chance": 15,
+            "material": 23
+        },
+        {
+            "main_key": 12265,
+            "name": "Tidal Tungrad Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 19,
+            "chance": 12,
+            "material": 24
+        },
+        {
+            "main_key": 12264,
+            "name": "Tidal Valtarra Eclipsed Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 20,
+            "chance": 12,
+            "material": 18
+        },
+        {
+            "main_key": 12263,
+            "name": "Tidal Basilisk's Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 26,
+            "chance": 12,
+            "material": 19
+        },
+        {
+            "main_key": 12262,
+            "name": "Tidal Centaurus Belt",
+            "rarity": 4,
+            "type": 10,
+            "cron": 27,
+            "chance": 12,
+            "material": 20
+        }
+    ],
+    "chance": {
+        "1": {
+            "id": 1,
+            "enhancements": [
+                0.7,
+                0.5,
+                0.4
+            ]
+        },
+        "2": {
+            "id": 2,
+            "enhancements": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0.9,
+                0.25641,
+                0.17241,
+                0.11765,
+                0.07692,
+                0.0625,
+                0.05,
+                0.04,
+                0.02857,
+                0.02,
+                0.13077,
+                0.10625,
+                0.034,
+                0.0051,
+                0.002
+            ]
+        },
+        "3": {
+            "id": 3,
+            "enhancements": [
+                0.7,
+                0.55,
+                0.45,
+                0.35,
+                0.28
+            ]
+        },
+        "4": {
+            "id": 4,
+            "enhancements": [
+                0.75,
+                0.45,
+                0.3,
+                0.15,
+                0.05
+            ]
+        },
+        "5": {
+            "id": 5,
+            "enhancements": [
+                0.7,
+                0.45,
+                0.3,
+                0.18,
+                0.08
+            ]
+        },
+        "6": {
+            "id": 6,
+            "enhancements": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0.9,
+                0.25641,
+                0.17241,
+                0.11765,
+                0.07692,
+                0.0625,
+                0.05,
+                0.04,
+                0.02857,
+                0.02,
+                0.11765,
+                0.07692,
+                0.0625,
+                0.02,
+                0.003
+            ]
+        },
+        "7": {
+            "id": 7,
+            "enhancements": [
+                0.7,
+                0.4,
+                0.3,
+                0.2,
+                0.1
+            ]
+        },
+        "8": {
+            "id": 8,
+            "enhancements": [
+                0.175,
+                0.08,
+                0.05,
+                0.025,
+                0.005
+            ]
+        },
+        "9": {
+            "id": 9,
+            "enhancements": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+            ]
+        },
+        "10": {
+            "id": 10,
+            "enhancements": [
+                0.02,
+                0.01,
+                0.005,
+                0.002,
+                3.0e-5
+            ]
+        },
+        "11": {
+            "id": 11,
+            "enhancements": [
+                0.7,
+                0.28571,
+                0.13333,
+                0.06,
+                0.04
+            ]
+        },
+        "12": {
+            "id": 12,
+            "enhancements": [
+                0.25,
+                0.1,
+                0.075,
+                0.025,
+                0.005
+            ]
+        },
+        "13": {
+            "id": 13,
+            "enhancements": [
+                0.3,
+                0.1,
+                0.075,
+                0.025,
+                0.005
+            ]
+        },
+        "14": {
+            "id": 14,
+            "enhancements": [
+                0.7,
+                0.35,
+                0.18
+            ]
+        },
+        "15": {
+            "id": 15,
+            "enhancements": [
+                0.35,
+                0.15,
+                0.1,
+                0.06,
+                0.02
+            ]
+        }
+    },
+    "cron": {
+        "1": {
+            "id": 1,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 1
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 2
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 3
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 7
+                }
+            }
+        },
+        "2": {
+            "id": 2,
+            "enhancements": {
+                "_17": {
+                    "level": 17,
+                    "value": 190
+                },
+                "_18": {
+                    "level": 18,
+                    "value": 570
+                },
+                "_19": {
+                    "level": 19,
+                    "value": 980
+                }
+            }
+        },
+        "3": {
+            "id": 3,
+            "enhancements": {
+                "_17": {
+                    "level": 17,
+                    "value": 220
+                },
+                "_18": {
+                    "level": 18,
+                    "value": 680
+                },
+                "_19": {
+                    "level": 19,
+                    "value": 1350
+                }
+            }
+        },
+        "4": {
+            "id": 4,
+            "enhancements": {
+                "_17": {
+                    "level": 17,
+                    "value": 1
+                },
+                "_18": {
+                    "level": 18,
+                    "value": 2
+                },
+                "_19": {
+                    "level": 19,
+                    "value": 3
+                }
+            }
+        },
+        "5": {
+            "id": 5,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 10
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 20
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 40
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 60
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 120
+                }
+            }
+        },
+        "6": {
+            "id": 6,
+            "enhancements": {
+                "_17": {
+                    "level": 17,
+                    "value": 14
+                },
+                "_18": {
+                    "level": 18,
+                    "value": 42
+                },
+                "_19": {
+                    "level": 19,
+                    "value": 175
+                }
+            }
+        },
+        "7": {
+            "id": 7,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 37
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 112
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 336
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 934
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 4484
+                }
+            }
+        },
+        "8": {
+            "id": 8,
+            "enhancements": {
+                "_17": {
+                    "level": 17,
+                    "value": 25
+                },
+                "_18": {
+                    "level": 18,
+                    "value": 75
+                },
+                "_19": {
+                    "level": 19,
+                    "value": 165
+                }
+            }
+        },
+        "9": {
+            "id": 9,
+            "enhancements": {
+                "_1": {
+                    "level": 1,
+                    "value": 1500
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 2100
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 2700
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 4000
+                }
+            }
+        },
+        "10": {
+            "id": 10,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 1
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 2
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 9
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 30
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 69
+                }
+            }
+        },
+        "11": {
+            "id": 11,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 1
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 1
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 3
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 11
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 25
+                }
+            }
+        },
+        "12": {
+            "id": 12,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 1
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 1
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 4
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 13
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 29
+                }
+            }
+        },
+        "13": {
+            "id": 13,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 6
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 18
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 68
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 218
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 499
+                }
+            }
+        },
+        "14": {
+            "id": 14,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 1
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 1
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 1
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 4
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 9
+                }
+            }
+        },
+        "15": {
+            "id": 15,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 1
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 5
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 19
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 61
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 139
+                }
+            }
+        },
+        "16": {
+            "id": 16,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 2
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 7
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 27
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 87
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 199
+                }
+            }
+        },
+        "17": {
+            "id": 17,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 7
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 22
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 82
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 261
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 896
+                }
+            }
+        },
+        "18": {
+            "id": 18,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 9
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 29
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 107
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 342
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 1173
+                }
+            }
+        },
+        "19": {
+            "id": 19,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 62
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 187
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 562
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 1562
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 7499
+                }
+            }
+        },
+        "20": {
+            "id": 20,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 47
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 142
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 427
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 1187
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 5699
+                }
+            }
+        },
+        "21": {
+            "id": 21,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 7
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 22
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 82
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 262
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 899
+                }
+            }
+        },
+        "22": {
+            "id": 22,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 2
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 7
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 27
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 87
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 299
+                }
+            }
+        },
+        "23": {
+            "id": 23,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 22
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 67
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 202
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 562
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 2699
+                }
+            }
+        },
+        "24": {
+            "id": 24,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 1
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 1
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 5
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 17
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 39
+                }
+            }
+        },
+        "25": {
+            "id": 25,
+            "enhancements": {
+                "_17": {
+                    "level": 17,
+                    "value": 10
+                },
+                "_18": {
+                    "level": 18,
+                    "value": 31
+                },
+                "_19": {
+                    "level": 19,
+                    "value": 54
+                }
+            }
+        },
+        "26": {
+            "id": 26,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 37
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 112
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 337
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 937
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 4499
+                }
+            }
+        },
+        "27": {
+            "id": 27,
+            "enhancements": {
+                "_0": {
+                    "level": 0,
+                    "value": 37
+                },
+                "_1": {
+                    "level": 1,
+                    "value": 112
+                },
+                "_2": {
+                    "level": 2,
+                    "value": 412
+                },
+                "_3": {
+                    "level": 3,
+                    "value": 1312
+                },
+                "_4": {
+                    "level": 4,
+                    "value": 4499
+                }
+            }
+        }
+    },
+    "material": {
+        "1": {
+            "id": 1,
+            "enhancements": [
+                {
+                    "item": null,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "2": {
+            "id": 2,
+            "enhancements": [
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 752021,
+                    "dura_loss": 20,
+                    "item_amount": 1
+                },
+                {
+                    "item": 752021,
+                    "dura_loss": 20,
+                    "item_amount": 1
+                },
+                {
+                    "item": 752021,
+                    "dura_loss": 20,
+                    "item_amount": 1
+                },
+                {
+                    "item": 752021,
+                    "dura_loss": 20,
+                    "item_amount": 1
+                },
+                {
+                    "item": 752021,
+                    "dura_loss": 20,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "3": {
+            "id": 3,
+            "enhancements": [
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 1
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 1
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 1
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 1
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 1
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 3
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 3
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 3
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 3
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 3
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 5
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 5
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 5
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 5
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 5
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 10
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 10
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 15
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 15
+                },
+                {
+                    "item": 756306,
+                    "dura_loss": 2,
+                    "item_amount": 15
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "4": {
+            "id": 4,
+            "enhancements": [
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 10
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 11
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 13
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 16
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 20
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "5": {
+            "id": 5,
+            "enhancements": [
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 2
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 3
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 4
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 5
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "6": {
+            "id": 6,
+            "enhancements": [
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16002,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 16005,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "7": {
+            "id": 7,
+            "enhancements": [
+                {
+                    "item": 5000,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 10,
+                    "item_amount": 2
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 10,
+                    "item_amount": 3
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 10,
+                    "item_amount": 4
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 10,
+                    "item_amount": 5
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "8": {
+            "id": 8,
+            "enhancements": [
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 750573,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "9": {
+            "id": 9,
+            "enhancements": [
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 2
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 3
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 4
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 5
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 6
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 7
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 8
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 9
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 10
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 11
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 12
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 13
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 14
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 5,
+                    "item_amount": 15
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 10,
+                    "item_amount": 10
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 10,
+                    "item_amount": 10
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 10,
+                    "item_amount": 10
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 10,
+                    "item_amount": 15
+                },
+                {
+                    "item": 721048,
+                    "dura_loss": 10,
+                    "item_amount": 15
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "10": {
+            "id": 10,
+            "enhancements": [
+                {
+                    "item": 752022,
+                    "dura_loss": 30,
+                    "item_amount": 1
+                },
+                {
+                    "item": 752022,
+                    "dura_loss": 30,
+                    "item_amount": 1
+                },
+                {
+                    "item": 752022,
+                    "dura_loss": 30,
+                    "item_amount": 1
+                },
+                {
+                    "item": 752022,
+                    "dura_loss": 30,
+                    "item_amount": 1
+                },
+                {
+                    "item": 752022,
+                    "dura_loss": 30,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "11": {
+            "id": 11,
+            "enhancements": [
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "12": {
+            "id": 12,
+            "enhancements": [
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 2
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 2
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 2
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 3
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 3
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 3
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 4
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 4
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 5
+                },
+                {
+                    "item": 5000,
+                    "dura_loss": 5,
+                    "item_amount": 5
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 4987,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "13": {
+            "id": 13,
+            "enhancements": [
+                {
+                    "item": null,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": 5,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "14": {
+            "id": 14,
+            "enhancements": [
+                {
+                    "item": 721041,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 721041,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 721041,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "15": {
+            "id": 15,
+            "enhancements": [
+                {
+                    "item": 40447,
+                    "dura_loss": null,
+                    "item_amount": 1
+                },
+                {
+                    "item": 40447,
+                    "dura_loss": null,
+                    "item_amount": 1
+                },
+                {
+                    "item": 40447,
+                    "dura_loss": null,
+                    "item_amount": 1
+                },
+                {
+                    "item": 40447,
+                    "dura_loss": null,
+                    "item_amount": 1
+                },
+                {
+                    "item": 40447,
+                    "dura_loss": null,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "16": {
+            "id": 16,
+            "enhancements": [
+                {
+                    "item": 40449,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 40449,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 40449,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 40449,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 40449,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "17": {
+            "id": 17,
+            "enhancements": [
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "18": {
+            "id": 18,
+            "enhancements": [
+                {
+                    "item": 12236,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12236,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12236,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12236,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12236,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "19": {
+            "id": 19,
+            "enhancements": [
+                {
+                    "item": 12230,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12230,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12230,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12230,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12230,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "20": {
+            "id": 20,
+            "enhancements": [
+                {
+                    "item": 12229,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12229,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12229,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12229,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12229,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "21": {
+            "id": 21,
+            "enhancements": [
+                {
+                    "item": 12257,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12257,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12257,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12257,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12257,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "22": {
+            "id": 22,
+            "enhancements": [
+                {
+                    "item": 12251,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12251,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12251,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12251,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12251,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "23": {
+            "id": 23,
+            "enhancements": [
+                {
+                    "item": 12245,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12245,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12245,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12245,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12245,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        },
+        "24": {
+            "id": 24,
+            "enhancements": [
+                {
+                    "item": 12237,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12237,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12237,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12237,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": 12237,
+                    "dura_loss": 10,
+                    "item_amount": 1
+                },
+                {
+                    "item": null,
+                    "dura_loss": null,
+                    "item_amount": null
+                }
+            ]
+        }
+    }
+}

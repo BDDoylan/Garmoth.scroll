@@ -1,12 +1,15 @@
 export default {
 	state: () => ({
 		storage: {
-			seconds: {},
+			fsDefaults: {},
 			items: {},
+            chance: {},
+            cron: {},
+            material: {},
 		},
 	}),
 	mutations: {
-		SET_SCROLL_STORAGE(state, payload) {
+		SET_ENCHANCE_STORAGE(state, payload) {
 			state.storage = payload;
 		},
 	},

@@ -178,7 +178,7 @@ export default {
 				return this.$store.state.scroll.storage;
 			},
 			set(value) {
-				this.$store.commit("SET_STORAGE", value);
+				this.$store.commit("SET_SCROLL_STORAGE", value);
 			},
 		},
 

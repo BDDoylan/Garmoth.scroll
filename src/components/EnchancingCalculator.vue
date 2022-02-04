@@ -73,7 +73,10 @@
 									class="truncate w-64"
 									@click="
 										(currentItemToggle = true),
-											(currentItemSelected.name = item.name),
+											//(selected_main_key = item.main_key(
+												(currentItemSelected.name = item.name)
+											//))
+											,
 											(currentItemSelected.key = item.main_key),
 											(currentItemSelected.tiers = item.levels),
 											(currentItemSelected.currTier = item.levels),
@@ -377,6 +380,7 @@
 					<button
 						class="rounded bg-700 h-18 col-span-1"
 						v-if="currentItemSelected.currTier"
+						:disabled="justClicked"
 						@click="skipOrNah(), clicked()"
 					>
 						<p class="my-3 text-green font-bold">ENCHANCE</p>
@@ -451,11 +455,13 @@
 </template>
 
 <script>
+import axios from "axios";
 import Input from "./Input.vue";
+import Select from "./Select.vue";
 
 export default {
 	name: "EnchancingCalculator",
-	components: { Input },
+	components: { Input, Select },
 	props: { title: String },
 
 	data() {
@@ -491,11 +497,20 @@ export default {
 			avgClicks: 0,
 
 			failstack: 0,
+
 			fsDefaultPri: 25,
 			fsDefaultDuo: 35,
 			fsDefaultTri: 50,
 			fsDefaultTet: 80,
 			fsDefaultPen: 110,
+
+			fsDefaults: {
+				pri: 25,
+				duo: 35,
+				tri: 50,
+				tet: 80,
+				pen: 110,
+			},
 
 			chanceOfSuccess: 0,
 
@@ -510,10 +525,15 @@ export default {
 
 			displayLeftItemDropDown: false,
 
+			selected_main_key: 12031,
+			selected_level: "II",
+
 			items: [
 				{
 					name: "Red Nose's Armor",
 					main_key: 11014,
+
+					class: 1,
 
 					levels: [
 						{
@@ -578,6 +598,8 @@ export default {
 					name: "Ring of Crescent Guardian",
 					main_key: 12031,
 
+					class: 2,
+
 					levels: [
 						{
 							lvlName: "",
@@ -618,6 +640,10 @@ export default {
 				{
 					name: "Fallen God's Armor",
 					main_key: 719898,
+
+					class: 4,
+
+					crons: [],
 
 					levels: [
 						{
@@ -661,9 +687,40 @@ export default {
 		};
 	},
 
-	created() {},
+	created() {
+		axios.get("https://garmoth.com/api/getEnhancements").then((res) => {
+			this.storage.items = res.data.items;
+			this.storage.chance = res.data.chance;
+			this.storage.cron = res.data.cron;
+			this.storage.material = res.data.material;
+		});
+	},
 
-	mounted() {},
+	computed: {
+		storage: {
+			get() {
+				return this.$store.state.enchance.storage;
+			},
+			set(value) {
+				this.$store.commit("SET_ENCHANCE_STORAGE", value);
+			},
+		},
+
+		selectItem() {
+
+			return {
+				name: null,
+				key: null,
+
+				tiers: {},
+
+				prevTier: {},
+				currTier: {},
+				nextTier: {},
+			}
+			return this.items[this.selected_main_key].levels[selected_level]
+		}
+	},
 
 	methods: {
 		clicked() {
