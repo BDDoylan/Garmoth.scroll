@@ -57,7 +57,7 @@
 								{{ currentItemSelected.currTier.lvlName }}
 							</p>
 						</div>
-						<ul
+						<!-- <ul
 							class="bg-600 text-red ml-6 rounded mt-2 h-auto w-64 left-full"
 							v-if="displayLeftItemDropDown"
 						>
@@ -135,7 +135,8 @@
 									</li>
 								</ul>
 							</li>
-						</ul>
+						</ul> -->
+						<Select v-if="displayLeftItemDropDown"></Select>
 					</div>
 					<div class="flex-auto w-full">
 						<div
