@@ -35,7 +35,7 @@
 			<div
 				class="bg-600 text-0 rounded h-auto text-xl relative px-2 pt-2 col-span-4 row-span-2"
 			>
-				<div class="flex bg-700 text-0 rounded h-24">
+				<div class="flex bg-700 text-0 rounded h-24" @click="open()">
 					<div class="flex-initial w-24 z-10">
 						<div
 							class="mt-6 bg-600 rounded ml-4 p-2 w-20 relative h-16"
@@ -57,86 +57,7 @@
 								{{ currentItemSelected.currTier.lvlName }}
 							</p>
 						</div>
-						<!-- <ul
-							class="bg-600 text-red ml-6 rounded mt-2 h-auto w-64 left-full"
-							v-if="displayLeftItemDropDown"
-						>
-							<li
-								v-for="(item, key1) in items"
-								:key="key1"
-								class="hover:bg-400 h-9 text-left text-ellipsis whitespace-nowrap"
-								:class="{
-									'text-green bg-400': currentItemSelected.name === item.name,
-								}"
-							>
-								<div
-									class="truncate w-64"
-									@click="
-										(currentItemToggle = true),
-											//(selected_main_key = item.main_key(
-												(currentItemSelected.name = item.name)
-											//))
-											,
-											(currentItemSelected.key = item.main_key),
-											(currentItemSelected.tiers = item.levels),
-											(currentItemSelected.currTier = item.levels),
-											(currentItemSelected.prevTier = item.levels),
-											(currentItemSelected.nextTier = item.levels),
-											(cronToggle = false),
-											(silverSpent = 0),
-											clearSimulation()
-									"
-								>
-									<img
-										:src="
-											'https://assets.garmoth.com/items/' +
-											item.main_key +
-											'.png'
-										"
-										class="h-8 inline ml-1"
-									/>
-									{{ item.name }}
-								</div>
-								<ul
-									class="relative left-full w-12 bottom-8 bg-600 ml-1 rounded"
-								>
-									<li
-										v-for="(level, key2) in item.levels"
-										:key="key2"
-										class="hover:bg-400 text-center"
-										@click="
-											(currentItemSelected.prevTier = item.levels[key2 - 1]
-												? item.levels[key2 - 1]
-												: { lvlName: '' }),
-												(currentItemSelected.currTier = item.levels[key2]),
-												(currentItemSelected.nextTier = item.levels[key2 + 1]
-													? item.levels[key2 + 1]
-													: { lvlName: 'V' }),
-												(displayLeftItemDropDown = false),
-												setChance(),
-												(cronToggle = false),
-												(silverSpent = 0),
-												clearSimulation()
-										"
-										:class="{
-											'text-green bg-400':
-												currentItemSelected.currTier.lvlName === level.lvlName,
-										}"
-									>
-										<p
-											v-if="
-												currentItemToggle &&
-												currentItemSelected.name === item.name
-											"
-											class="h-8"
-										>
-											{{ getLvl(level.lvlName) }}
-										</p>
-									</li>
-								</ul>
-							</li>
-						</ul> -->
-						<Select v-if="displayLeftItemDropDown"></Select>
+						<Select></Select>
 					</div>
 					<div class="flex-auto w-full">
 						<div
@@ -708,7 +629,6 @@ export default {
 		},
 
 		selectItem() {
-
 			return {
 				name: null,
 				key: null,
@@ -718,9 +638,9 @@ export default {
 				prevTier: {},
 				currTier: {},
 				nextTier: {},
-			}
-			return this.items[this.selected_main_key].levels[selected_level]
-		}
+			};
+			return this.items[this.selected_main_key].levels[selected_level];
+		},
 	},
 
 	methods: {
@@ -803,6 +723,10 @@ export default {
 			this.chanceOfSuccess = (this.chanceOfSuccess * 100).toFixed(2);
 			if (this.chanceOfSuccess > 90) this.chanceOfSuccess = 90;
 			this.avgClicks = (100 / this.chanceOfSuccess).toFixed(2);
+		},
+
+		open() {
+			document.getElementById("itemSelector").style.display = "flex";
 		},
 
 		degrade() {
