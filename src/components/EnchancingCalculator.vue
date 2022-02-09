@@ -35,29 +35,29 @@
 			<div
 				class="bg-600 text-0 rounded h-auto text-xl relative px-2 pt-2 col-span-4 row-span-2"
 			>
-				<div class="flex bg-700 text-0 rounded h-24" @click="open()">
+				<div class="flex bg-700 text-0 rounded h-24">
 					<div class="flex-initial w-24 z-10">
 						<div
 							class="mt-6 bg-600 rounded ml-4 p-2 w-20 relative h-16"
-							@click="displayLeftItemDropDown = !displayLeftItemDropDown"
+							@click="displayLeftItemDropDown = !displayLeftItemDropDown, open()"
 						>
 							<img
 								:src="
 									'https://assets.garmoth.com/items/' +
-									currentItemSelected.key +
+									currentItemSelected.information.main_key +
 									'.png'
 								"
-								v-if="currentItemSelected.key"
-								class="h-12 m-auto rounded-xl"
+								v-if="currentItemSelected.information.main_key"
+								:class="['h-12 m-auto rounded-xl', { 'animate-pulse' : currentItemSelected.information.main_key === 10810 } ]"
 							/>
 							<p
 								class="absolute top-4 left-4 text-white text-1xl font-semibold w-12 bg-600 bg-opacity-20"
-								v-if="currentItemSelected.key"
+								v-if="currentItemSelected.information.main_key"
 							>
-								{{ currentItemSelected.currTier.lvlName }}
+								{{ currentItemSelected.currTier.lvlName === "BASE" ? "" : currentItemSelected.currTier.lvlName }}
 							</p>
 						</div>
-						<Select></Select>
+						<Select @chosenItem="itemChange"></Select>
 					</div>
 					<div class="flex-auto w-full">
 						<div
@@ -84,11 +84,11 @@
 							<img
 								:src="
 									'https://assets.garmoth.com/items/' +
-									currentItemSelected.key +
+									currentItemSelected.information.main_key +
 									'.png'
 								"
 								v-if="
-									currentItemSelected.key &&
+									currentItemSelected.information.main_key != 10810 &&
 									currentItemSelected.currTier.lvlName != 'V'
 								"
 								class="h-12 m-auto rounded-xl"
@@ -96,11 +96,11 @@
 							<p
 								class="absolute top-4 left-4 text-white text-1xl font-semibold w-12 bg-600 bg-opacity-20"
 								v-if="
-									currentItemSelected.key &&
+									currentItemSelected.information.main_key &&
 									currentItemSelected.currTier.lvlName != 'V'
 								"
 							>
-								{{ currentItemSelected.nextTier.lvlName }}
+								{{ currentItemSelected.currTier.lvlName === "IV" ? "V" : currentItemSelected.nextTier.lvlName }}
 							</p>
 						</div>
 					</div>
@@ -391,13 +391,14 @@ export default {
 			realEnchancement: false,
 
 			currentItemSelected: {
-				name: null,
-				key: null,
+				information: {
+					main_key: 10810,
+				},
 
-				tiers: {},
+				allTiers: null,
 
-				prevTier: {},
 				currTier: {},
+				prevTier: {},
 				nextTier: {},
 			},
 
@@ -627,23 +628,13 @@ export default {
 				this.$store.commit("SET_ENCHANCE_STORAGE", value);
 			},
 		},
-
-		selectItem() {
-			return {
-				name: null,
-				key: null,
-
-				tiers: {},
-
-				prevTier: {},
-				currTier: {},
-				nextTier: {},
-			};
-			return this.items[this.selected_main_key].levels[selected_level];
-		},
 	},
 
 	methods: {
+		itemChange(item) {
+			this.currentItemSelected = item;
+		},
+
 		clicked() {
 			if (!this.animationToggle) {
 				this.justClicked = true;
