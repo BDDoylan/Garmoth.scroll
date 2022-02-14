@@ -25,7 +25,7 @@
 			>
 				<ul v-for="item in filteredOptions" :key="item.main_key">
 					<li
-						@click="(selectedItem = item), (toggle = false)"
+						@click="(selectedItem = item), getAllTiers(), (toggle = false)"
 						:class="['relative py-2 pl-3 pr-9 hover:bg-500 cursor-pointer']"
 					>
 						<div class="flex items-center">
@@ -66,7 +66,7 @@
 				>
 					<div v-for="(tier, key) in getTierOptions" :key="key">
 						<p
-							@click="prepareSelectedItem(tier, key), passCurrentSelectedItem()"
+							@click="prepareSelectedItem(key), passCurrentSelectedItem()"
 							class="text-white font-bold bg-400 rounded w-14 m-auto text-center my-2 p-2 hover:bg-700 cursor-pointer"
 						>
 							{{ tier }}
@@ -96,6 +96,8 @@ export default {
 
 			selectedItem: null,
 
+			allTiers: null,
+
 			finalItem: null,
 
 			selectedTier: {
@@ -113,8 +115,32 @@ export default {
 					rarity: 5,
 					type: 2,
 					cron: 9,
-					chance: 10,
+					chance: 17,
 					material: 10,
+
+					softCaps: [
+						{
+							softCap: 340,
+						},
+						{
+							softCap: 690,
+						},
+						{
+							softCap: 1390,
+						},
+						{
+							softCap: 3490,
+						},
+						{
+							softCap: 279990,
+						},
+					],
+
+					failStackGain: [
+						{
+							failstackGain: 2,
+						}
+					]
 				},
 				{
 					main_key: 731102,
@@ -213,79 +239,43 @@ export default {
 			this.$emit("chosenItem", this.finalItem);
 		},
 
-		prepareSelectedItem(tier, key) {
-			this.selectedTier.currLvlName = tier;
-			this.selectedTier.prevLvlName = this.getTierOptions[key - 1];
-			this.selectedTier.nextLvlName = this.getTierOptions[key + 1];
-			this.selectedTier.currIndex = key;
-
+		prepareSelectedItem(key) {
 			this.finalItem = {
 				information: this.selectedItem,
 
-				allTiers: null,
+				allTiers: this.allTiers,
 
-				currTier: this.getTier("curr"),
-				prevTier: this.getTier("prev"),
-				nextTier: this.getTier("next"),
+				currTier: this.allTiers[key],
+				prevTier: this.allTiers[key - 1] === undefined ? null : this.allTiers[key - 1],
+				nextTier: this.allTiers[key + 1] === undefined ? null : this.allTiers[key + 1],
 			};
 		},
 
-		getTier(state) {
-			let tier;
+		getAllTiers() {
+			let tiers = [];
 
-			if (state === "curr") {
-				tier = {
-					lvlName: this.selectedTier.currLvlName === undefined ? null : this.selectedTier.currLvlName,
-					baseChance: this.storage.chance[this.selectedItem.chance].enhancements[this.selectedTier.currIndex],
-					//softCap: this.storage.chance[this.selectedItem.chance].softcaps[this.selectedTier.index],
-					crons:
-						this.storage.cron[this.selectedItem.cron].enhancements["_" + this.selectedTier.currIndex] ===
-						undefined
-							? null
-							: this.storage.cron[this.selectedItem.cron].enhancements["_" + this.selectedTier.currIndex]
-									.value,
-				};
-			} else if (state === "prev") {
-				tier = {
-					lvlName: this.selectedTier.prevLvlName === undefined ? null : this.selectedTier.prevLvlName,
+			for (let index in this.storage.chance[this.selectedItem.chance].enhancements) {
+				let tier = {
+					lvlName: this.getTierOptions[index],
 					baseChance:
-						this.storage.chance[this.selectedItem.chance].enhancements[this.selectedTier.currIndex - 1] ===
-						undefined
+						this.storage.chance[this.selectedItem.chance].enhancements[index] === undefined
 							? null
-							: this.storage.chance[this.selectedItem.chance].enhancements[this.selectedTier.currIndex - 1],
-					//softCap: !(this.selectedTier.currIndex - 1)
-					//	? this.storage.chance[this.selectedItem.chance].softcaps[this.selectedTier.index - 1] : null,
-					crons:
-						this.storage.cron[this.selectedItem.cron].enhancements[
-							"_" + (this.selectedTier.currIndex - 1)
-						] === undefined
-							? null
-							: this.storage.cron[this.selectedItem.cron].enhancements[
-									"_" + (this.selectedTier.currIndex - 1)
-							  ].value,
-				};
-			} else if (state === "next") {
-				tier = {
-					lvlName: this.selectedTier.nextLvlName === undefined ? null : this.selectedTier.nextLvlName,
-					baseChance:
-						this.storage.chance[this.selectedItem.chance].enhancements[this.selectedTier.currIndex + 1] ===
-						undefined
-							? null
-							: this.storage.chance[this.selectedItem.chance].enhancements[this.selectedTier.currIndex + 1],
+							: this.storage.chance[this.selectedItem.chance].enhancements[index],
 					//softCap: !(this.selectedTier.currIndex + 1)
 					//	? this.storage.chance[this.selectedItem.chance].softcaps[this.selectedTier.index + 1] : null,
-					crons:
-						this.storage.cron[this.selectedItem.cron].enhancements[
-							"_" + (this.selectedTier.currIndex + 1)
-						] === undefined
+					softCap:
+						this.selectedItem.softCaps[index].softCap === undefined
 							? null
-							: this.storage.cron[this.selectedItem.cron].enhancements[
-									"_" + (this.selectedTier.currIndex + 1)
-							  ].value,
+							: this.selectedItem.softCaps[index].softCap,
+					crons:
+						this.storage.cron[this.selectedItem.cron].enhancements["_" + index] === undefined
+							? null
+							: this.storage.cron[this.selectedItem.cron].enhancements["_" + index].value,
 				};
+				tiers.push(tier);
 			}
 
-			return tier;
+			this.allTiers = tiers;
 		},
 	},
 };

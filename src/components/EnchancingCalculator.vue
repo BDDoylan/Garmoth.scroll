@@ -448,8 +448,8 @@ export default {
 
 			displayLeftItemDropDown: false,
 
-			selected_main_key: 12031,
-			selected_level: "II",
+			// selected_main_key: 12031,
+			// selected_level: "II",
 
 			items: [
 				{
@@ -633,6 +633,7 @@ export default {
 	methods: {
 		itemChange(item) {
 			this.currentItemSelected = item;
+			this.setChance();
 		},
 
 		clicked() {
@@ -676,10 +677,10 @@ export default {
 		},
 
 		previousTier(currentTier) {
-			let indexOfCurr = this.currentItemSelected.tiers.findIndex(
+			let indexOfCurr = this.currentItemSelected.allTiers.findIndex(
 				(tier) => tier === currentTier
 			);
-			return this.currentItemSelected.tiers[indexOfCurr - 1];
+			return this.currentItemSelected.allTiers[indexOfCurr - 1];
 		},
 
 		nextTier(currentTier) {
@@ -688,17 +689,18 @@ export default {
 			} else if (currentTier.lvlName === "V") {
 				return { lvlName: "" };
 			} else if (currentTier.lvlName != "") {
-				let indexOfCurr = this.currentItemSelected.tiers.findIndex(
+				let indexOfCurr = this.currentItemSelected.allTiers.findIndex(
 					(tier) => tier === currentTier
 				);
-				return this.currentItemSelected.tiers[indexOfCurr + 1];
+				return this.currentItemSelected.allTiers[indexOfCurr + 1];
 			}
 		},
 
 		setChance() {
 			let baseChance = this.currentItemSelected.currTier.baseChance;
+			console.log(baseChance)
 			this.softcap = this.currentItemSelected.currTier.softCap;
-
+			console.log(this.softcap)	
 			let failstackChance = baseChance / 10;
 			let failstackChanceAfterSoftcap = baseChance / 50;
 
@@ -804,6 +806,7 @@ export default {
 
 						if (!this.realEnchancement) {
 							if (
+								this.currentItemSelected.prevTier != null &&
 								this.currentItemSelected.prevTier.lvlName != "" &&
 								this.currentItemSelected.prevTier.lvlName != "+12" &&
 								this.currentItemSelected.prevTier.lvlName != "+13" &&
