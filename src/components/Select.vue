@@ -138,9 +138,21 @@ export default {
 
 					failStackGain: [
 						{
-							failstackGain: 2,
-						}
-					]
+							fs: 2,
+						},
+						{
+							fs: 3,
+						},
+						{
+							fs: 4,
+						},
+						{
+							fs: 5,
+						},
+						{
+							fs: 6,
+						},
+					],
 				},
 				{
 					main_key: 731102,
@@ -271,6 +283,10 @@ export default {
 						this.storage.cron[this.selectedItem.cron].enhancements["_" + index] === undefined
 							? null
 							: this.storage.cron[this.selectedItem.cron].enhancements["_" + index].value,
+					failstackGain:
+						this.selectedItem.failStackGain[index].fs === undefined
+							? null
+							: this.selectedItem.failStackGain[index].fs,
 				};
 				tiers.push(tier);
 			}

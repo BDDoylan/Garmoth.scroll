@@ -13,9 +13,7 @@
 		</div>
 
 		<div class="grid grid-cols-2 gap-4 mx-4 pb-3 xsm:grid-cols-8">
-			<div
-				class="bg-600 text-0 rounded text-xl relative py-4 xsm:col-span-2 col-span-4 xsm:pt-16 lgx:pt-10"
-			>
+			<div class="bg-600 text-0 rounded text-xl relative py-4 xsm:col-span-2 col-span-4 xsm:pt-16 lgx:pt-10">
 				<p>
 					Attempts: <strong>{{ attempts }}</strong>
 				</p>
@@ -27,34 +25,32 @@
 				</p>
 				<p>
 					Avg. Clicks:
-					<strong class="text-orange">{{
-						(attempts / success).toFixed(2)
-					}}</strong>
+					<strong class="text-orange">{{ (attempts / success).toFixed(2) }}</strong>
 				</p>
 			</div>
-			<div
-				class="bg-600 text-0 rounded h-auto text-xl relative px-2 pt-2 col-span-4 row-span-2"
-			>
+			<div class="bg-600 text-0 rounded h-auto text-xl relative px-2 pt-2 col-span-4 row-span-2">
 				<div class="flex bg-700 text-0 rounded h-24">
 					<div class="flex-initial w-24 z-10">
 						<div
 							class="mt-6 bg-600 rounded ml-4 p-2 w-20 relative h-16"
-							@click="displayLeftItemDropDown = !displayLeftItemDropDown, open()"
+							@click="(displayLeftItemDropDown = !displayLeftItemDropDown), open()"
 						>
 							<img
-								:src="
-									'https://assets.garmoth.com/items/' +
-									currentItemSelected.information.main_key +
-									'.png'
-								"
+								:src="'https://assets.garmoth.com/items/' + currentItemSelected.information.main_key + '.png'"
 								v-if="currentItemSelected.information.main_key"
-								:class="['h-12 m-auto rounded-xl', { 'animate-pulse' : currentItemSelected.information.main_key === 10810 } ]"
+								:class="[
+									'h-12 m-auto rounded-xl',
+									{ 'animate-pulse': currentItemSelected.information.main_key === 10810 },
+								]"
 							/>
 							<p
 								class="absolute top-4 left-4 text-white text-1xl font-semibold w-12 bg-600 bg-opacity-20"
 								v-if="currentItemSelected.information.main_key"
 							>
-								{{ currentItemSelected.currTier.lvlName === "BASE" ? "" : currentItemSelected.currTier.lvlName }}
+								<span>{{
+									currentItemSelected.currTier.lvlName === "BASE" ? "" : currentItemSelected.currTier.lvlName
+								}}</span>
+								<span v-if="currentItemSelected.currTier === null">V</span>
 							</p>
 						</div>
 						<Select @chosenItem="itemChange"></Select>
@@ -62,31 +58,19 @@
 					<div class="flex-auto w-full">
 						<div
 							class="mt-12 bg-600 h-4 w-full"
-							v-if="
-								animationToggle ||
-								!justClicked ||
-								currentItemSelected.currTier.lvlName === 'V'
-							"
+							v-if="animationToggle || !justClicked || currentItemSelected.currTier.lvlName === 'V'"
 						></div>
 						<transition name="anim">
 							<div
 								class="mt-12 bg-600 h-4 w-full"
-								v-if="
-									!animationToggle &&
-									justClicked &&
-									currentItemSelected.currTier.lvlName != 'V'
-								"
+								v-if="!animationToggle && justClicked && currentItemSelected.currTier.lvlName != 'V'"
 							></div>
 						</transition>
 					</div>
 					<div class="flex-initial w-24 z-10">
 						<div class="mt-6 bg-600 rounded mr-6 p-2 w-20 relative h-16">
 							<img
-								:src="
-									'https://assets.garmoth.com/items/' +
-									currentItemSelected.information.main_key +
-									'.png'
-								"
+								:src="'https://assets.garmoth.com/items/' + currentItemSelected.information.main_key + '.png'"
 								v-if="
 									currentItemSelected.information.main_key != 10810 &&
 									currentItemSelected.currTier.lvlName != 'V'
@@ -95,12 +79,11 @@
 							/>
 							<p
 								class="absolute top-4 left-4 text-white text-1xl font-semibold w-12 bg-600 bg-opacity-20"
-								v-if="
-									currentItemSelected.information.main_key &&
-									currentItemSelected.currTier.lvlName != 'V'
-								"
+								v-if="currentItemSelected.information.main_key && currentItemSelected.currTier.lvlName != 'V'"
 							>
-								{{ currentItemSelected.currTier.lvlName === "IV" ? "V" : currentItemSelected.nextTier.lvlName }}
+								{{
+									currentItemSelected.currTier.lvlName === "IV" ? "V" : currentItemSelected.nextTier.lvlName
+								}}
 							</p>
 						</div>
 					</div>
@@ -118,8 +101,7 @@
 									{ 'text-red': !failstackDefaultToggle },
 								]"
 								@click="
-									(failstackDefaultToggle = !failstackDefaultToggle),
-										(failstackDefaultTabToggle = false)
+									(failstackDefaultToggle = !failstackDefaultToggle), (failstackDefaultTabToggle = false)
 								"
 								>Use Defaults</span
 							>
@@ -128,35 +110,35 @@
 							<input
 								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
 								type="number"
-								v-model="fsDefaultPri"
+								v-model="fsDefaults.pri"
 							/>
 							<br />
 							II:
 							<input
 								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
 								type="number"
-								v-model="fsDefaultDuo"
+								v-model="fsDefaults.duo"
 							/>
 							<br />
 							III:
 							<input
 								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
 								type="number"
-								v-model="fsDefaultTri"
+								v-model="fsDefaults.tri"
 							/>
 							<br />
 							IV:
 							<input
 								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
 								type="number"
-								v-model="fsDefaultTet"
+								v-model="fsDefaults.tet"
 							/>
 							<br />
 							V:
 							<input
 								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
 								type="number"
-								v-model="fsDefaultPen"
+								v-model="fsDefaults.pen"
 							/>
 						</div>
 						<div class="font-bold mb-5 pt-2">
@@ -220,25 +202,17 @@
 						</button>
 					</div>
 				</div>
-				<div
-					class="grid grid-cols-1 my-2 gap-2 lgx:grid-cols-3 xsm:grid-cols-2 xs:grid-cols-3"
-				>
+				<div class="grid grid-cols-1 my-2 gap-2 lgx:grid-cols-3 xsm:grid-cols-2 xs:grid-cols-3">
 					<div class="rounded bg-700 h-14 w-auto font-semibold">
 						<p class="my-3">
 							Success Rate:
-							{{
-								currentItemSelected.currTier.lvlName != "V"
-									? chanceOfSuccess + "%"
-									: "N/A"
-							}}
+							{{ currentItemSelected.currTier.lvlName != "V" ? chanceOfSuccess + "%" : "N/A" }}
 						</p>
 					</div>
 					<div class="rounded bg-700 h-14 w-auto font-semibold">
-						<p class="my-3">
+						<p class="my-3 cursor-pointer hover:text-green" @click="failstack = softcap">
 							Softcap:
-							{{
-								currentItemSelected.currTier.lvlName != "V" ? softcap : "N/A"
-							}}
+							{{ currentItemSelected.currTier.lvlName != "V" ? softcap : "N/A" }}
 						</p>
 					</div>
 					<div
@@ -246,27 +220,16 @@
 					>
 						<p class="my-3">
 							Avg. Clicks:
-							{{
-								currentItemSelected.currTier.lvlName != "V" ? avgClicks : "N/A"
-							}}
+							{{ currentItemSelected.currTier.lvlName != "V" ? avgClicks : "N/A" }}
 						</p>
 					</div>
 					<div class="rounded bg-700 h-32 row-span-1 pt-1 xs:row-span-2">
-						<p
-							:class="[
-								'my-3 text-green font-bold',
-								{ 'text-red': !cronToggle },
-							]"
-						>
+						<p :class="['my-3 text-green font-bold', { 'text-red': !cronToggle }]">
 							CRONS
 							<label
 								class="switch ml-1"
-								v-if="
-									currentItemSelected.currTier.crons != null &&
-									currentItemSelected.currTier.crons != 0
-								"
-								><input @click="cronToggle = !cronToggle" type="checkbox" />
-								<span class="slider round"></span
+								v-if="currentItemSelected.currTier.crons != null && currentItemSelected.currTier.crons != 0"
+								><input @click="cronToggle = !cronToggle" type="checkbox" /> <span class="slider round"></span
 							></label>
 						</p>
 						<div class="bg-600 rounded w-28 h-12 m-auto">
@@ -276,25 +239,14 @@
 							<p v-else class="p-2 font-bold">?</p>
 						</div>
 					</div>
-					<div
-						class="rounded bg-700 h-18 col-span-1 xsm:col-span-2 xs:col-span-2"
-					>
-						<p class="my-3 font-semibold">
-							Silver Spent: {{ silverSpent.toLocaleString() }}
-						</p>
+					<div class="rounded bg-700 h-18 col-span-1 xsm:col-span-2 xs:col-span-2">
+						<p class="my-3 font-semibold">Silver Spent: {{ silverSpent.toLocaleString() }}</p>
 					</div>
 					<div class="rounded bg-700 h-18 col-span-1 py-2 pt-3">
-						<div
-							:class="[
-								'my-1 text-green font-bold',
-								{ 'text-red': !animationToggle },
-							]"
-						>
+						<div :class="['my-1 text-green font-bold', { 'text-red': !animationToggle }]">
 							<span>Skip Animation</span>
 							<label class="switch ml-3"
-								><input
-									@click="animationToggle = !animationToggle"
-									type="checkbox" />
+								><input @click="animationToggle = !animationToggle" type="checkbox" />
 								<span class="slider round"></span
 							></label>
 						</div>
@@ -302,58 +254,44 @@
 					<button
 						class="rounded bg-700 h-18 col-span-1"
 						v-if="currentItemSelected.currTier"
-						:disabled="justClicked"
+						:disabled="justClicked || currentItemSelected.allTiers === null"
 						@click="skipOrNah(), clicked()"
 					>
 						<p class="my-3 text-green font-bold">ENCHANCE</p>
 					</button>
 				</div>
 			</div>
-			<div
-				class="bg-600 text-0 rounded h-auto text-xl relative p-2 col-span-4 row-span-2 xsm:col-span-2"
-			>
-				<Input
-					class="w-full p-2 h-12 text-2xl"
-					v-model="simulationTapAmount"
-					:valueName="'simulation'"
-				/>
+			<div class="bg-600 text-0 rounded h-auto text-xl relative p-2 col-span-4 row-span-2 xsm:col-span-2">
+				<Input class="w-full p-2 h-12 text-2xl" v-model="simulationTapAmount" :valueName="'simulation'" />
 				<div class="my-3 mx-1 grid grid-cols-2 gap-3">
 					<button
+						:disabled="currentItemSelected.allTiers === null"
 						@click="simulate(simulationTapAmount)"
 						class="bg-green rounded p-4 font-bold truncate"
 					>
 						Simulate
 					</button>
 					<button
-						@click="clearSimulation()"
+						:disabled="currentItemSelected.allTiers === null"
+						@click="clearSimulation(), (failstack = 0), (silverSpent = 0)"
 						class="bg-red rounded p-4 font-bold truncate"
 					>
 						Clear
 					</button>
 				</div>
-				<div
-					class="rounded bg-700 h-90 lgx:h-65 text-left pb-0 overflow-y-auto"
-				>
+				<div class="rounded bg-700 h-90 lgx:h-65 text-left pb-0 overflow-y-auto">
 					<p
 						v-for="(attempt, key) in simulations"
 						:key="key"
-						:class="[
-							'ml-2',
-							{ 'text-red': !attempt.state, 'text-green': attempt.state },
-						]"
+						:class="['ml-2', { 'text-red': !attempt.state, 'text-green': attempt.state }]"
 					>
 						{{ attempt.lvlName }} <span class="text-400">|</span>
 						{{ attempt.text + attempt.roll }}
-						<span class="text-200"
-							><span class="text-400">|</span> FS used:
-							{{ attempt.failstack }}</span
-						>
+						<span class="text-200"><span class="text-400">|</span> FS used: {{ attempt.failstack }}</span>
 					</p>
 				</div>
 			</div>
-			<div
-				class="bg-600 text-0 rounded text-xl relative py-4 col-span-4 xsm:col-span-2 xsm:pt-16 lgx:pt-10"
-			>
+			<div class="bg-600 text-0 rounded text-xl relative py-4 col-span-4 xsm:col-span-2 xsm:pt-16 lgx:pt-10">
 				<div class="">
 					<p>
 						Highest Success Streak: <strong>{{ highestSuccessStreak }}</strong>
@@ -421,12 +359,6 @@ export default {
 
 			failstack: 0,
 
-			fsDefaultPri: 25,
-			fsDefaultDuo: 35,
-			fsDefaultTri: 50,
-			fsDefaultTet: 80,
-			fsDefaultPen: 110,
-
 			fsDefaults: {
 				pri: 25,
 				duo: 35,
@@ -447,9 +379,6 @@ export default {
 			silverSpent: 0,
 
 			displayLeftItemDropDown: false,
-
-			// selected_main_key: 12031,
-			// selected_level: "II",
 
 			items: [
 				{
@@ -677,9 +606,7 @@ export default {
 		},
 
 		previousTier(currentTier) {
-			let indexOfCurr = this.currentItemSelected.allTiers.findIndex(
-				(tier) => tier === currentTier
-			);
+			let indexOfCurr = this.currentItemSelected.allTiers.findIndex((tier) => tier === currentTier);
 			return this.currentItemSelected.allTiers[indexOfCurr - 1];
 		},
 
@@ -689,18 +616,15 @@ export default {
 			} else if (currentTier.lvlName === "V") {
 				return { lvlName: "" };
 			} else if (currentTier.lvlName != "") {
-				let indexOfCurr = this.currentItemSelected.allTiers.findIndex(
-					(tier) => tier === currentTier
-				);
+				let indexOfCurr = this.currentItemSelected.allTiers.findIndex((tier) => tier === currentTier);
 				return this.currentItemSelected.allTiers[indexOfCurr + 1];
 			}
 		},
 
 		setChance() {
 			let baseChance = this.currentItemSelected.currTier.baseChance;
-			console.log(baseChance)
 			this.softcap = this.currentItemSelected.currTier.softCap;
-			console.log(this.softcap)	
+
 			let failstackChance = baseChance / 10;
 			let failstackChanceAfterSoftcap = baseChance / 50;
 
@@ -726,9 +650,7 @@ export default {
 			let temp = this.currentItemSelected.currTier;
 
 			this.currentItemSelected.currTier = this.currentItemSelected.prevTier;
-			this.currentItemSelected.prevTier = this.previousTier(
-				this.currentItemSelected.prevTier
-			);
+			this.currentItemSelected.prevTier = this.previousTier(this.currentItemSelected.prevTier);
 			this.currentItemSelected.nextTier = temp;
 
 			this.setChance();
@@ -739,9 +661,7 @@ export default {
 
 			this.currentItemSelected.currTier = this.currentItemSelected.nextTier;
 			this.currentItemSelected.prevTier = temp;
-			this.currentItemSelected.nextTier = this.nextTier(
-				this.currentItemSelected.nextTier
-			);
+			this.currentItemSelected.nextTier = this.nextTier(this.currentItemSelected.nextTier);
 
 			this.setChance();
 		},
@@ -756,35 +676,32 @@ export default {
 							if (
 								this.simulations.length === 0 ||
 								this.simulations[0].text === "S: " ||
-								this.failstack > this.fsDefaultTri
+								this.failstack > this.fsDefaults.tri
 							) {
-								this.failstack = this.fsDefaultDuo;
+								this.failstack = this.fsDefaults.duo;
 								this.setChance();
 							}
 						} else if (this.currentItemSelected.currTier.lvlName === "II") {
 							if (
 								this.simulations.length === 0 ||
 								this.simulations[0].text === "S: " ||
-								this.failstack > this.fsDefaultTet
+								this.failstack > this.fsDefaults.tet
 							) {
-								this.failstack = this.fsDefaultTri;
+								this.failstack = this.fsDefaults.tri;
 								this.setChance();
 							}
 						} else if (this.currentItemSelected.currTier.lvlName === "III") {
 							if (
 								this.simulations.length === 0 ||
 								this.simulations[0].text === "S: " ||
-								this.failstack > this.fsDefaultPen
+								this.failstack > this.fsDefaults.pen
 							) {
-								this.failstack = this.fsDefaultTet;
+								this.failstack = this.fsDefaults.tet;
 								this.setChance();
 							}
 						} else if (this.currentItemSelected.currTier.lvlName === "IV") {
-							if (
-								this.simulations.length === 0 ||
-								this.simulations[0].text === "S: "
-							) {
-								this.failstack = this.fsDefaultPen;
+							if (this.simulations.length === 0 || this.simulations[0].text === "S: ") {
+								this.failstack = this.fsDefaults.pen;
 								this.setChance();
 							}
 						}
@@ -801,37 +718,26 @@ export default {
 							text: "F: ",
 							roll: (roll * 100).toFixed(2),
 							failstack: this.failstack,
-							lvlName: this.currentItemSelected.nextTier.lvlName,
+							lvlName:
+								this.currentItemSelected.nextTier === null ? "V" : this.currentItemSelected.nextTier.lvlName,
 						});
 
 						if (!this.realEnchancement) {
 							if (
-								this.currentItemSelected.prevTier != null &&
-								this.currentItemSelected.prevTier.lvlName != "" &&
-								this.currentItemSelected.prevTier.lvlName != "+12" &&
-								this.currentItemSelected.prevTier.lvlName != "+13" &&
-								this.currentItemSelected.prevTier.lvlName != "+14"
+								this.currentItemSelected.currTier.lvlName === "I" ||
+								this.currentItemSelected.currTier.lvlName === "II" ||
+								this.currentItemSelected.currTier.lvlName === "III" ||
+								this.currentItemSelected.currTier.lvlName === "IV"
 							) {
-								if (
-									this.currentItemSelected.prevTier.lvlName === "+15" &&
-									this.currentItemSelected.currTier.lvlName === "I" &&
-									this.currentItemSelected.nextTier.lvlName === "II"
-								) {
-									this.addToFailstack(
-										this.currentItemSelected.currTier.failstackGain
-									);
-									this.setChance();
+								if (!this.cronToggle) {
+									this.addToFailstack(this.currentItemSelected.currTier.failstackGain);
+									this.degrade();
 								} else {
-									if (!this.cronToggle) {
-										this.addToFailstack(
-											this.currentItemSelected.currTier.failstackGain
-										);
-										this.degrade();
-									} else {
-										this.silverSpent +=
-											this.currentItemSelected.currTier.crons * 1126190;
-									}
+									this.silverSpent += this.currentItemSelected.currTier.crons * 1126190;
 								}
+							} else {
+								this.addToFailstack(this.currentItemSelected.currTier.failstackGain);
+								this.setChance();
 							}
 						}
 					} else {
@@ -845,7 +751,8 @@ export default {
 							text: "S: ",
 							roll: (roll * 100).toFixed(2),
 							failstack: this.failstack,
-							lvlName: this.currentItemSelected.nextTier.lvlName,
+							lvlName:
+								this.currentItemSelected.nextTier === null ? "V" : this.currentItemSelected.nextTier.lvlName,
 						});
 
 						if (!this.realEnchancement) {
@@ -883,11 +790,7 @@ export default {
 
 <style>
 .anim-enter-active {
-	background: linear-gradient(
-		to right,
-		rgb(43, 46, 50) 0%,
-		rgb(212, 177, 20) 100%
-	);
+	background: linear-gradient(to right, rgb(43, 46, 50) 0%, rgb(212, 177, 20) 100%);
 	background-size: 200% auto;
 	background-position: 0 100%;
 	animation: slide 3s;
@@ -909,17 +812,11 @@ export default {
 	font-style: normal;
 	font-weight: 400;
 	src: url("../fonts/poppins-v15-latin-regular.eot"); /* IE9 Compat Modes */
-	src: local(""),
-		url("../fonts/poppins-v15-latin-regular.eot?#iefix")
-			format("embedded-opentype"),
-		/* IE6-IE8 */ url("../fonts/poppins-v15-latin-regular.woff2")
-			format("woff2"),
-		/* Super Modern Browsers */ url("../fonts/poppins-v15-latin-regular.woff")
-			format("woff"),
-		/* Modern Browsers */ url("../fonts/poppins-v15-latin-regular.ttf")
-			format("truetype"),
-		/* Safari, Android, iOS */
-			url("../fonts/poppins-v15-latin-regular.svg#Poppins") format("svg"); /* Legacy iOS */
+	src: local(""), url("../fonts/poppins-v15-latin-regular.eot?#iefix") format("embedded-opentype"),
+		/* IE6-IE8 */ url("../fonts/poppins-v15-latin-regular.woff2") format("woff2"),
+		/* Super Modern Browsers */ url("../fonts/poppins-v15-latin-regular.woff") format("woff"),
+		/* Modern Browsers */ url("../fonts/poppins-v15-latin-regular.ttf") format("truetype"),
+		/* Safari, Android, iOS */ url("../fonts/poppins-v15-latin-regular.svg#Poppins") format("svg"); /* Legacy iOS */
 }
 
 /* Chrome, Safari, Edge, Opera */
