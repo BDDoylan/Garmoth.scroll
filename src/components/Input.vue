@@ -2,6 +2,7 @@
 	<input
 		class="text-center rounded bg-700 text-0 p-1 focus:outline-none"
 		type="text"
+		maxlength="5"
 		v-model="value"
 	/>
 </template>
@@ -33,11 +34,6 @@ export default {
 	computed: {
 		value: {
 			get() {
-				if (this.valueName === "simulation") {
-					if (this.modelValue > 10000) {
-						this.valueF = "10,000";
-					}
-				}
 				return this.valueF;
 			},
 

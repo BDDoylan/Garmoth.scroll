@@ -6,6 +6,7 @@ export default {
             chance: {},
             cron: {},
             material: {},
+			prices: {},
 		},
 	}),
 	mutations: {

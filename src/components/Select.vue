@@ -100,14 +100,6 @@ export default {
 
 			finalItem: null,
 
-			selectedTier: {
-				currIndex: null,
-				currLvlName: null,
-
-				prevLvlName: null,
-				nextLvlName: null,
-			},
-
 			popularItems: [
 				{
 					main_key: 719898,
@@ -263,6 +255,8 @@ export default {
 			};
 		},
 
+		materialCosts(index) {},
+
 		getAllTiers() {
 			let tiers = [];
 
@@ -287,9 +281,17 @@ export default {
 						this.selectedItem.failStackGain[index].fs === undefined
 							? null
 							: this.selectedItem.failStackGain[index].fs,
+					clickCost: this.materialCosts(index),
 				};
 				tiers.push(tier);
 			}
+			tiers.push({
+				lvlName: "END",
+				baseChance: 0,
+				softCap: 0,
+				crons: 0,
+				failstackGain: 0,
+			});
 
 			this.allTiers = tiers;
 		},
