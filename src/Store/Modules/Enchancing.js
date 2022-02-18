@@ -1,17 +1,26 @@
 export default {
 	state: () => ({
-		storage: {
-			fsDefaults: {},
-			items: {},
-            chance: {},
-            cron: {},
-            material: {},
-			prices: {},
-		},
+		items: {},
+		chance: {},
+		cron: {},
+		material: {},
+		prices: {},
 	}),
 	mutations: {
-		SET_ENCHANCE_STORAGE(state, payload) {
-			state.storage = payload;
+		SET_ITEMS_STORAGE(state, payload) {
+			state.items = payload;
+		},
+		SET_CHANCE_STORAGE(state, payload) {
+			state.chance = payload;
+		},
+		SET_CRON_STORAGE(state, payload) {
+			state.cron = payload;
+		},
+		SET_MATERIAL_STORAGE(state, payload) {
+			state.material = payload;
+		},
+		SET_PRICES_STORAGE(state, payload) {
+			state.prices = payload;
 		},
 	},
 	actions: {},

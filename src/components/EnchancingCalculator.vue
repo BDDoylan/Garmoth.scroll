@@ -255,7 +255,9 @@
 					<button
 						class="rounded bg-700 h-18 col-span-1"
 						v-if="currentItemSelected.currTier"
-						:disabled="justClicked || currentItemSelected.nextTier === null || currentItemSelected.allTiers === null"
+						:disabled="
+							justClicked || currentItemSelected.nextTier === null || currentItemSelected.allTiers === null
+						"
 						@click="skipOrNah(), clicked()"
 					>
 						<p class="my-3 text-green font-bold">ENCHANCE</p>
@@ -381,186 +383,61 @@ export default {
 			silverSpent: 0,
 
 			displayLeftItemDropDown: false,
-
-			items: [
-				{
-					name: "Red Nose's Armor",
-					main_key: 11014,
-
-					class: 1,
-
-					levels: [
-						{
-							lvlName: "+12",
-							baseChance: 0.04,
-							softCap: 78,
-							crons: 0,
-							failstackGain: 1,
-						},
-						{
-							lvlName: "+13",
-							baseChance: 0.0286,
-							softCap: 84,
-							crons: 0,
-							failstackGain: 1,
-						},
-						{
-							lvlName: "+14",
-							baseChance: 0.02,
-							softCap: 107,
-							crons: 0,
-							failstackGain: 1,
-						},
-						{
-							lvlName: "+15",
-							baseChance: 0.1176,
-							softCap: 50,
-							crons: 0,
-							failstackGain: 2,
-						},
-						{
-							lvlName: "I",
-							baseChance: 0.0769,
-							softCap: 82,
-							crons: 0,
-							failstackGain: 3,
-						},
-						{
-							lvlName: "II",
-							baseChance: 0.0625,
-							softCap: 102,
-							crons: 38,
-							failstackGain: 4,
-						},
-						{
-							lvlName: "III",
-							baseChance: 0.02,
-							softCap: 340,
-							crons: 114,
-							failstackGain: 5,
-						},
-						{
-							lvlName: "IV",
-							baseChance: 0.003,
-							softCap: 2324,
-							crons: 429,
-							failstackGain: 6,
-						},
-					],
-				},
-				{
-					name: "Ring of Crescent Guardian",
-					main_key: 12031,
-
-					class: 2,
-
-					levels: [
-						{
-							lvlName: "",
-							baseChance: 0.25,
-							softCap: 18,
-							crons: 0,
-							failstackGain: 1,
-						},
-						{
-							lvlName: "I",
-							baseChance: 0.1,
-							softCap: 40,
-							crons: 74,
-							failstackGain: 1,
-						},
-						{
-							lvlName: "II",
-							baseChance: 0.075,
-							softCap: 44,
-							crons: 224,
-							failstackGain: 1,
-						},
-						{
-							lvlName: "III",
-							baseChance: 0.025,
-							softCap: 110,
-							crons: 625,
-							failstackGain: 1,
-						},
-						{
-							lvlName: "IV",
-							baseChance: 0.005,
-							softCap: 2999,
-							failstackGain: 1,
-						},
-					],
-				},
-				{
-					name: "Fallen God's Armor",
-					main_key: 719898,
-
-					class: 4,
-
-					crons: [],
-
-					levels: [
-						{
-							lvlName: "",
-							baseChance: 0.02,
-							softCap: 340,
-							crons: 0,
-							failstackGain: 2,
-						},
-						{
-							lvlName: "I",
-							baseChance: 0.01,
-							softCap: 690,
-							crons: 1500,
-							failstackGain: 3,
-						},
-						{
-							lvlName: "II",
-							baseChance: 0.005,
-							softCap: 1390,
-							crons: 2100,
-							failstackGain: 4,
-						},
-						{
-							lvlName: "III",
-							baseChance: 0.002,
-							softCap: 3490,
-							crons: 2700,
-							failstackGain: 5,
-						},
-						{
-							lvlName: "IV",
-							baseChance: 0.000025,
-							softCap: 279990,
-							crons: 4000,
-							failstackGain: 6,
-						},
-					],
-				},
-			],
 		};
 	},
 
 	created() {
 		axios.get("https://garmoth.com/api/getEnhancements").then((res) => {
-			this.storage.items = res.data.items;
-			this.storage.chance = res.data.chance;
-			this.storage.cron = res.data.cron;
-			this.storage.material = res.data.material;
+			this.items = res.data.items;
+			this.chance = res.data.chance;
+			this.cron = res.data.cron;
+			this.material = res.data.material;
 		});
 
 		axios.get("market.json").then((res) => {
-			this.storage.prices = res.data.items;
+			this.prices = res.data.items;
 		});
 	},
 
 	computed: {
-		storage: {
+		items: {
 			get() {
-				return this.$store.state.enchance.storage;
+				return this.$store.state.enchance.items;
 			},
 			set(value) {
-				this.$store.commit("SET_ENCHANCE_STORAGE", value);
+				this.$store.commit("SET_ITEMS_STORAGE", value);
+			},
+		},
+		chance: {
+			get() {
+				return this.$store.state.enchance.chance;
+			},
+			set(value) {
+				this.$store.commit("SET_CHANCE_STORAGE", value);
+			},
+		},
+		cron: {
+			get() {
+				return this.$store.state.enchance.cron;
+			},
+			set(value) {
+				this.$store.commit("SET_CRON_STORAGE", value);
+			},
+		},
+		material: {
+			get() {
+				return this.$store.state.enchance.material;
+			},
+			set(value) {
+				this.$store.commit("SET_MATERIAL_STORAGE", value);
+			},
+		},
+		prices: {
+			get() {
+				return this.$store.state.enchance.prices;
+			},
+			set(value) {
+				this.$store.commit("SET_PRICES_STORAGE", value);
 			},
 		},
 	},
@@ -681,7 +558,16 @@ export default {
 					let roll = Math.random();
 
 					if (this.failstackDefaultToggle) {
-						if (this.currentItemSelected.currTier.lvlName === "I") {
+						if (this.currentItemSelected.currTier.lvlName === "BASE") {
+							if (
+								this.simulationsToDisplay.length === 0 ||
+								this.simulationsToDisplay[0].text === "S: " ||
+								this.failstack > this.fsDefaults.duo
+							) {
+								this.failstack = this.fsDefaults.pri;
+								this.setChance();
+							}
+						} else if (this.currentItemSelected.currTier.lvlName === "I") {
 							if (
 								this.simulationsToDisplay.length === 0 ||
 								this.simulationsToDisplay[0].text === "S: " ||
@@ -731,8 +617,7 @@ export default {
 								this.currentItemSelected.nextTier === null ? "V" : this.currentItemSelected.nextTier.lvlName,
 						};
 
-						this.simulationsToDisplay.unshift(obj);
-						this.allSimulations.unshift(obj);
+						this.allSimulations.push(obj);
 
 						if (!this.realEnchancement) {
 							if (
@@ -769,8 +654,7 @@ export default {
 									: this.currentItemSelected.nextTier.lvlName,
 						};
 
-						this.simulationsToDisplay.unshift(obj);
-						this.allSimulations.unshift(obj);
+						this.allSimulations.push(obj);
 
 						if (!this.realEnchancement) {
 							if (!this.failstackDefaultToggle) {
@@ -794,7 +678,11 @@ export default {
 					if (this.currentFailStreak > this.highestFailStreak)
 						this.highestFailStreak = this.currentFailStreak;
 
-					this.simulationsToDisplay = this.simulationsToDisplay.slice(0, 250);
+					this.simulationsToDisplay = this.allSimulations;
+
+					if (this.allSimulations.length > 100) {
+						this.allSimulations.unshift();
+					}
 				}
 			}
 		},

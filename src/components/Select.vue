@@ -172,6 +172,42 @@ export default {
 					cron: 37,
 					chance: 12,
 					material: 1,
+
+					softCaps: [
+						{
+							softCap: 18,
+						},
+						{
+							softCap: 690,
+						},
+						{
+							softCap: 1390,
+						},
+						{
+							softCap: 3490,
+						},
+						{
+							softCap: 279990,
+						},
+					],
+
+					failStackGain: [
+						{
+							fs: 1,
+						},
+						{
+							fs: 1,
+						},
+						{
+							fs: 1,
+						},
+						{
+							fs: 1,
+						},
+						{
+							fs: 1,
+						},
+					],
 				},
 				{
 					main_key: 16486,
@@ -187,18 +223,50 @@ export default {
 	},
 
 	computed: {
-		storage: {
+		items: {
 			get() {
-				return this.$store.state.enchance.storage;
+				return this.$store.state.enchance.items;
 			},
 			set(value) {
-				this.$store.commit("SET_ENCHANCE_STORAGE", value);
+				this.$store.commit("SET_ITEMS_STORAGE", value);
+			},
+		},
+		chance: {
+			get() {
+				return this.$store.state.enchance.chance;
+			},
+			set(value) {
+				this.$store.commit("SET_CHANCE_STORAGE", value);
+			},
+		},
+		cron: {
+			get() {
+				return this.$store.state.enchance.cron;
+			},
+			set(value) {
+				this.$store.commit("SET_CRON_STORAGE", value);
+			},
+		},
+		material: {
+			get() {
+				return this.$store.state.enchance.material;
+			},
+			set(value) {
+				this.$store.commit("SET_MATERIAL_STORAGE", value);
+			},
+		},
+		prices: {
+			get() {
+				return this.$store.state.enchance.prices;
+			},
+			set(value) {
+				this.$store.commit("SET_PRICES_STORAGE", value);
 			},
 		},
 
 		filteredOptions() {
 			if (this.searchItem.length > 2) {
-				return this.storage.items.filter((item) => {
+				return this.items.filter((item) => {
 					return item.name.toLowerCase().includes(this.searchItem.toLowerCase());
 				});
 			} else {
@@ -207,11 +275,11 @@ export default {
 		},
 
 		getTierOptions() {
-			if (this.storage.chance[this.selectedItem.chance].enhancements.length === 3) {
+			if (this.chance[this.selectedItem.chance].enhancements.length === 3) {
 				return ["BASE", "+1", "+2"];
-			} else if (this.storage.chance[this.selectedItem.chance].enhancements.length === 5) {
+			} else if (this.chance[this.selectedItem.chance].enhancements.length === 5) {
 				return ["BASE", "I", "II", "III", "IV"];
-			} else if (this.storage.chance[this.selectedItem.chance].enhancements.length === 20) {
+			} else if (this.chance[this.selectedItem.chance].enhancements.length === 20) {
 				return [
 					"BASE",
 					"+1",
@@ -260,23 +328,21 @@ export default {
 		getAllTiers() {
 			let tiers = [];
 
-			for (let index in this.storage.chance[this.selectedItem.chance].enhancements) {
+			for (let index in this.chance[this.selectedItem.chance].enhancements) {
 				let tier = {
 					lvlName: this.getTierOptions[index],
 					baseChance:
-						this.storage.chance[this.selectedItem.chance].enhancements[index] === undefined
+						this.chance[this.selectedItem.chance].enhancements[index] === undefined
 							? null
-							: this.storage.chance[this.selectedItem.chance].enhancements[index],
-					//softCap: !(this.selectedTier.currIndex + 1)
-					//	? this.storage.chance[this.selectedItem.chance].softcaps[this.selectedTier.index + 1] : null,
+							: this.chance[this.selectedItem.chance].enhancements[index],
 					softCap:
-						this.selectedItem.softCaps[index].softCap === undefined
+						this.chance[this.selectedItem.chance].softcap === undefined
 							? null
-							: this.selectedItem.softCaps[index].softCap,
+							: this.chance[this.selectedItem.chance].softcap[index],
 					crons:
-						this.storage.cron[this.selectedItem.cron].enhancements["_" + index] === undefined
+						this.cron[this.selectedItem.cron].enhancements["_" + index] === undefined
 							? null
-							: this.storage.cron[this.selectedItem.cron].enhancements["_" + index].value,
+							: this.cron[this.selectedItem.cron].enhancements["_" + index].value,
 					failstackGain:
 						this.selectedItem.failStackGain[index].fs === undefined
 							? null
@@ -287,10 +353,6 @@ export default {
 			}
 			tiers.push({
 				lvlName: "END",
-				baseChance: 0,
-				softCap: 0,
-				crons: 0,
-				failstackGain: 0,
 			});
 
 			this.allTiers = tiers;
