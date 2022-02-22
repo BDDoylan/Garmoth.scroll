@@ -26,7 +26,10 @@
 				<ul v-for="item in filteredOptions" :key="item.main_key">
 					<li
 						@click="(selectedItem = item), getAllTiers(), (toggle = false)"
-						:class="['relative py-2 pl-3 pr-9 hover:bg-500 cursor-pointer']"
+						:class="[
+							'relative py-2 pl-3 pr-9 hover:bg-500 cursor-pointer',
+							{ 'bg-500': selectedItem.name === item.name },
+						]"
 					>
 						<div class="flex items-center">
 							<img
@@ -52,8 +55,23 @@
 					</li>
 				</ul>
 			</div>
-			<div v-if="selectedItem">
+			<div v-if="selectedItem.name != null">
 				<div class="mt-1 w-full bg-600 shadow-lg text-center text-white py-2 font-bold text-xl">
+					<p
+						:class="[
+							{
+								'text-red': selectedItem.rarity === 5,
+								'text-yellow': selectedItem.rarity === 4,
+								'text-blue': selectedItem.rarity === 3,
+								'text-green': selectedItem.rarity === 2,
+								'text-300': selectedItem.rarity === 1,
+							},
+						]"
+					>
+						{{ selectedItem.name }}
+					</p>
+				</div>
+				<div class="mt-1 w-full bg-600 shadow-lg text-center text-white py-2 font-bold text-lg">
 					<p>Choose Your Tier</p>
 				</div>
 				<div
@@ -94,11 +112,21 @@ export default {
 
 			searchItem: "",
 
-			selectedItem: null,
+			selectedItem: {
+				main_key: null,
+				name: null,
+				rarity: null,
+				type: null,
+				cron: null,
+				chance: null,
+				material: null,
+			},
 
 			allTiers: null,
 
 			finalItem: null,
+
+			gain: null,
 
 			popularItems: [
 				{
@@ -109,42 +137,6 @@ export default {
 					cron: 9,
 					chance: 17,
 					material: 10,
-
-					softCaps: [
-						{
-							softCap: 340,
-						},
-						{
-							softCap: 690,
-						},
-						{
-							softCap: 1390,
-						},
-						{
-							softCap: 3490,
-						},
-						{
-							softCap: 279990,
-						},
-					],
-
-					failStackGain: [
-						{
-							fs: 2,
-						},
-						{
-							fs: 3,
-						},
-						{
-							fs: 4,
-						},
-						{
-							fs: 5,
-						},
-						{
-							fs: 6,
-						},
-					],
 				},
 				{
 					main_key: 731102,
@@ -172,42 +164,6 @@ export default {
 					cron: 37,
 					chance: 12,
 					material: 1,
-
-					softCaps: [
-						{
-							softCap: 18,
-						},
-						{
-							softCap: 690,
-						},
-						{
-							softCap: 1390,
-						},
-						{
-							softCap: 3490,
-						},
-						{
-							softCap: 279990,
-						},
-					],
-
-					failStackGain: [
-						{
-							fs: 1,
-						},
-						{
-							fs: 1,
-						},
-						{
-							fs: 1,
-						},
-						{
-							fs: 1,
-						},
-						{
-							fs: 1,
-						},
-					],
 				},
 				{
 					main_key: 16486,
@@ -275,33 +231,37 @@ export default {
 		},
 
 		getTierOptions() {
-			if (this.chance[this.selectedItem.chance].enhancements.length === 3) {
-				return ["BASE", "+1", "+2"];
-			} else if (this.chance[this.selectedItem.chance].enhancements.length === 5) {
-				return ["BASE", "I", "II", "III", "IV"];
-			} else if (this.chance[this.selectedItem.chance].enhancements.length === 20) {
-				return [
-					"BASE",
-					"+1",
-					"+2",
-					"+3",
-					"+4",
-					"+5",
-					"+6",
-					"+7",
-					"+8",
-					"+9",
-					"+10",
-					"+11",
-					"+12",
-					"+13",
-					"+14",
-					"+15",
-					"I",
-					"II",
-					"III",
-					"IV",
-				];
+			if (this.selectedItem.chance != null) {
+				if (this.chance[this.selectedItem.chance].enhancements.length === 3) {
+					return ["BASE", "+1", "+2"];
+				} else if (this.chance[this.selectedItem.chance].enhancements.length === 5) {
+					return ["BASE", "I", "II", "III", "IV"];
+				} else if (this.chance[this.selectedItem.chance].enhancements.length === 20) {
+					return [
+						"BASE",
+						"+1",
+						"+2",
+						"+3",
+						"+4",
+						"+5",
+						"+6",
+						"+7",
+						"+8",
+						"+9",
+						"+10",
+						"+11",
+						"+12",
+						"+13",
+						"+14",
+						"+15",
+						"I",
+						"II",
+						"III",
+						"IV",
+					];
+				}
+			} else {
+				return [];
 			}
 		},
 	},
@@ -314,7 +274,6 @@ export default {
 		prepareSelectedItem(key) {
 			this.finalItem = {
 				information: this.selectedItem,
-
 				allTiers: this.allTiers,
 
 				currTier: this.allTiers[key],
@@ -326,6 +285,8 @@ export default {
 		materialCosts(index) {},
 
 		getAllTiers() {
+			this.gain = this.chance[this.selectedItem.chance].gain.replace(/\[|\]/g, "").split(", ");
+
 			let tiers = [];
 
 			for (let index in this.chance[this.selectedItem.chance].enhancements) {
@@ -340,13 +301,13 @@ export default {
 							? null
 							: this.chance[this.selectedItem.chance].softcap[index],
 					crons:
-						this.cron[this.selectedItem.cron].enhancements["_" + index] === undefined
+						this.cron[this.selectedItem.cron] === undefined
+							? null
+							: this.cron[this.selectedItem.cron].enhancements["_" + index] === undefined
 							? null
 							: this.cron[this.selectedItem.cron].enhancements["_" + index].value,
-					failstackGain:
-						this.selectedItem.failStackGain[index].fs === undefined
-							? null
-							: this.selectedItem.failStackGain[index].fs,
+					failstackGain: this.gain === null ? null : parseInt(this.gain[index]),
+					material: this.material[this.selectedItem.material].enhancements[index].item,
 					clickCost: this.materialCosts(index),
 				};
 				tiers.push(tier);

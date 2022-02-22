@@ -29,29 +29,17 @@
 				</p>
 			</div>
 			<div class="bg-600 text-0 rounded h-auto text-xl relative px-2 pt-2 col-span-4 row-span-2">
-				<div class="flex bg-700 text-0 rounded h-24">
+				<div class="flex bg-700 text-0 rounded h-24" @click="open()">
 					<div class="flex-initial w-24 z-10">
-						<div
-							class="mt-6 bg-600 rounded ml-4 p-2 w-20 relative h-16"
-							@click="(displayLeftItemDropDown = !displayLeftItemDropDown), open()"
-						>
+						<div class="mt-6 bg-600 rounded ml-4 p-2 w-20 relative h-16">
 							<img
-								:src="'https://assets.garmoth.com/items/' + currentItemSelected.information.main_key + '.png'"
-								v-if="currentItemSelected.information.main_key"
+								:src="'https://assets.garmoth.com/items/' + currentItemSelected.currTier.material + '.png'"
+								v-if="currentItemSelected.currTier.material"
 								:class="[
 									'h-12 m-auto rounded-xl',
 									{ 'animate-pulse': currentItemSelected.information.main_key === 10810 },
 								]"
 							/>
-							<p
-								class="absolute top-4 left-4 text-white text-1xl font-semibold w-12 bg-600 bg-opacity-20"
-								v-if="currentItemSelected.information.main_key"
-							>
-								<span v-if="currentItemSelected.currTier.lvlName != 'END'">{{
-									currentItemSelected.currTier.lvlName === "BASE" ? "" : currentItemSelected.currTier.lvlName
-								}}</span>
-								<span v-else>V</span>
-							</p>
 						</div>
 						<Select @chosenItem="itemChange"></Select>
 					</div>
@@ -71,20 +59,22 @@
 						<div class="mt-6 bg-600 rounded mr-6 p-2 w-20 relative h-16">
 							<img
 								:src="'https://assets.garmoth.com/items/' + currentItemSelected.information.main_key + '.png'"
-								v-if="
-									currentItemSelected.information.main_key != 10810 &&
-									currentItemSelected.currTier.lvlName != 'END'
-								"
-								class="h-12 m-auto rounded-xl"
+								:class="[
+									'h-12 m-auto rounded-xl',
+									{ 'animate-pulse': currentItemSelected.information.main_key === 10810 },
+								]"
 							/>
 							<p
 								class="absolute top-4 left-4 text-white text-1xl font-semibold w-12 bg-600 bg-opacity-20"
 								v-if="currentItemSelected.information.main_key && currentItemSelected.currTier.lvlName != 'V'"
 							>
-								<span v-if="currentItemSelected.currTier.lvlName != 'END'">{{
-									currentItemSelected.currTier.lvlName === "IV" ? "V" : currentItemSelected.nextTier.lvlName
+								<span>{{
+									currentItemSelected.currTier.lvlName === "BASE"
+										? ""
+										: currentItemSelected.currTier.lvlName === "END"
+										? "V"
+										: currentItemSelected.currTier.lvlName
 								}}</span>
-								<span v-else></span>
 							</p>
 						</div>
 					</div>
@@ -210,11 +200,15 @@
 							{{ currentItemSelected.currTier.lvlName != "END" ? chanceOfSuccess + "%" : "N/A" }}
 						</p>
 					</div>
-					<div class="rounded bg-700 h-14 w-auto font-semibold">
-						<p class="my-3 cursor-pointer hover:text-green" @click="(failstack = softcap), setChance()">
+					<div class="rounded bg-700 h-14 w-auto">
+						<button
+							class="my-3 cursor-pointer hover:text-green font-semibold"
+							:disabled="currentItemSelected.currTier.lvlName === 'END'"
+							@click="(failstack = softcap), setChance()"
+						>
 							Softcap:
 							{{ currentItemSelected.currTier.lvlName != "END" ? softcap : "N/A" }}
-						</p>
+						</button>
 					</div>
 					<div
 						class="rounded font-semibold bg-700 h-18 w-auto lgx:row-span-1 row-span-1 xsm:row-span-2 lgx:pt-0 xsm:pt-9"
@@ -523,7 +517,7 @@ export default {
 				this.chanceOfSuccess = baseChance + failstackChance * this.failstack;
 			}
 
-			this.chanceOfSuccess = (this.chanceOfSuccess * 100).toFixed(2);
+			this.chanceOfSuccess = (this.chanceOfSuccess * 100).toFixed(4);
 			if (this.chanceOfSuccess > 90) this.chanceOfSuccess = 90;
 			this.avgClicks = (100 / this.chanceOfSuccess).toFixed(2);
 		},
@@ -614,7 +608,9 @@ export default {
 							roll: (roll * 100).toFixed(2),
 							failstack: this.failstack,
 							lvlName:
-								this.currentItemSelected.nextTier === null ? "V" : this.currentItemSelected.nextTier.lvlName,
+								this.currentItemSelected.nextTier.lvlName === "END"
+									? "V"
+									: this.currentItemSelected.nextTier.lvlName,
 						};
 
 						this.allSimulations.push(obj);
@@ -681,7 +677,7 @@ export default {
 					this.simulationsToDisplay = this.allSimulations;
 
 					if (this.allSimulations.length > 100) {
-						this.allSimulations.unshift();
+						this.allSimulations.shift();
 					}
 				}
 			}
