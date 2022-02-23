@@ -13,7 +13,9 @@
 		</div>
 
 		<div class="grid grid-cols-2 gap-4 mx-4 pb-3 xsm:grid-cols-8">
-			<div class="bg-600 text-0 rounded text-xl relative py-4 xsm:col-span-2 col-span-4 xsm:pt-16 lgx:pt-10">
+			<div
+				class="bg-600 text-0 rounded text-xl relative py-4 pt-3 xsm:col-span-2 col-span-4 xsm:pt-7 lgx:pt-3"
+			>
 				<p>
 					Attempts: <strong>{{ attempts }}</strong>
 				</p>
@@ -27,13 +29,28 @@
 					Avg. Clicks:
 					<strong class="text-orange">{{ (attempts / success).toFixed(2) }}</strong>
 				</p>
+				<p class="mt-1">
+					Highest Success Streak: <strong>{{ highestSuccessStreak }}</strong>
+				</p>
+				<p>
+					Highest Fail Streak:
+					<strong class="text-green">{{ highestFailStreak }}</strong>
+				</p>
+				<p>
+					Current Success Streak:
+					<strong class="text-red">{{ currentSuccessStreak }}</strong>
+				</p>
+				<p>
+					Current Fail Streak:
+					<strong class="text-orange">{{ currentFailStreak }}</strong>
+				</p>
 			</div>
 			<div class="bg-600 text-0 rounded h-auto text-xl relative px-2 pt-2 col-span-4 row-span-2">
-				<div class="flex bg-700 text-0 rounded h-24" @click="open()">
+				<div class="flex bg-700 text-0 rounded h-28 lgx:h-28" @click="open()">
 					<div class="flex-initial w-24 z-10">
 						<div class="mt-6 bg-600 rounded ml-4 p-2 w-20 relative h-16">
 							<img
-								:src="'https://assets.garmoth.com/items/' + currentItemSelected.currTier.material + '.png'"
+								:src="'https://assets.garmoth.com/items/' + currentItemSelected.currTier.material.id + '.png'"
 								v-if="currentItemSelected.currTier.material"
 								:class="[
 									'h-12 m-auto rounded-xl',
@@ -79,7 +96,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="bg-700 text-0 rounded h-24">
+				<div class="bg-700 text-0 rounded h-24 lgx:h-36 pb-32">
 					<div class="relative">
 						<div
 							v-if="failstackDefaultTabToggle"
@@ -275,7 +292,7 @@
 						Clear
 					</button>
 				</div>
-				<div class="rounded bg-700 h-90 lgx:h-65 text-left pb-0 overflow-y-auto">
+				<div class="rounded bg-700 h-90 xsm:h-95 lgx:h-81 text-left pb-0 overflow-y-auto">
 					<p
 						v-for="(attempt, key) in simulationsToDisplay"
 						:key="key"
@@ -287,23 +304,17 @@
 					</p>
 				</div>
 			</div>
-			<div class="bg-600 text-0 rounded text-xl relative py-4 col-span-4 xsm:col-span-2 xsm:pt-16 lgx:pt-10">
+			<div class="bg-600 text-0 rounded text-xl relative py-4 col-span-4 xsm:col-span-2 xsm:pt-1 lgx:pt-1">
 				<div class="">
-					<p>
-						Highest Success Streak: <strong>{{ highestSuccessStreak }}</strong>
-					</p>
-					<p>
-						Highest Fail Streak:
-						<strong class="text-green">{{ highestFailStreak }}</strong>
-					</p>
-					<p>
-						Current Success Streak:
-						<strong class="text-red">{{ currentSuccessStreak }}</strong>
-					</p>
-					<p>
-						Current Fail Streak:
-						<strong class="text-orange">{{ currentFailStreak }}</strong>
-					</p>
+					<p class="text-3xl xsm:mt-10 lgx:mt-1">Chance Calculator</p>
+					<input
+						class="w-42 p-2 bg-700 h-8 text-center focus:outline-none my-5"
+						type="number"
+						placeholder="Times"
+						v-model="chanceCalcTimes"
+					/>
+					<p>Chance of success</p>
+					<p class="text-3xl">{{ chanceCalculator }}%</p>
 				</div>
 			</div>
 		</div>
@@ -344,6 +355,8 @@ export default {
 			allSimulations: [],
 
 			softcap: 0,
+
+			chanceCalcTimes: null,
 
 			highestSuccessStreak: 0,
 			highestFailStreak: 0,
@@ -434,6 +447,17 @@ export default {
 				this.$store.commit("SET_PRICES_STORAGE", value);
 			},
 		},
+
+		chanceCalculator() {
+			let times = this.chanceCalcTimes;
+			let calc = ((1 - Math.pow(1 - (this.chanceOfSuccess)/100, times))*100).toFixed(5);
+			console.log(calc)
+			if (parseFloat(calc) > 99.99) {
+				return 99.99;
+			} else {
+				return calc;
+			}
+		},
 	},
 
 	methods: {
@@ -448,7 +472,7 @@ export default {
 
 				setTimeout(() => {
 					this.justClicked = false;
-				}, 4000);
+				}, 3000);
 			}
 		},
 
@@ -517,8 +541,9 @@ export default {
 				this.chanceOfSuccess = baseChance + failstackChance * this.failstack;
 			}
 
-			this.chanceOfSuccess = (this.chanceOfSuccess * 100).toFixed(4);
-			if (this.chanceOfSuccess > 90) this.chanceOfSuccess = 90;
+			this.chanceOfSuccess = (this.chanceOfSuccess * 100).toFixed(2);
+			if (this.chanceOfSuccess > 90 && this.currentItemSelected.currTier.baseChance != 1)
+				this.chanceOfSuccess = (90).toFixed(2);
 			this.avgClicks = (100 / this.chanceOfSuccess).toFixed(2);
 		},
 
@@ -624,7 +649,22 @@ export default {
 							) {
 								if (!this.cronToggle) {
 									this.addToFailstack(this.currentItemSelected.currTier.failstackGain);
-									this.degrade();
+									if (
+										this.currentItemSelected.information.chance === 1 ||
+										this.currentItemSelected.information.chance === 3 ||
+										this.currentItemSelected.information.chance === 4 ||
+										this.currentItemSelected.information.chance === 5 ||
+										this.currentItemSelected.information.chance === 7 ||
+										this.currentItemSelected.information.chance === 11 ||
+										this.currentItemSelected.information.chance === 12
+									) {
+										this.currentItemSelected.currTier = this.currentItemSelected.allTiers[0];
+										this.currentItemSelected.nextTier = this.currentItemSelected.allTiers[1];
+										this.currentItemSelected.prevTier = null;
+										this.setChance();
+									} else {
+										this.degrade();
+									}
 								} else {
 									this.silverSpent += this.currentItemSelected.currTier.crons * 1126190;
 								}
@@ -632,6 +672,9 @@ export default {
 								this.addToFailstack(this.currentItemSelected.currTier.failstackGain);
 								this.setChance();
 							}
+							this.silverSpent +=
+								this.currentItemSelected.currTier.material.materialCost +
+								this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
 						}
 					} else {
 						this.currentFailStreak = 0;
@@ -656,15 +699,15 @@ export default {
 							if (!this.failstackDefaultToggle) {
 								this.failstack = 0;
 							}
-							this.upgrade();
-
-							if (this.cronToggle) {
+							if (!this.cronToggle) {
+								this.upgrade();
+							} else {
 								this.silverSpent += this.currentItemSelected.currTier.crons * 1126190;
 							}
-
 							if (this.currentItemSelected.currTier.lvlName === "END") {
 								this.cronToggle = false;
 							}
+							this.silverSpent += this.currentItemSelected.currTier.material.materialCost;
 						}
 					}
 

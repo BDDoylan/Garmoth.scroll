@@ -5,7 +5,7 @@
 				<div class="rounded relative shadow-lg" @mousedown.stop="">
 					<div
 						v-if="closeable"
-						class="absolute -top-8 -right-8 text-3xl cursor-pointer w-8 h-8 flex justify-center items-center text-100 hover:text-red rounded font-bold transition select-none"
+						class="absolute -top-8 -right-1 text-3xl cursor-pointer w-8 h-8 flex justify-center items-center text-100 hover:text-red rounded font-bold transition select-none"
 						@click="close"
 					>
 						<i class="fa fa-times"></i>

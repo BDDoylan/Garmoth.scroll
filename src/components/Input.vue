@@ -2,7 +2,7 @@
 	<input
 		class="text-center rounded bg-700 text-0 p-1 focus:outline-none"
 		type="text"
-		maxlength="5"
+		:maxlength="this.valueName === 'simulation' ? 5 : 10000000"
 		v-model="value"
 	/>
 </template>

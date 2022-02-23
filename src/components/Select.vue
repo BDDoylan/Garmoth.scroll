@@ -1,6 +1,6 @@
 <template>
 	<Modal id="itemSelector">
-		<div class="mt-1 relative w-96 ml-4">
+		<div class="mt-1 relative w-90">
 			<div class="w-full bg-600 shadow-sm pl-3 pr-10 py-2 text-left focus:outline-none rounded">
 				<div class="flex items-center">
 					<input
@@ -264,6 +264,28 @@ export default {
 				return [];
 			}
 		},
+
+		idsNotInMarket() {
+			return [
+				{
+					id: null,
+					cost: this.prices[this.selectedItem.main_key].sub_items[0].price,
+				},
+				{
+					id: 752022,
+					cost:
+						50000 +
+						this.prices[16004].sub_items[0].price +
+						this.prices[16005].sub_items[0].price +
+						this.prices[721003].sub_items[0].price * 10,
+				},
+				{
+					id: 752021,
+					cost: 50000 + this.prices[16004].sub_items[0].price + this.prices[16005].sub_items[0].price,
+				},
+				{ id: 756306, cost: 0 },
+			];
+		},
 	},
 
 	methods: {
@@ -282,11 +304,27 @@ export default {
 			};
 		},
 
-		materialCosts(index) {},
+		materialCosts(index) {
+			let cost = 0;
+			if (
+				this.idsNotInMarket.some(
+					(e) => e.id === this.material[this.selectedItem.material].enhancements[index].item
+				)
+			) {
+				this.idsNotInMarket.some((e) => {
+					if (e.id === this.material[this.selectedItem.material].enhancements[index].item) {
+						cost = e.cost;
+					}
+				});
+			} else {
+				cost =
+					this.prices[this.material[this.selectedItem.material].enhancements[index].item].sub_items[0].price *
+					this.material[this.selectedItem.material].enhancements[index].item_amount;
+			}
+			return cost;
+		},
 
 		getAllTiers() {
-			this.gain = this.chance[this.selectedItem.chance].gain.replace(/\[|\]/g, "").split(", ");
-
 			let tiers = [];
 
 			for (let index in this.chance[this.selectedItem.chance].enhancements) {
@@ -306,14 +344,29 @@ export default {
 							: this.cron[this.selectedItem.cron].enhancements["_" + index] === undefined
 							? null
 							: this.cron[this.selectedItem.cron].enhancements["_" + index].value,
-					failstackGain: this.gain === null ? null : parseInt(this.gain[index]),
-					material: this.material[this.selectedItem.material].enhancements[index].item,
-					clickCost: this.materialCosts(index),
+					failstackGain: this.chance[this.selectedItem.chance].gain[index],
+					material: {
+						id:
+							this.material[this.selectedItem.material].enhancements[index].item === null
+								? this.selectedItem.main_key
+								: this.material[this.selectedItem.material].enhancements[index].item,
+						materialCost: this.materialCosts(index),
+					},
+					durabilityLoss: this.material[this.selectedItem.material].enhancements[index].dura_loss,
 				};
 				tiers.push(tier);
 			}
 			tiers.push({
 				lvlName: "END",
+				baseChance: 0,
+				softCap: 0,
+				crons: 0,
+				failstackGain: 0,
+				material: {
+					id: 0,
+					materialCost: 0,
+				},
+				durabilityLoss: 0,
 			});
 
 			this.allTiers = tiers;

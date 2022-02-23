@@ -41,17 +41,20 @@ module.exports = {
 			width: {
 				144: "32rem",
 				75: "19.4rem",
+				90: "22rem",
 			},
 			height: {
 				128: "32rem",
 				90: "23.8rem",
 				65: "16.2rem",
+				81: "20.2rem",
+				95: "27.1rem",
 			},
 			fontFamily: {
 				poppins: ["Poppins"],
 			},
 			inset: {
-				'popup': "45%",
+				popup: "45%",
 			},
 		},
 		container: {
