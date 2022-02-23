@@ -14,7 +14,7 @@
 
 		<div class="grid grid-cols-2 gap-4 mx-4 pb-3 xsm:grid-cols-8">
 			<div
-				class="bg-600 text-0 rounded text-xl relative py-4 pt-3 xsm:col-span-2 col-span-4 xsm:pt-7 lgx:pt-3"
+				class="bg-600 text-0 rounded text-xl relative py-4 pt-4 xsm:col-span-2 col-span-4 xsm:pt-8 lgx:pt-3"
 			>
 				<p>
 					Attempts: <strong>{{ attempts }}</strong>
@@ -29,7 +29,7 @@
 					Avg. Clicks:
 					<strong class="text-orange">{{ (attempts / success).toFixed(2) }}</strong>
 				</p>
-				<p class="mt-1">
+				<p class="mt-2">
 					Highest Success Streak: <strong>{{ highestSuccessStreak }}</strong>
 				</p>
 				<p>
@@ -286,7 +286,7 @@
 						Simulate
 					</button>
 					<button
-						@click="clearSimulation(), (failstack = 0), (silverSpent = 0)"
+						@click="clearSimulation(), (failstack = 0), (silverSpent = 0), setChance()"
 						class="bg-red rounded p-4 font-bold truncate"
 					>
 						Clear
@@ -450,8 +450,7 @@ export default {
 
 		chanceCalculator() {
 			let times = this.chanceCalcTimes;
-			let calc = ((1 - Math.pow(1 - (this.chanceOfSuccess)/100, times))*100).toFixed(5);
-			console.log(calc)
+			let calc = ((1 - Math.pow(1 - this.chanceOfSuccess / 100, times)) * 100).toFixed(5);
 			if (parseFloat(calc) > 99.99) {
 				return 99.99;
 			} else {
@@ -567,20 +566,22 @@ export default {
 			this.currentItemSelected.currTier = this.currentItemSelected.nextTier;
 			this.currentItemSelected.prevTier = temp;
 			this.currentItemSelected.nextTier = this.nextTier(this.currentItemSelected.nextTier);
-
 			this.setChance();
 		},
 
 		simulate(tapNum) {
 			for (let i = 0; i < tapNum; i++) {
-				if (this.currentItemSelected.currTier.lvlName != "V") {
+				if (this.currentItemSelected.currTier.lvlName != "END") {
 					let roll = Math.random();
 
 					if (this.failstackDefaultToggle) {
-						if (this.currentItemSelected.currTier.lvlName === "BASE") {
+						if (
+							this.currentItemSelected.currTier.lvlName === "BASE" ||
+							this.currentItemSelected.currTier.lvlName === "+15"
+						) {
 							if (
 								this.simulationsToDisplay.length === 0 ||
-								this.simulationsToDisplay[0].text === "S: " ||
+								this.simulationsToDisplay[this.simulationsToDisplay.length - 1].text === "S: " ||
 								this.failstack > this.fsDefaults.duo
 							) {
 								this.failstack = this.fsDefaults.pri;
@@ -589,7 +590,7 @@ export default {
 						} else if (this.currentItemSelected.currTier.lvlName === "I") {
 							if (
 								this.simulationsToDisplay.length === 0 ||
-								this.simulationsToDisplay[0].text === "S: " ||
+								this.simulationsToDisplay[this.simulationsToDisplay.length - 1].text === "S: " ||
 								this.failstack > this.fsDefaults.tri
 							) {
 								this.failstack = this.fsDefaults.duo;
@@ -598,7 +599,7 @@ export default {
 						} else if (this.currentItemSelected.currTier.lvlName === "II") {
 							if (
 								this.simulationsToDisplay.length === 0 ||
-								this.simulationsToDisplay[0].text === "S: " ||
+								this.simulationsToDisplay[this.simulationsToDisplay.length - 1].text === "S: " ||
 								this.failstack > this.fsDefaults.tet
 							) {
 								this.failstack = this.fsDefaults.tri;
@@ -607,14 +608,17 @@ export default {
 						} else if (this.currentItemSelected.currTier.lvlName === "III") {
 							if (
 								this.simulationsToDisplay.length === 0 ||
-								this.simulationsToDisplay[0].text === "S: " ||
+								this.simulationsToDisplay[this.simulationsToDisplay.length - 1].text === "S: " ||
 								this.failstack > this.fsDefaults.pen
 							) {
 								this.failstack = this.fsDefaults.tet;
 								this.setChance();
 							}
 						} else if (this.currentItemSelected.currTier.lvlName === "IV") {
-							if (this.simulationsToDisplay.length === 0 || this.simulationsToDisplay[0].text === "S: ") {
+							if (
+								this.simulationsToDisplay.length === 0 ||
+								this.simulationsToDisplay[this.simulationsToDisplay.length - 1].text === "S: "
+							) {
 								this.failstack = this.fsDefaults.pen;
 								this.setChance();
 							}
@@ -633,6 +637,7 @@ export default {
 							roll: (roll * 100).toFixed(2),
 							failstack: this.failstack,
 							lvlName:
+								this.currentItemSelected.nextTier === null ||
 								this.currentItemSelected.nextTier.lvlName === "END"
 									? "V"
 									: this.currentItemSelected.nextTier.lvlName,
@@ -699,9 +704,8 @@ export default {
 							if (!this.failstackDefaultToggle) {
 								this.failstack = 0;
 							}
-							if (!this.cronToggle) {
-								this.upgrade();
-							} else {
+							this.upgrade();
+							if (this.cronToggle) {
 								this.silverSpent += this.currentItemSelected.currTier.crons * 1126190;
 							}
 							if (this.currentItemSelected.currTier.lvlName === "END") {
