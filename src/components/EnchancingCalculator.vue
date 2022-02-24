@@ -27,7 +27,9 @@
 				</p>
 				<p>
 					Avg. Clicks:
-					<strong class="text-orange">{{ (attempts / success).toFixed(2) }}</strong>
+					<strong class="text-orange">{{
+						!(attempts / success >= 0) ? 0 : (attempts / success).toFixed(2)
+					}}</strong>
 				</p>
 				<p class="mt-2">
 					Highest Success Streak: <strong>{{ highestSuccessStreak }}</strong>
@@ -46,7 +48,7 @@
 				</p>
 			</div>
 			<div class="bg-600 text-0 rounded h-auto text-xl relative px-2 pt-2 col-span-4 row-span-2">
-				<div class="flex bg-700 text-0 rounded h-28 lgx:h-28" @click="open()">
+				<div class="flex bg-700 text-0 rounded h-28 lgx:h-28" @click="open('itemSelector')">
 					<div class="flex-initial w-24 z-10">
 						<div class="mt-6 bg-600 rounded ml-4 p-2 w-20 relative h-16">
 							<img
@@ -149,26 +151,14 @@
 								v-model="fsDefaults.pen"
 							/>
 						</div>
-						<div class="font-bold mb-5 pt-2">
+						<div class="font-bold mb-3 pt-2">
 							Current Failstack:
 							<input
-								class="w-16 p-2 bg-500 h-7 text-center focus:outline-none"
+								class="w-20 p-2 bg-500 h-7 text-center focus:outline-none"
 								type="number"
 								v-model="failstack"
 								@input="setChance()"
 							/>
-							<button
-								:class="[
-									'text-sm ml-2 rounded bg-500 px-1',
-									{
-										'text-green': failstackDefaultTabToggle,
-										'text-red': !failstackDefaultTabToggle,
-									},
-								]"
-								@click="failstackDefaultTabToggle = !failstackDefaultTabToggle"
-							>
-								FS Defaults
-							</button>
 						</div>
 					</div>
 					<div class="mr-1">
@@ -207,6 +197,33 @@
 							@click="addToFailstack(25), setChance()"
 						>
 							+25
+						</button>
+					</div>
+					<div class="mt-2">
+						<FSDefaults></FSDefaults>
+						<button
+							:class="[
+								'text-sm ml-2 rounded bg-500 px-1',
+								{
+									'text-green': failstackDefaultTabToggle,
+									'text-red': !failstackDefaultTabToggle,
+								},
+							]"
+							@click="open('fsDefaults')"
+						>
+							FS Defaults
+						</button>
+						<button
+							:class="[
+								'text-sm ml-2 rounded bg-500 px-1',
+								{
+									'text-green': failstackSilverValuesTabToggle,
+									'text-red': !failstackSilverValuesTabToggle,
+								},
+							]"
+							@click="failstackSilverValuesTabToggle = !failstackSilverValuesTabToggle"
+						>
+							FS Silver Values
 						</button>
 					</div>
 				</div>
@@ -325,10 +342,11 @@
 import axios from "axios";
 import Input from "./Input.vue";
 import Select from "./Select.vue";
+import FSDefaults from "./FSDefaults.vue";
 
 export default {
 	name: "EnchancingCalculator",
-	components: { Input, Select },
+	components: { Input, Select, FSDefaults },
 	props: { title: String },
 
 	data() {
@@ -384,6 +402,9 @@ export default {
 			animationToggle: false,
 			failstackDefaultTabToggle: false,
 			failstackDefaultToggle: false,
+			failstackSilverValuesTabToggle: false,
+			failstackSilverValuesToggle: false,
+
 			justClicked: false,
 
 			cronsNeeded: 0,
@@ -541,13 +562,16 @@ export default {
 			}
 
 			this.chanceOfSuccess = (this.chanceOfSuccess * 100).toFixed(2);
-			if (this.chanceOfSuccess > 90 && this.currentItemSelected.currTier.baseChance != 1)
+			if (this.chanceOfSuccess > 90 && this.currentItemSelected.currTier.baseChance != 1) {
 				this.chanceOfSuccess = (90).toFixed(2);
+			} else if (this.currentItemSelected.currTier.baseChance === 1) {
+				this.chanceOfSuccess = (100).toFixed(2);
+			}
 			this.avgClicks = (100 / this.chanceOfSuccess).toFixed(2);
 		},
 
-		open() {
-			document.getElementById("itemSelector").style.display = "flex";
+		open(id) {
+			document.getElementById(id).style.display = "flex";
 		},
 
 		degrade() {

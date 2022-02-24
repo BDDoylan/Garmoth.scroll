@@ -1,12 +1,13 @@
 1. fix vuex storage to be seperated not all in one object. <DONE>
 2. first left image to display enhancement material and 
-   right image to display item you are going for.
-3. Add chance calculator after the enhancement streak data.
-4. Add array for special items not found in marketplace api such as stone for fallen god.
+   right image to display item you are going for. <DONE>
+3. Add chance calculator after the enhancement streak data. <DONE>
+4. Add array for special items not found in marketplace api such as stone for fallen god. <DONE>
 5. Add logic to silver spent going up in variables not reading off thousands of simulations,
-   cut simulations down to 100-250. (Put data in variables adding to it each simulated attempt.)
+   cut simulations down to 100-250. (Put data in variables adding to it each simulated attempt.) <DONE>
 6. Add both graphs (left for silver spent based on material distribution), (right for item 
    success/ fail based on tier (pri, duo, tri...) ) 
+7. Incorporate Stack value in silver
 
 
 Softcaps: 
