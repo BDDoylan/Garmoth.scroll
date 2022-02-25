@@ -3,11 +3,20 @@
 		<div class="mt-1 relative w-full">
 			<div class="w-full bg-600 shadow-sm pl-3 p-3 py-2 text-left focus:outline-none rounded">
 				<div class="text-xl text-white mb-2">
-					<p :class="{ 'text-green': useFsDefaultsToggle, 'text-red': !useFsDefaultsToggle }">
+					<p
+						:class="{
+							'text-green': fsDefaults.useFsDefaultsToggle,
+							'text-red': !fsDefaults.useFsDefaultsToggle,
+						}"
+					>
 						Use FS Defaults
 					</p>
 					<label class="switch ml-9 my-2"
-						><input @click="useFsDefaultsToggle = !useFsDefaultsToggle" type="checkbox" />
+						><input
+							@click="
+								(fsDefaults.useFsDefaultsToggle = !fsDefaults.useFsDefaultsToggle), passCurrentFsDefaults()
+							"
+							type="checkbox" />
 						<span class="slider round"></span
 					></label>
 				</div>
@@ -129,13 +138,13 @@ export default {
 
 	components: { Modal },
 
-	emits: [],
+	emits: ["chosenFsDefaults"],
 
 	data() {
 		return {
-			useFsDefaultsToggle: false,
-
 			fsDefaults: {
+				useFsDefaultsToggle: false,
+
 				seven: null,
 				eight: null,
 				nine: null,
@@ -155,6 +164,10 @@ export default {
 
 	computed: {},
 
-	methods: {},
+	methods: {
+		passCurrentFsDefaults() {
+			this.$emit("chosenFsDefaults", this.fsDefaults);
+		},
+	},
 };
 </script>

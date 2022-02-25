@@ -13,40 +13,7 @@
 		</div>
 
 		<div class="grid grid-cols-2 gap-4 mx-4 pb-3 xsm:grid-cols-8">
-			<div
-				class="bg-600 text-0 rounded text-xl relative py-4 pt-4 xsm:col-span-2 col-span-4 xsm:pt-8 lgx:pt-3"
-			>
-				<p>
-					Attempts: <strong>{{ attempts }}</strong>
-				</p>
-				<p>
-					Success: <strong class="text-green">{{ success }}</strong>
-				</p>
-				<p>
-					Fails: <strong class="text-red">{{ fails }}</strong>
-				</p>
-				<p>
-					Avg. Clicks:
-					<strong class="text-orange">{{
-						!(attempts / success >= 0) ? 0 : (attempts / success).toFixed(2)
-					}}</strong>
-				</p>
-				<p class="mt-2">
-					Highest Success Streak: <strong>{{ highestSuccessStreak }}</strong>
-				</p>
-				<p>
-					Highest Fail Streak:
-					<strong class="text-green">{{ highestFailStreak }}</strong>
-				</p>
-				<p>
-					Current Success Streak:
-					<strong class="text-red">{{ currentSuccessStreak }}</strong>
-				</p>
-				<p>
-					Current Fail Streak:
-					<strong class="text-orange">{{ currentFailStreak }}</strong>
-				</p>
-			</div>
+			<Stats :stats="statsS"></Stats>
 			<div class="bg-600 text-0 rounded h-auto text-xl relative px-2 pt-2 col-span-4 row-span-2">
 				<div class="flex bg-700 text-0 rounded h-28 lgx:h-28" @click="open('itemSelector')">
 					<div class="flex-initial w-24 z-10">
@@ -99,58 +66,7 @@
 					</div>
 				</div>
 				<div class="bg-700 text-0 rounded h-24 lgx:h-36 pb-32">
-					<div class="relative">
-						<div
-							v-if="failstackDefaultTabToggle"
-							class="rounded bg-500 w-24 absolute right-1/2 bottom-10 translate-x-1/2 z-20 text-right"
-						>
-							<span
-								:class="[
-									'mr-0.5 font-semibold text-base',
-									{ 'text-green': failstackDefaultToggle },
-									{ 'text-red': !failstackDefaultToggle },
-								]"
-								@click="
-									(failstackDefaultToggle = !failstackDefaultToggle), (failstackDefaultTabToggle = false)
-								"
-								>Use Defaults</span
-							>
-							<br />
-							I:
-							<input
-								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
-								type="number"
-								v-model="fsDefaults.pri"
-							/>
-							<br />
-							II:
-							<input
-								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
-								type="number"
-								v-model="fsDefaults.duo"
-							/>
-							<br />
-							III:
-							<input
-								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
-								type="number"
-								v-model="fsDefaults.tri"
-							/>
-							<br />
-							IV:
-							<input
-								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
-								type="number"
-								v-model="fsDefaults.tet"
-							/>
-							<br />
-							V:
-							<input
-								class="w-16 p-2 bg-400 h-7 text-center focus:outline-none"
-								type="number"
-								v-model="fsDefaults.pen"
-							/>
-						</div>
+					<div class="">
 						<div class="font-bold mb-3 pt-2">
 							Current Failstack:
 							<input
@@ -200,28 +116,29 @@
 						</button>
 					</div>
 					<div class="mt-2">
-						<FSDefaults></FSDefaults>
+						<FSDefaults @chosenFsDefaults="defaults"></FSDefaults>
 						<button
 							:class="[
 								'text-sm ml-2 rounded bg-500 px-1',
 								{
-									'text-green': failstackDefaultTabToggle,
-									'text-red': !failstackDefaultTabToggle,
+									'text-green': fsDefaults.useFsDefaultsToggle,
+									'text-red': !fsDefaults.useFsDefaultsToggle,
 								},
 							]"
 							@click="open('fsDefaults')"
 						>
 							FS Defaults
 						</button>
+						<FSSilverValues @chosenFsSilverValues="silverV"></FSSilverValues>
 						<button
 							:class="[
 								'text-sm ml-2 rounded bg-500 px-1',
 								{
-									'text-green': failstackSilverValuesTabToggle,
-									'text-red': !failstackSilverValuesTabToggle,
+									'text-green': fsSilverValue.useFsDefaultSilverValuesToggle,
+									'text-red': !fsSilverValue.useFsDefaultSilverValuesToggle,
 								},
 							]"
-							@click="failstackSilverValuesTabToggle = !failstackSilverValuesTabToggle"
+							@click="open('fsSilver')"
 						>
 							FS Silver Values
 						</button>
@@ -321,19 +238,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="bg-600 text-0 rounded text-xl relative py-4 col-span-4 xsm:col-span-2 xsm:pt-1 lgx:pt-1">
-				<div class="">
-					<p class="text-3xl xsm:mt-10 lgx:mt-1">Chance Calculator</p>
-					<input
-						class="w-42 p-2 bg-700 h-8 text-center focus:outline-none my-5"
-						type="number"
-						placeholder="Times"
-						v-model="chanceCalcTimes"
-					/>
-					<p>Chance of success</p>
-					<p class="text-3xl">{{ chanceCalculator }}%</p>
-				</div>
-			</div>
+			<ChanceCalculator :chanceOfSuccess="chanceOfSuccess"></ChanceCalculator>
 		</div>
 	</div>
 </template>
@@ -342,11 +247,14 @@
 import axios from "axios";
 import Input from "./Input.vue";
 import Select from "./Select.vue";
+import Stats from "./Stats.vue";
 import FSDefaults from "./FSDefaults.vue";
+import FSSilverValues from "./FSSilverValues.vue";
+import ChanceCalculator from "./ChanceCalculator.vue";
 
 export default {
 	name: "EnchancingCalculator",
-	components: { Input, Select, FSDefaults },
+	components: { Input, Select, Stats, FSDefaults, FSSilverValues, ChanceCalculator },
 	props: { title: String },
 
 	data() {
@@ -365,8 +273,6 @@ export default {
 				nextTier: {},
 			},
 
-			currentItemToggle: false,
-
 			simulationTapAmount: 1,
 			simulationsToDisplay: [],
 
@@ -374,43 +280,32 @@ export default {
 
 			softcap: 0,
 
-			chanceCalcTimes: null,
-
-			highestSuccessStreak: 0,
-			highestFailStreak: 0,
-			currentSuccessStreak: 0,
-			currentFailStreak: 0,
-
-			attempts: 0,
-			success: 0,
-			fails: 0,
 			avgClicks: 0,
+
+			statsS: {
+				attempts: 0,
+				success: 0,
+				fails: 0,
+				highestSuccessStreak: 0,
+				highestFailStreak: 0,
+				currentSuccessStreak: 0,
+				currentFailStreak: 0,
+			},
 
 			failstack: 0,
 
-			fsDefaults: {
-				pri: 25,
-				duo: 35,
-				tri: 50,
-				tet: 80,
-				pen: 110,
-			},
+			fsDefaults: {},
+			fsSilverValue: {},
 
 			chanceOfSuccess: 0,
 
 			cronToggle: false,
 			animationToggle: false,
-			failstackDefaultTabToggle: false,
-			failstackDefaultToggle: false,
-			failstackSilverValuesTabToggle: false,
-			failstackSilverValuesToggle: false,
 
 			justClicked: false,
 
 			cronsNeeded: 0,
 			silverSpent: 0,
-
-			displayLeftItemDropDown: false,
 		};
 	},
 
@@ -468,22 +363,20 @@ export default {
 				this.$store.commit("SET_PRICES_STORAGE", value);
 			},
 		},
-
-		chanceCalculator() {
-			let times = this.chanceCalcTimes;
-			let calc = ((1 - Math.pow(1 - this.chanceOfSuccess / 100, times)) * 100).toFixed(5);
-			if (parseFloat(calc) > 99.99) {
-				return 99.99;
-			} else {
-				return calc;
-			}
-		},
 	},
 
 	methods: {
 		itemChange(item) {
 			this.currentItemSelected = item;
 			this.setChance();
+		},
+
+		defaults(obj) {
+			this.fsDefaults = obj;
+		},
+
+		silverV(obj) {
+			this.fsSilverValue = obj;
 		},
 
 		clicked() {
@@ -497,13 +390,13 @@ export default {
 		},
 
 		clearSimulation() {
-			this.highestSuccessStreak = 0;
-			this.highestFailStreak = 0;
-			this.currentSuccessStreak = 0;
-			this.currentFailStreak = 0;
-			this.attempts = 0;
-			this.success = 0;
-			this.fails = 0;
+			this.statsS.highestSuccessStreak = 0;
+			this.statsS.highestFailStreak = 0;
+			this.statsS.currentSuccessStreak = 0;
+			this.statsS.currentFailStreak = 0;
+			this.statsS.attempts = 0;
+			this.statsS.success = 0;
+			this.statsS.fails = 0;
 			this.simulationsToDisplay = [];
 			this.allSimulations = [];
 		},
@@ -598,7 +491,7 @@ export default {
 				if (this.currentItemSelected.currTier.lvlName != "END") {
 					let roll = Math.random();
 
-					if (this.failstackDefaultToggle) {
+					if (this.fsDefaults.useFsDefaultsToggle) {
 						if (
 							this.currentItemSelected.currTier.lvlName === "BASE" ||
 							this.currentItemSelected.currTier.lvlName === "+15"
@@ -650,10 +543,10 @@ export default {
 					}
 
 					if (roll >= this.chanceOfSuccess / 100) {
-						this.currentSuccessStreak = 0;
-						this.currentFailStreak++;
-						this.fails++;
-						this.attempts++;
+						this.statsS.currentSuccessStreak = 0;
+						this.statsS.currentFailStreak++;
+						this.statsS.fails++;
+						this.statsS.attempts++;
 
 						let obj = {
 							state: false,
@@ -706,10 +599,10 @@ export default {
 								this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
 						}
 					} else {
-						this.currentFailStreak = 0;
-						this.currentSuccessStreak++;
-						this.success++;
-						this.attempts++;
+						this.statsS.currentFailStreak = 0;
+						this.statsS.currentSuccessStreak++;
+						this.statsS.success++;
+						this.statsS.attempts++;
 
 						let obj = {
 							state: true,
@@ -725,9 +618,6 @@ export default {
 						this.allSimulations.push(obj);
 
 						if (!this.realEnchancement) {
-							if (!this.failstackDefaultToggle) {
-								this.failstack = 0;
-							}
 							this.upgrade();
 							if (this.cronToggle) {
 								this.silverSpent += this.currentItemSelected.currTier.crons * 1126190;
@@ -735,15 +625,22 @@ export default {
 							if (this.currentItemSelected.currTier.lvlName === "END") {
 								this.cronToggle = false;
 							}
+							if (this.fsSilverValue.useFsDefaultSilverValuesToggle === true) {
+								console.log(this.fsSilverValue.failstackValues[this.failstack]);
+								this.silverSpent += this.fsSilverValue.failstackValues[this.failstack];
+							}
 							this.silverSpent += this.currentItemSelected.currTier.material.materialCost;
+							if (!this.failstackDefaultToggle) {
+								this.failstack = 0;
+							}
 						}
 					}
 
-					if (this.currentSuccessStreak > this.highestSuccessStreak)
-						this.highestSuccessStreak = this.currentSuccessStreak;
+					if (this.statsS.currentSuccessStreak > this.statsS.highestSuccessStreak)
+						this.statsS.highestSuccessStreak = this.statsS.currentSuccessStreak;
 
-					if (this.currentFailStreak > this.highestFailStreak)
-						this.highestFailStreak = this.currentFailStreak;
+					if (this.statsS.currentFailStreak > this.statsS.highestFailStreak)
+						this.statsS.highestFailStreak = this.statsS.currentFailStreak;
 
 					this.simulationsToDisplay = this.allSimulations;
 
