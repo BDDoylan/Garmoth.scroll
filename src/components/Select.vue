@@ -353,6 +353,7 @@ export default {
 						materialCost: this.materialCosts(index),
 					},
 					durabilityLoss: this.material[this.selectedItem.material].enhancements[index].dura_loss,
+					tierNum: parseInt(index),
 				};
 				tiers.push(tier);
 			}
@@ -367,6 +368,7 @@ export default {
 					materialCost: 0,
 				},
 				durabilityLoss: 0,
+				tierNum: null
 			});
 
 			this.allTiers = tiers;
