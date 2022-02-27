@@ -1,13 +1,13 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 import Scrolls from "./Modules/Scrolls";
-import Enchancing from './Modules/Enchancing';
+import Enhancing from "./Modules/Enhancing";
 
 // Create a new store instance.
 const store = createStore({
-    modules: {
-        scroll: Scrolls,
-        enchance: Enchancing,
-    }
-})
+	modules: {
+		scroll: Scrolls,
+		enhance: Enhancing,
+	},
+});
 
-export default store
+export default store;

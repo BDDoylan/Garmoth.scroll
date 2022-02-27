@@ -31,7 +31,7 @@
 						<p class="inline ml-3 text-green float-right mr-2">Silver</p>
 					</span>
 				</div>
-				<div class="grid grid-cols-1 xs:grid-cols-3 xs:gap-1">
+				<div class="grid grid-cols-1 xs:grid-cols-3 xs:gap-1 text-center">
 					<div
 						v-for="(fs, index) in fsDefaultSilverValues.failstackValues"
 						:key="index"

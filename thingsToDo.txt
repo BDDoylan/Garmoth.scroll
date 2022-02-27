@@ -9,35 +9,11 @@
    success/ fail based on tier (pri, duo, tri...) ) 
 7. Incorporate Stack value in silver
 
-
-Softcaps: 
-
-Life skill clothes: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-
-Tuvala Armor and Weapons: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,20,30,40,60]
-
-Tuvala Accessories: [10,20,30,35,40]
-
-Green Armors: [0,0,0,0,0,0,4,11,20,36,46,60,78,84,107,50,82,102,340,2324]
-
-Green Accessories: [14,40,44,110,490]
-
-Accessories: [18,40,44,110,490]
-
-Green Weapons: [0,0,0,0,0,0,0,0,8,15,25,43,78,84,107,50,82,102,340,2324]
-
-Blue Accessories: [14,8,21,40]
-
-Silver Embroidered: [14,40,44,110,490]
-
-Weapons and life skill tools: [0,0,0,0,0,0,0,0,25,40,60,96,165,270,340,50,82,102,340,2324]
-
-Armors: [0,0,0,0,0,0,18,31,50,82,102,130,165,236,340,50,82,102,340,2324]
-
-Black Star Armor: [0,0,0,0,0,0,18,31,50,82,102,130,165,236,340,44,56,196,1363,3490]
-
-Black Star Weapons: [0,0,0,0,0,0,0,31,50,82,102,130,165,270,340,44,56,196,1363,3490]
-
-Ship gear: [5,5,10,10,20,20,30,40,51,61]
-
-Naru: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+8. Make buttons gray when disabled
+9. Make simulation its own seperate components
+10. Make select animation / current failstack and adding fs / subtracting failstack its own components
+11. Fix to use default tailwind resolution settings
+12. Fix items that cannot be clicked in select
+13. Add all the data needed across the components in the vuex storage
+14. Make the charts dynamically update based on data taken from vuexstore / the bar-y-category-stack
+15. Make the button simulate / enhance one component and put simulation logic there

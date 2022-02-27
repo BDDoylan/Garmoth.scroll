@@ -13,7 +13,7 @@
 		</div>
 
 		<div class="grid grid-cols-2 gap-4 mx-4 pb-3 xsm:grid-cols-8">
-			<Stats :stats="statsS"></Stats>
+			<Stats></Stats>
 			<div class="bg-600 text-0 rounded h-auto text-xl relative px-2 pt-2 col-span-4 row-span-2">
 				<div class="flex bg-700 text-0 rounded h-28 lgx:h-28" @click="open('itemSelector')">
 					<div class="flex-initial w-24 z-10">
@@ -27,7 +27,7 @@
 								]"
 							/>
 						</div>
-						<Select @chosenItem="itemChange"></Select>
+						<Select></Select>
 					</div>
 					<div class="flex-auto w-full">
 						<div
@@ -92,7 +92,7 @@
 								this.currentItemSelected.information.chance === 4 ||
 								this.currentItemSelected.information.chance === 5 ||
 								this.currentItemSelected.information.chance === 7 ||
-								this.currentItemSelected.information.chance === 13 || 
+								this.currentItemSelected.information.chance === 13 ||
 								this.currentItemSelected.allTiers == null
 							"
 							:class="[
@@ -140,18 +140,32 @@
 					<div class="rounded bg-700 h-14 w-auto font-semibold">
 						<p class="my-3">
 							Success Rate:
-							{{ currentItemSelected.currTier.lvlName != "END" ? chanceOfSuccess + "%" : "N/A" }}
+							{{
+								currentItemSelected.currTier.lvlName != "END"
+									? displayedItemInformation.chanceOfSuccess + "%"
+									: "N/A"
+							}}
 						</p>
 					</div>
 
 					<div class="rounded bg-700 h-14 w-auto">
 						<button
-							class="my-3 cursor-pointer hover:text-green font-semibold"
-							:disabled="currentItemSelected.currTier.lvlName === 'END'"
-							@click="(failstack = softcap), setChance()"
+							:class="[
+								currentItemSelected.nextTier === null || currentItemSelected.allTiers === null || justClicked
+									? 'text-white'
+									: 'hover:text-green',
+								'my-3 cursor-pointer font-semibold',
+							]"
+							:disabled="
+								currentItemSelected.currTier.lvlName === 'END' ||
+								currentItemSelected.nextTier === null ||
+								currentItemSelected.allTiers === null ||
+								justClicked
+							"
+							@click="(failstack = this.displayedItemInformation.softCap), setChance()"
 						>
 							Softcap:
-							{{ currentItemSelected.currTier.lvlName != "END" ? softcap : "N/A" }}
+							{{ currentItemSelected.currTier.lvlName != "END" ? displayedItemInformation.softCap : "N/A" }}
 						</button>
 					</div>
 
@@ -160,7 +174,7 @@
 					>
 						<p class="my-3">
 							Avg. Clicks:
-							{{ currentItemSelected.currTier.lvlName != "END" ? avgClicks : "N/A" }}
+							{{ currentItemSelected.currTier.lvlName != "END" ? displayedItemInformation.avgClicks : "N/A" }}
 						</p>
 					</div>
 
@@ -183,7 +197,9 @@
 					</div>
 
 					<div class="rounded bg-700 h-18 col-span-1 xsm:col-span-2 xs:col-span-2">
-						<p class="my-3 font-semibold">Silver Spent: {{ silverSpent.toLocaleString() }}</p>
+						<p class="my-3 font-semibold">
+							Silver Spent: {{ displayedItemInformation.silverSpent.toLocaleString() }}
+						</p>
 					</div>
 
 					<div class="rounded bg-700 h-18 col-span-1 py-2 pt-3">
@@ -197,14 +213,19 @@
 					</div>
 
 					<button
-						class="rounded bg-700 h-18 col-span-1"
 						v-if="currentItemSelected.currTier"
 						:disabled="
-							justClicked || currentItemSelected.nextTier === null || currentItemSelected.allTiers === null
+							currentItemSelected.nextTier === null || currentItemSelected.allTiers === null || justClicked
 						"
+						:class="[
+							currentItemSelected.nextTier === null || currentItemSelected.allTiers === null || justClicked
+								? 'bg-400'
+								: 'bg-green',
+							'rounded h-18 col-span-1',
+						]"
 						@click="skipOrNah(), clicked()"
 					>
-						<p class="my-3 text-green font-bold">ENCHANCE</p>
+						<p class="my-3 text-white font-bold">ENCHANCE</p>
 					</button>
 				</div>
 			</div>
@@ -216,20 +237,35 @@
 							currentItemSelected.nextTier === null || currentItemSelected.allTiers === null || justClicked
 						"
 						@click="simulate(simulationTapAmount)"
-						class="bg-green rounded p-4 font-bold truncate"
+						:class="[
+							currentItemSelected.nextTier === null || currentItemSelected.allTiers === null || justClicked
+								? 'bg-400'
+								: 'bg-green',
+							'rounded p-4 font-bold truncate',
+						]"
 					>
 						Simulate
 					</button>
 					<button
-						@click="clearSimulation(), (failstack = 0), (silverSpent = 0), setChance()"
-						class="bg-red rounded p-4 font-bold truncate"
+						:disabled="
+							currentItemSelected.nextTier === null || currentItemSelected.allTiers === null || justClicked
+						"
+						:class="[
+							currentItemSelected.nextTier === null || currentItemSelected.allTiers === null || justClicked
+								? 'bg-400'
+								: 'bg-red',
+							'rounded p-4 font-bold truncate',
+						]"
+						@click="
+							clearSimulation(), (failstack = 0), (displayedItemInformation.silverSpent = 0), setChance()
+						"
 					>
 						Clear
 					</button>
 				</div>
 				<div class="rounded bg-700 h-90 xsm:h-95 lgx:h-81 text-left pb-0 overflow-y-auto">
 					<p
-						v-for="(attempt, key) in simulationsToDisplay"
+						v-for="(attempt, key) in simulationsToDisplay.slice(0, 100).reverse()"
 						:key="key"
 						:class="['ml-2', { 'text-red': !attempt.state, 'text-green': attempt.state }]"
 					>
@@ -239,7 +275,7 @@
 					</p>
 				</div>
 			</div>
-			<ChanceCalculator :chanceOfSuccess="chanceOfSuccess"></ChanceCalculator>
+			<ChanceCalculator></ChanceCalculator>
 		</div>
 		<div class="grid grid-cols-1 xsm:grid-cols-2 gap-4 px-4 py-1 w-50%">
 			<TierChart class="w-50%"></TierChart>
@@ -268,34 +304,8 @@ export default {
 		return {
 			realEnchancement: false,
 
-			currentItemSelected: {
-				information: {
-					main_key: 10810,
-				},
-
-				allTiers: null,
-
-				currTier: {},
-				prevTier: {},
-				nextTier: {},
-			},
-
 			simulationTapAmount: 1,
 			simulationsToDisplay: [],
-
-			softcap: 0,
-
-			avgClicks: 0,
-
-			statsS: {
-				attempts: 0,
-				success: 0,
-				fails: 0,
-				highestSuccessStreak: 0,
-				highestFailStreak: 0,
-				currentSuccessStreak: 0,
-				currentFailStreak: 0,
-			},
 
 			tierChartData: {
 				data: [
@@ -547,7 +557,6 @@ export default {
 				],
 			},
 
-			failstack: 0,
 			fsButtons: [-25, -5, -1, +1, +5, +25],
 
 			unusedFsStorage: [],
@@ -555,15 +564,12 @@ export default {
 			fsDefaults: {},
 			fsSilverValue: {},
 
-			chanceOfSuccess: 0,
-
 			cronToggle: false,
 			animationToggle: false,
 
 			justClicked: false,
 
 			cronsNeeded: 0,
-			silverSpent: 0,
 		};
 	},
 
@@ -583,7 +589,7 @@ export default {
 	computed: {
 		items: {
 			get() {
-				return this.$store.state.enchance.items;
+				return this.$store.state.enhance.items;
 			},
 			set(value) {
 				this.$store.commit("SET_ITEMS_STORAGE", value);
@@ -591,7 +597,7 @@ export default {
 		},
 		chance: {
 			get() {
-				return this.$store.state.enchance.chance;
+				return this.$store.state.enhance.chance;
 			},
 			set(value) {
 				this.$store.commit("SET_CHANCE_STORAGE", value);
@@ -599,7 +605,7 @@ export default {
 		},
 		cron: {
 			get() {
-				return this.$store.state.enchance.cron;
+				return this.$store.state.enhance.cron;
 			},
 			set(value) {
 				this.$store.commit("SET_CRON_STORAGE", value);
@@ -607,7 +613,7 @@ export default {
 		},
 		material: {
 			get() {
-				return this.$store.state.enchance.material;
+				return this.$store.state.enhance.material;
 			},
 			set(value) {
 				this.$store.commit("SET_MATERIAL_STORAGE", value);
@@ -615,10 +621,46 @@ export default {
 		},
 		prices: {
 			get() {
-				return this.$store.state.enchance.prices;
+				return this.$store.state.enhance.prices;
 			},
 			set(value) {
 				this.$store.commit("SET_PRICES_STORAGE", value);
+			},
+		},
+
+		currentItemSelected: {
+			get() {
+				return this.$store.state.enhance.currentItemSelected;
+			},
+			set(value) {
+				this.$store.commit("SET_CURRENT_ITEM_SELECTED", value);
+			},
+		},
+
+		stats: {
+			get() {
+				return this.$store.state.enhance.stats;
+			},
+			set(value) {
+				this.$store.commit("SET_STATS", value);
+			},
+		},
+
+		displayedItemInformation: {
+			get() {
+				return this.$store.state.enhance.displayedItemInformation;
+			},
+			set(value) {
+				this.$store.commit("SET_DISPLAYED_ITEM_INFO", value);
+			},
+		},
+
+		failstack: {
+			get() {
+				return this.$store.state.enhance.failstack;
+			},
+			set(value) {
+				this.$store.commit("SET_FAILSTACK", value);
 			},
 		},
 	},
@@ -649,13 +691,13 @@ export default {
 		},
 
 		clearSimulation() {
-			this.statsS.highestSuccessStreak = 0;
-			this.statsS.highestFailStreak = 0;
-			this.statsS.currentSuccessStreak = 0;
-			this.statsS.currentFailStreak = 0;
-			this.statsS.attempts = 0;
-			this.statsS.success = 0;
-			this.statsS.fails = 0;
+			this.stats.highestSuccessStreak = 0;
+			this.stats.highestFailStreak = 0;
+			this.stats.currentSuccessStreak = 0;
+			this.stats.currentFailStreak = 0;
+			this.stats.attempts = 0;
+			this.stats.success = 0;
+			this.stats.fails = 0;
 			this.simulationsToDisplay = [];
 		},
 
@@ -665,47 +707,36 @@ export default {
 			this.setChance();
 		},
 
-		previousTier(currentTier) {
-			let indexOfCurr = this.currentItemSelected.allTiers.findIndex((tier) => tier === currentTier);
-			return this.currentItemSelected.allTiers[indexOfCurr - 1];
-		},
-
-		nextTier(currentTier) {
-			if (currentTier.lvlName === "END") {
-				return null;
-			} else if (currentTier.lvlName != "BASE") {
-				let indexOfCurr = this.currentItemSelected.allTiers.findIndex((tier) => tier === currentTier);
-				if (this.currentItemSelected.allTiers[indexOfCurr + 1].lvlName != "BASE") {
-					return this.currentItemSelected.allTiers[indexOfCurr + 1];
-				} else {
-					return null;
-				}
-			}
-		},
-
 		setChance() {
 			let baseChance = this.currentItemSelected.currTier.baseChance;
-			this.softcap = this.currentItemSelected.currTier.softCap;
+			this.displayedItemInformation.softCap = this.currentItemSelected.currTier.softCap;
 
 			let failstackChance = baseChance / 10;
 			let failstackChanceAfterSoftcap = baseChance / 50;
 
-			if (this.failstack > this.softcap) {
-				this.chanceOfSuccess =
+			if (this.failstack > this.displayedItemInformation.softCap) {
+				this.displayedItemInformation.chanceOfSuccess =
 					baseChance +
-					failstackChance * this.softcap +
-					(this.failstack - this.softcap) * failstackChanceAfterSoftcap;
+					failstackChance * this.displayedItemInformation.softCap +
+					(this.failstack - this.displayedItemInformation.softCap) * failstackChanceAfterSoftcap;
 			} else {
-				this.chanceOfSuccess = baseChance + failstackChance * this.failstack;
+				this.displayedItemInformation.chanceOfSuccess = baseChance + failstackChance * this.failstack;
 			}
 
-			this.chanceOfSuccess = (this.chanceOfSuccess * 100).toFixed(2);
-			if (this.chanceOfSuccess > 90 && this.currentItemSelected.currTier.baseChance != 1) {
-				this.chanceOfSuccess = (90).toFixed(2);
+			this.displayedItemInformation.chanceOfSuccess = (
+				this.displayedItemInformation.chanceOfSuccess * 100
+			).toFixed(2);
+			if (
+				this.displayedItemInformation.chanceOfSuccess > 90 &&
+				this.currentItemSelected.currTier.baseChance != 1
+			) {
+				this.displayedItemInformation.chanceOfSuccess = (90).toFixed(2);
 			} else if (this.currentItemSelected.currTier.baseChance === 1) {
-				this.chanceOfSuccess = (100).toFixed(2);
+				this.displayedItemInformation.chanceOfSuccess = (100).toFixed(2);
 			}
-			this.avgClicks = (100 / this.chanceOfSuccess).toFixed(2);
+			this.displayedItemInformation.avgClicks = (100 / this.displayedItemInformation.chanceOfSuccess).toFixed(
+				2
+			);
 		},
 
 		open(id) {
@@ -716,7 +747,8 @@ export default {
 			let temp = this.currentItemSelected.currTier;
 
 			this.currentItemSelected.currTier = this.currentItemSelected.prevTier;
-			this.currentItemSelected.prevTier = this.previousTier(this.currentItemSelected.prevTier);
+			this.currentItemSelected.prevTier =
+				this.currentItemSelected.allTiers[this.currentItemSelected.prevTier.tierNum - 1];
 			this.currentItemSelected.nextTier = temp;
 
 			this.setChance();
@@ -727,7 +759,11 @@ export default {
 
 			this.currentItemSelected.currTier = this.currentItemSelected.nextTier;
 			this.currentItemSelected.prevTier = temp;
-			this.currentItemSelected.nextTier = this.nextTier(this.currentItemSelected.nextTier);
+			this.currentItemSelected.nextTier =
+				this.currentItemSelected.nextTier.lvlName === "END"
+					? null
+					: this.currentItemSelected.allTiers[this.currentItemSelected.nextTier.tierNum + 1];
+
 			this.setChance();
 		},
 
@@ -751,11 +787,11 @@ export default {
 
 					this.setFsDefaults();
 
-					if (roll >= this.chanceOfSuccess / 100) {
-						this.statsS.currentSuccessStreak = 0;
-						this.statsS.currentFailStreak++;
-						this.statsS.fails++;
-						this.statsS.attempts++;
+					if (roll >= this.displayedItemInformation.chanceOfSuccess / 100) {
+						this.stats.currentSuccessStreak = 0;
+						this.stats.currentFailStreak++;
+						this.stats.fails++;
+						this.stats.attempts++;
 
 						let obj = {
 							state: false,
@@ -777,40 +813,38 @@ export default {
 							let prev = this.currentItemSelected.currTier.tierNum;
 
 							if (
-								this.currentItemSelected.currTier.lvlName === "I" ||
+								(this.currentItemSelected.currTier.lvlName === "I" &&
+									[1, 3, 4, 5, 7, 8, 11, 12, 17].includes(this.currentItemSelected.information.chance)) ||
 								this.currentItemSelected.currTier.lvlName === "II" ||
 								this.currentItemSelected.currTier.lvlName === "III" ||
 								this.currentItemSelected.currTier.lvlName === "IV"
 							) {
 								if (!this.cronToggle) {
 									this.addToFailstack(this.currentItemSelected.currTier.failstackGain);
-									if (
-										this.currentItemSelected.information.chance === 1 ||
-										this.currentItemSelected.information.chance === 3 ||
-										this.currentItemSelected.information.chance === 4 ||
-										this.currentItemSelected.information.chance === 5 ||
-										this.currentItemSelected.information.chance === 7 ||
-										this.currentItemSelected.information.chance === 11 ||
-										this.currentItemSelected.information.chance === 12
-									) {
+									if ([1, 3, 4, 5, 7, 8, 11, 12].includes(this.currentItemSelected.information.chance)) {
 										this.currentItemSelected.currTier = this.currentItemSelected.allTiers[0];
 										this.currentItemSelected.nextTier = this.currentItemSelected.allTiers[1];
 										this.currentItemSelected.prevTier = null;
 										this.setChance();
 									} else {
-										this.silverSpent +=
+										this.displayedItemInformation.silverSpent +=
 											this.currentItemSelected.currTier.material.materialCost +
 											this.prices[44195].sub_items[0].price *
 												this.currentItemSelected.currTier.durabilityLoss;
 										this.degrade();
 									}
 								} else {
-									this.silverSpent += this.currentItemSelected.currTier.crons * 1126190;
+									this.displayedItemInformation.silverSpent +=
+										this.currentItemSelected.currTier.crons * 1126190;
 
 									this.silverChartData.data[prev].silverForCrons +=
 										this.currentItemSelected.currTier.crons * 1126190;
 								}
 							} else {
+								this.displayedItemInformation.silverSpent +=
+									this.currentItemSelected.currTier.material.materialCost +
+									this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+									
 								this.addToFailstack(this.currentItemSelected.currTier.failstackGain);
 								this.setChance();
 							}
@@ -821,10 +855,10 @@ export default {
 								this.currentItemSelected.currTier.material.materialCost;
 						}
 					} else {
-						this.statsS.currentFailStreak = 0;
-						this.statsS.currentSuccessStreak++;
-						this.statsS.success++;
-						this.statsS.attempts++;
+						this.stats.currentFailStreak = 0;
+						this.stats.currentSuccessStreak++;
+						this.stats.success++;
+						this.stats.attempts++;
 
 						let obj = {
 							state: true,
@@ -845,7 +879,8 @@ export default {
 							let prev = this.currentItemSelected.currTier.tierNum;
 
 							if (this.cronToggle) {
-								this.silverSpent += this.currentItemSelected.currTier.crons * 1126190;
+								this.displayedItemInformation.silverSpent +=
+									this.currentItemSelected.currTier.crons * 1126190;
 								this.silverChartData.data[prev].silverForCrons +=
 									this.currentItemSelected.currTier.crons * 1126190;
 							}
@@ -853,13 +888,15 @@ export default {
 								this.cronToggle = false;
 							}
 							if (this.fsSilverValue.useFsDefaultSilverValuesToggle === true) {
-								this.silverSpent += this.fsSilverValue.failstackValues[this.failstack];
+								this.displayedItemInformation.silverSpent +=
+									this.fsSilverValue.failstackValues[this.failstack];
 
 								this.silverChartData.data[prev].silverForFS +=
 									this.fsSilverValue.failstackValues[this.failstack];
 							}
 
-							this.silverSpent += this.currentItemSelected.currTier.material.materialCost;
+							this.displayedItemInformation.silverSpent +=
+								this.currentItemSelected.currTier.material.materialCost;
 
 							this.currentItemSelected.nextTier === null
 								? null
@@ -873,11 +910,11 @@ export default {
 						}
 					}
 
-					if (this.statsS.currentSuccessStreak > this.statsS.highestSuccessStreak)
-						this.statsS.highestSuccessStreak = this.statsS.currentSuccessStreak;
+					if (this.stats.currentSuccessStreak > this.stats.highestSuccessStreak)
+						this.stats.highestSuccessStreak = this.stats.currentSuccessStreak;
 
-					if (this.statsS.currentFailStreak > this.statsS.highestFailStreak)
-						this.statsS.highestFailStreak = this.statsS.currentFailStreak;
+					if (this.stats.currentFailStreak > this.stats.highestFailStreak)
+						this.stats.highestFailStreak = this.stats.currentFailStreak;
 
 					if (this.simulationsToDisplay.length > 100) {
 						this.simulationsToDisplay.shift();

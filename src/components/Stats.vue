@@ -13,16 +13,16 @@
 			Highest Success Streak: <strong>{{ stats.highestSuccessStreak }}</strong>
 		</p>
 		<p>
-			Highest Fail Streak:
-			<strong class="text-green">{{ stats.highestFailStreak }}</strong>
+			Current Success Streak:
+			<strong class="text-green">{{ stats.currentSuccessStreak }}</strong>
 		</p>
 		<p>
-			Current Success Streak:
-			<strong class="text-red">{{ stats.currentSuccessStreak }}</strong>
+			Highest Fail Streak:
+			<strong class="text-white">{{ stats.highestFailStreak }}</strong>
 		</p>
 		<p>
 			Current Fail Streak:
-			<strong class="text-orange">{{ stats.currentFailStreak }}</strong>
+			<strong class="text-red">{{ stats.currentFailStreak }}</strong>
 		</p>
 	</div>
 </template>
@@ -31,9 +31,14 @@
 export default {
 	name: "Stats",
 
-	props: {
+	computed: {
 		stats: {
-			type: Object,
+			get() {
+				return this.$store.state.enhance.stats;
+			},
+			set(value) {
+				this.$store.commit("SET_STATS", value);
+			},
 		},
 	},
 };

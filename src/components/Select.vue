@@ -25,10 +25,10 @@
 			>
 				<ul v-for="item in filteredOptions" :key="item.main_key">
 					<li
-						@click="(selectedItem = item), getAllTiers(), (toggle = false)"
+						@click="(selectedItem = item), (toggle = false)"
 						:class="[
 							'relative py-2 pl-3 pr-9 hover:bg-500 cursor-pointer',
-							{ 'bg-500': selectedItem.name === item.name },
+							{ 'bg-500': selectedItem === null ? false : selectedItem.name === item.name },
 						]"
 					>
 						<div class="flex items-center">
@@ -55,7 +55,7 @@
 					</li>
 				</ul>
 			</div>
-			<div v-if="selectedItem.name != null">
+			<div v-if="selectedItem != null">
 				<div class="mt-1 w-full bg-600 shadow-lg text-center text-white py-2 font-bold text-xl">
 					<p
 						:class="[
@@ -84,7 +84,7 @@
 				>
 					<div v-for="(tier, key) in getTierOptions" :key="key">
 						<p
-							@click="prepareSelectedItem(key), passCurrentSelectedItem()"
+							@click="setCurrentSelectedItem(key)"
 							class="text-white font-bold bg-400 rounded w-14 m-auto text-center my-2 p-2 hover:bg-700 cursor-pointer"
 						>
 							{{ tier }}
@@ -112,21 +112,7 @@ export default {
 
 			searchItem: "",
 
-			selectedItem: {
-				main_key: null,
-				name: null,
-				rarity: null,
-				type: null,
-				cron: null,
-				chance: null,
-				material: null,
-			},
-
-			allTiers: null,
-
-			finalItem: null,
-
-			gain: null,
+			selectedItem: null,
 
 			popularItems: [
 				{
@@ -174,6 +160,15 @@ export default {
 					chance: 19,
 					material: 45,
 				},
+				{
+					main_key: 705512,
+					name: "Manos Belt",
+					rarity: 5,
+					type: 10,
+					cron: 0,
+					chance: 4,
+					material: 4,
+				},
 			],
 		};
 	},
@@ -181,42 +176,74 @@ export default {
 	computed: {
 		items: {
 			get() {
-				return this.$store.state.enchance.items;
+				return this.$store.state.enhance.items;
 			},
 			set(value) {
 				this.$store.commit("SET_ITEMS_STORAGE", value);
 			},
 		},
+
 		chance: {
 			get() {
-				return this.$store.state.enchance.chance;
+				return this.$store.state.enhance.chance;
 			},
 			set(value) {
 				this.$store.commit("SET_CHANCE_STORAGE", value);
 			},
 		},
+
 		cron: {
 			get() {
-				return this.$store.state.enchance.cron;
+				return this.$store.state.enhance.cron;
 			},
 			set(value) {
 				this.$store.commit("SET_CRON_STORAGE", value);
 			},
 		},
+
 		material: {
 			get() {
-				return this.$store.state.enchance.material;
+				return this.$store.state.enhance.material;
 			},
 			set(value) {
 				this.$store.commit("SET_MATERIAL_STORAGE", value);
 			},
 		},
+
 		prices: {
 			get() {
-				return this.$store.state.enchance.prices;
+				return this.$store.state.enhance.prices;
 			},
 			set(value) {
 				this.$store.commit("SET_PRICES_STORAGE", value);
+			},
+		},
+
+		displayedItemInformation: {
+			get() {
+				return this.$store.state.enhance.displayedItemInformation;
+			},
+			set(value) {
+				this.$store.commit("SET_DISPLAYED_ITEM_INFO", value);
+			},
+		},
+
+		failstack: {
+			get() {
+				return this.$store.state.enhance.failstack;
+			},
+			set(value) {
+				this.$store.commit("SET_FAILSTACK", value);
+			},
+		},
+
+		currentItemSelected: {
+			get() {
+				return this.$store.state.enhance.currentItemSelected;
+			},
+			set(value) {
+				this.$store.commit("SET_CURRENT_ITEM_SELECTED", value);
+				this.setChance();
 			},
 		},
 
@@ -269,7 +296,10 @@ export default {
 			return [
 				{
 					id: null,
-					cost: this.prices[this.selectedItem.main_key].sub_items[0].price,
+					cost:
+						this.prices[this.selectedItem.main_key] === undefined
+							? 0
+							: this.prices[this.selectedItem.main_key].sub_items[0].price,
 				},
 				{
 					id: 752022,
@@ -289,41 +319,6 @@ export default {
 	},
 
 	methods: {
-		passCurrentSelectedItem() {
-			this.$emit("chosenItem", this.finalItem);
-		},
-
-		prepareSelectedItem(key) {
-			this.finalItem = {
-				information: this.selectedItem,
-				allTiers: this.allTiers,
-
-				currTier: this.allTiers[key],
-				prevTier: this.allTiers[key - 1] === undefined ? null : this.allTiers[key - 1],
-				nextTier: this.allTiers[key + 1] === undefined ? null : this.allTiers[key + 1],
-			};
-		},
-
-		materialCosts(index) {
-			let cost = 0;
-			if (
-				this.idsNotInMarket.some(
-					(e) => e.id === this.material[this.selectedItem.material].enhancements[index].item
-				)
-			) {
-				this.idsNotInMarket.some((e) => {
-					if (e.id === this.material[this.selectedItem.material].enhancements[index].item) {
-						cost = e.cost;
-					}
-				});
-			} else {
-				cost =
-					this.prices[this.material[this.selectedItem.material].enhancements[index].item].sub_items[0].price *
-					this.material[this.selectedItem.material].enhancements[index].item_amount;
-			}
-			return cost;
-		},
-
 		getAllTiers() {
 			let tiers = [];
 
@@ -368,10 +363,78 @@ export default {
 					materialCost: 0,
 				},
 				durabilityLoss: 0,
-				tierNum: null
+				tierNum: null,
 			});
 
-			this.allTiers = tiers;
+			return tiers;
+		},
+
+		materialCosts(index) {
+			let cost = 0;
+
+			if (
+				this.idsNotInMarket.some(
+					(e) => e.id === this.material[this.selectedItem.material].enhancements[index].item
+				)
+			) {
+				this.idsNotInMarket.some((e) => {
+					if (e.id === this.material[this.selectedItem.material].enhancements[index].item) {
+						cost = e.cost;
+					}
+				});
+			} else {
+				cost =
+					this.prices[this.material[this.selectedItem.material].enhancements[index].item].sub_items[0].price *
+					this.material[this.selectedItem.material].enhancements[index].item_amount;
+			}
+
+			return cost;
+		},
+
+		setCurrentSelectedItem(key) {
+			let allTiers = this.getAllTiers();
+
+			this.currentItemSelected = {
+				information: this.selectedItem,
+
+				allTiers: allTiers,
+
+				currTier: allTiers[key],
+				prevTier: allTiers[key - 1] === undefined ? null : allTiers[key - 1],
+				nextTier: allTiers[key + 1] === undefined ? null : allTiers[key + 1],
+			};
+		},
+
+		setChance() {
+			let baseChance = this.currentItemSelected.currTier.baseChance;
+			this.displayedItemInformation.softCap = this.currentItemSelected.currTier.softCap;
+
+			let failstackChance = baseChance / 10;
+			let failstackChanceAfterSoftcap = baseChance / 50;
+
+			if (this.failstack > this.displayedItemInformation.softCap) {
+				this.displayedItemInformation.chanceOfSuccess =
+					baseChance +
+					failstackChance * this.displayedItemInformation.softCap +
+					(this.failstack - this.displayedItemInformation.softCap) * failstackChanceAfterSoftcap;
+			} else {
+				this.displayedItemInformation.chanceOfSuccess = baseChance + failstackChance * this.failstack;
+			}
+
+			this.displayedItemInformation.chanceOfSuccess = (
+				this.displayedItemInformation.chanceOfSuccess * 100
+			).toFixed(2);
+			if (
+				this.displayedItemInformation.chanceOfSuccess > 90 &&
+				this.currentItemSelected.currTier.baseChance != 1
+			) {
+				this.displayedItemInformation.chanceOfSuccess = (90).toFixed(2);
+			} else if (this.currentItemSelected.currTier.baseChance === 1) {
+				this.displayedItemInformation.chanceOfSuccess = (100).toFixed(2);
+			}
+			this.displayedItemInformation.avgClicks = (100 / this.displayedItemInformation.chanceOfSuccess).toFixed(
+				2
+			);
 		},
 	},
 };

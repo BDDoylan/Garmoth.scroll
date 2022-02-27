@@ -18,8 +18,6 @@
 export default {
 	name: "ChanceCalculator",
 
-	props: ["chanceOfSuccess"],
-
 	data() {
 		return {
 			chanceCalcTimes: null,
@@ -27,9 +25,21 @@ export default {
 	},
 
 	computed: {
+		displayedItemInformation: {
+			get() {
+				return this.$store.state.enhance.displayedItemInformation;
+			},
+			set(value) {
+				this.$store.commit("SET_DISPLAYED_ITEM_INFO", value);
+			},
+		},
+
 		chanceCalculator() {
 			let times = this.chanceCalcTimes;
-			let calc = ((1 - Math.pow(1 - this.chanceOfSuccess / 100, times)) * 100).toFixed(5);
+			let calc = (
+				(1 - Math.pow(1 - this.displayedItemInformation.chanceOfSuccess / 100, times)) *
+				100
+			).toFixed(5);
 			if (parseFloat(calc) > 99.99) {
 				return 99.99;
 			} else {

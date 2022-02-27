@@ -1,19 +1,19 @@
 <template>
 	<div class="bg-800 w-full min-h-screen">
 		<!-- <Scrolls title="Scroll Calculator" /> -->
-		<EnchancingCalculator title="Enchancing Calculator" />
+		<EnhancingCalculator title="Enhancing Calculator" />
 	</div>
 </template>
 
 <script>
-import EnchancingCalculator from './components/EnchancingCalculator.vue';
+import EnhancingCalculator from './components/EnhancingCalculator.vue';
 import Scrolls from "./components/Scrolls.vue";
 
 export default {
 	name: "App",
 	components: {
 		Scrolls,
-		EnchancingCalculator,
+		EnhancingCalculator,
 	},
 };
 </script>
