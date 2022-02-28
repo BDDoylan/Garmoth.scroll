@@ -1,46 +1,45 @@
 <template>
 	<Modal id="fsDefaults">
-		<div class="mt-1 relative w-full">
-			<div class="w-full bg-600 shadow-sm pl-3 p-3 py-2 text-left focus:outline-none rounded">
-				<div class="text-2xl text-white mb-2">
-					<p
-						:class="[
-							'inline',
-							{
-								'text-green': useFsDefaultsToggle,
-								'text-red': !useFsDefaultsToggle,
-							},
-						]"
-					>
-						Use FS Defaults
-					</p>
-					<label class="switch my-2"
-						><input
-							@click="(useFsDefaultsToggle = !useFsDefaultsToggle), passCurrentFsDefaults()"
-							type="checkbox" />
-						<span class="slider round"></span
-					></label>
-				</div>
-				<div class="flex text-lg text-white mb-2">
-					<p class="flex-auto ml-4">Tier</p>
-					<p class="flex-auto ml-4 text-green">Start</p>
-					<p class="flex-auto ml-5 text-red">Stop</p>
-				</div>
-				<div v-for="(fs, index) in defaults" :key="index" class="text-center text-white text-xl">
-					<p class="bg-700 w-14 p-1 mb-2 inline-block">{{ fs.tier }}</p>
-					:
-					<input
-						class="w-16 p-2 bg-500 h-8 text-center focus:outline-none text-green"
-						type="number"
-						v-model="fs.start"
-					/>
-					-
-					<input
-						class="w-16 p-2 bg-500 h-8 text-center focus:outline-none text-red"
-						type="number"
-						v-model="fs.stop"
-					/>
-				</div>
+		<div class="w-full bg-600 shadow-sm pl-3 p-3 py-2 text-left focus:outline-none rounded">
+			<div class="text-2xl text-white mb-2">
+				<p
+					:class="[
+						'inline',
+						{
+							'text-green': toggles.useFsDefaultsToggle,
+							'text-red': !toggles.useFsDefaultsToggle,
+						},
+					]"
+				>
+					Use FS Defaults
+				</p>
+
+				<label class="switch my-2"
+					><input @click="toggles.useFsDefaultsToggle = !toggles.useFsDefaultsToggle" type="checkbox" />
+					<span class="slider round"></span
+				></label>
+			</div>
+
+			<div class="flex text-lg text-white mb-2">
+				<p class="flex-auto ml-4">Tier</p>
+				<p class="flex-auto ml-4 text-green">Start</p>
+				<p class="flex-auto ml-5 text-red">Stop</p>
+			</div>
+
+			<div v-for="(fs, index) in defaults" :key="index" class="text-center text-white text-xl">
+				<p class="bg-700 w-14 p-1 mb-2 inline-block">{{ fs.tier }}</p>
+				:
+				<input
+					class="w-16 p-2 bg-500 h-8 text-center focus:outline-none text-green"
+					type="number"
+					v-model="fs.start"
+				/>
+				-
+				<input
+					class="w-16 p-2 bg-500 h-8 text-center focus:outline-none text-red"
+					type="number"
+					v-model="fs.stop"
+				/>
 			</div>
 		</div>
 	</Modal>
@@ -54,16 +53,8 @@ export default {
 
 	components: { Modal },
 
-	props: {
-		curr: Number,
-	},
-
-	emits: ["chosenFsDefaults"],
-
 	data() {
 		return {
-			useFsDefaultsToggle: false,
-
 			fsDefaultsTwenty: [
 				{
 					tier: "Base",
@@ -170,8 +161,8 @@ export default {
 			fsDefaultsFive: [
 				{
 					tier: "Base",
-					start: 0,
-					stop: 0,
+					start: 10,
+					stop: 20,
 				},
 				{
 					tier: "I",
@@ -198,8 +189,8 @@ export default {
 			fsDefaultsThree: [
 				{
 					tier: "Base",
-					start: 0,
-					stop: 0,
+					start: 20,
+					stop: 30,
 				},
 				{
 					tier: "+1",
@@ -216,20 +207,47 @@ export default {
 	},
 
 	computed: {
+		currentItemSelected: {
+			get() {
+				return this.$store.state.enhance.currentItemSelected;
+			},
+			set(value) {
+				this.$store.commit("SET_CURRENT_ITEM_SELECTED", value);
+			},
+		},
+
+		fsDefaults: {
+			get() {
+				return this.$store.state.enhance.fsDefaults;
+			},
+			set(value) {
+				this.$store.commit("SET_FS_DEFAULTS", value);
+			},
+		},
+
+		toggles: {
+			get() {
+				return this.$store.state.enhance.toggles;
+			},
+			set(value) {
+				this.$store.commit("SET_TOGGLES", value);
+			},
+		},
+
 		defaults() {
-			if (this.curr === 20) {
+			let len =
+				this.currentItemSelected.allTiers === null ? null : this.currentItemSelected.allTiers.length - 1;
+
+			if (len === 20) {
+				this.fsDefaults = this.fsDefaultsTwenty;
 				return this.fsDefaultsTwenty;
-			} else if (this.curr === 5) {
+			} else if (len === 5) {
+				this.fsDefaults = this.fsDefaultsFive;
 				return this.fsDefaultsFive;
-			} else if (this.curr === 3) {
+			} else if (len === 3) {
+				this.fsDefaults = this.fsDefaultsThree;
 				return this.fsDefaultsThree;
 			}
-		},
-	},
-
-	methods: {
-		passCurrentFsDefaults() {
-			this.$emit("chosenFsDefaults", { failstacks: this.defaults, toggle: this.useFsDefaultsToggle });
 		},
 	},
 };

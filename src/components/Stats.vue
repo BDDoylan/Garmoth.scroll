@@ -1,5 +1,7 @@
 <template>
-	<div class="bg-600 text-0 rounded text-xl relative py-4 pt-3 xsm:col-span-2 col-span-4 xsm:pt-11 lgx:pt-5">
+	<div
+		class="bg-600 text-0 rounded text-xl relative py-4 pt-3 lg:col-span-2 col-span-4 lg:pt-11 2xl:pt-5 text-center"
+	>
 		<p>
 			Total Attempts: <strong>{{ stats.attempts }}</strong>
 		</p>

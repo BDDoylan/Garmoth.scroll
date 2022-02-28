@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-800 w-full min-h-screen">
 		<!-- <Scrolls title="Scroll Calculator" /> -->
-		<EnhancingCalculator title="Enhancing Calculator" />
+		<EnhancingCalculator/>
 	</div>
 </template>
 

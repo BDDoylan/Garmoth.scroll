@@ -27,8 +27,7 @@ export default {
 
 		failstack: 0,
 
-		simulationTapAmount: 1,
-		simulationsToDisplay: [],
+		simulations: { simulationTapAmount: 1, simulationsToDisplay: [] },
 
 		stats: {
 			attempts: 0,
@@ -39,6 +38,23 @@ export default {
 			currentSuccessStreak: 0,
 			currentFailStreak: 0,
 		},
+
+		toggles: {
+			realEnchancement: false,
+			cronToggle: false,
+			animationToggle: false,
+			justClicked: false,
+			useFsDefaultsToggle: false,
+			useFsDefaultSilverValuesToggle: false,
+		},
+
+		fsDefaults: {},
+
+		fsSilver: {},
+
+		tierChart: {},
+
+		silverChart: {},
 	}),
 
 	mutations: {
@@ -76,6 +92,30 @@ export default {
 
 		SET_FAILSTACK(state, payload) {
 			state.failstack = payload;
+		},
+
+		SET_SIMULATIONS(state, payload) {
+			state.simulation = payload;
+		},
+
+		SET_TOGGLES(state, payload) {
+			state.toggles = payload;
+		},
+
+		SET_FS_DEFAULTS(state, payload) {
+			state.fsDefaults = payload;
+		},
+
+		SET_FS_SILVER(state, payload) {
+			state.fsSilver = payload;
+		},
+
+		SET_TIER_CHART(state, payload) {
+			state.tierChart = payload;
+		},
+
+		SET_SILVER_CHART(state, payload) {
+			state.silverChart = payload;
 		},
 
 		// SET_CHANCE(state) {

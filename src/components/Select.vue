@@ -84,7 +84,7 @@
 				>
 					<div v-for="(tier, key) in getTierOptions" :key="key">
 						<p
-							@click="setCurrentSelectedItem(key)"
+							@click="setCurrentSelectedItem(key), selectChartData(), close('itemSelector')"
 							class="text-white font-bold bg-400 rounded w-14 m-auto text-center my-2 p-2 hover:bg-700 cursor-pointer"
 						>
 							{{ tier }}
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import Modal from "./Modal.vue";
 
 export default {
@@ -170,7 +171,374 @@ export default {
 					material: 4,
 				},
 			],
+
+			tierChartDataTwenty: [
+				{
+					tier: "+1",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+2",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+3",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+4",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+5",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+6",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+7",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+8",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+9",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+10",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+11",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+12",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+13",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+14",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+15",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "pri",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "duo",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "tri",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "tet",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "pen",
+					success: 0,
+					fail: 0,
+				},
+			],
+
+			tierChartDataFive: [
+				{
+					tier: "pri",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "duo",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "tri",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "tet",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "pen",
+					success: 0,
+					fail: 0,
+				},
+			],
+
+			tierChartDataThree: [
+				{
+					tier: "+1",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+2",
+					success: 0,
+					fail: 0,
+				},
+				{
+					tier: "+3",
+					success: 0,
+					fail: 0,
+				},
+			],
+
+			silverChartDataTwenty: [
+				{
+					tier: "+1",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+2",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+3",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+4",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+5",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+6",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+7",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+8",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+9",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+10",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+11",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+12",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+13",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+14",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+15",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "pri",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "duo",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "tri",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "tet",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "pen",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+			],
+
+			silverChartDataFive: [
+				{
+					tier: "pri",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "duo",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "tri",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "tet",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "pen",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+			],
+
+			silverChartDataThree: [
+				{
+					tier: "+1",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+2",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+				{
+					tier: "+3",
+					silverForDurability: 0,
+					silverForMaterial: 0,
+					silverForCrons: 0,
+					silverForFS: 0,
+				},
+			],
 		};
+	},
+
+	created() {
+		axios.get("https://garmoth.com/api/getEnhancements").then((res) => {
+			this.items = res.data.items;
+			this.chance = res.data.chance;
+			this.cron = res.data.cron;
+			this.material = res.data.material;
+		});
+
+		axios.get("market.json").then((res) => {
+			this.prices = res.data.items;
+		});
 	},
 
 	computed: {
@@ -247,6 +615,24 @@ export default {
 			},
 		},
 
+		tierChart: {
+			get() {
+				return this.$store.state.enhance.tierChart;
+			},
+			set(value) {
+				this.$store.commit("SET_TIER_CHART", value);
+			},
+		},
+
+		silverChart: {
+			get() {
+				return this.$store.state.enhance.silverChart;
+			},
+			set(value) {
+				this.$store.commit("SET_SILVER_CHART", value);
+			},
+		},
+
 		filteredOptions() {
 			if (this.searchItem.length > 2) {
 				return this.items.filter((item) => {
@@ -258,7 +644,7 @@ export default {
 		},
 
 		getTierOptions() {
-			if (this.selectedItem.chance != null) {
+			if (this.selectedItem != null) {
 				if (this.chance[this.selectedItem.chance].enhancements.length === 3) {
 					return ["BASE", "+1", "+2"];
 				} else if (this.chance[this.selectedItem.chance].enhancements.length === 5) {
@@ -319,6 +705,26 @@ export default {
 	},
 
 	methods: {
+		close(id) {
+			document.getElementById(id).style.display = "none";
+		},
+
+		selectChartData() {
+			let len =
+				this.currentItemSelected.allTiers === null ? null : this.currentItemSelected.allTiers.length - 1;
+
+			if (len === 20) {
+				this.tierChart = this.tierChartDataTwenty;
+				this.silverChart = this.silverChartDataTwenty;
+			} else if (len === 5) {
+				this.tierChart = this.tierChartDataFive;
+				this.silverChart = this.silverChartDataFive;
+			} else if (len === 3) {
+				this.tierChart = this.tierChartDataThree;
+				this.silverChart = this.silverChartDataThree;
+			}
+		},
+
 		getAllTiers() {
 			let tiers = [];
 
