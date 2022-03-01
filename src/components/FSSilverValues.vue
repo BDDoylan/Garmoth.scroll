@@ -14,9 +14,10 @@
 					>
 						Use FS Silver Defaults
 					</p>
-					
+
 					<label class="switch md:ml-60 lg:ml-80 my-2 mt-3"
 						><input
+							:disabled="[4, 5, 7, 8, 11, 13].includes(this.currentItemSelected.information.chance)"
 							@click="toggles.useFsDefaultSilverValuesToggle = !toggles.useFsDefaultSilverValuesToggle"
 							type="checkbox" />
 						<span class="slider round"></span
@@ -79,6 +80,15 @@ export default {
 	},
 
 	computed: {
+		currentItemSelected: {
+			get() {
+				return this.$store.state.enhance.currentItemSelected;
+			},
+			set(value) {
+				this.$store.commit("SET_CURRENT_ITEM_SELECTED", value);
+			},
+		},
+		
 		fsSilver: {
 			get() {
 				return this.$store.state.enhance.fsSilver;

@@ -15,7 +15,10 @@
 				</p>
 
 				<label class="switch my-2"
-					><input @click="toggles.useFsDefaultsToggle = !toggles.useFsDefaultsToggle" type="checkbox" />
+					><input
+						:disabled="[4, 5, 7, 8, 11, 13].includes(this.currentItemSelected.information.chance)"
+						@click="toggles.useFsDefaultsToggle = !toggles.useFsDefaultsToggle"
+						type="checkbox" />
 					<span class="slider round"></span
 				></label>
 			</div>

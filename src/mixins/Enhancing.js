@@ -126,6 +126,9 @@ export default {
 				data.silverForCrons = 0;
 				data.silverForFS = 0;
 			});
+            this.displayedItemInformation.silverSpent = 0;
+            this.failstack = 0;
+            this.setChance();
 		},
 
 		open(id) {

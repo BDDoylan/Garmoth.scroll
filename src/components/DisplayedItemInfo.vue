@@ -50,6 +50,11 @@
 					class="switch ml-1"
 					v-if="currentItemSelected.currTier.crons != null && currentItemSelected.currTier.crons != 0"
 					><input
+						:disabled="
+							currentItemSelected.nextTier === null ||
+							currentItemSelected.allTiers === null ||
+							toggles.justClicked
+						"
 						@click="toggles.cronToggle = !toggles.cronToggle"
 						v-model="toggles.cronToggle"
 						type="checkbox" />

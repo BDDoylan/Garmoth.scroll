@@ -15,7 +15,7 @@
 					currentItemSelected.allTiers === null || toggles.justClicked ? 'bg-400' : 'bg-red',
 					'rounded p-4 font-bold truncate',
 				]"
-				@click="clearSimulation(), (failstack = 0), (displayedItemInformation.silverSpent = 0), setChance()"
+				@click="clearSimulation()"
 			>
 				Clear
 			</button>
