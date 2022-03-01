@@ -52,9 +52,9 @@ export default {
 
 		fsSilver: {},
 
-		tierChart: {},
+		tierChart: [],
 
-		silverChart: {},
+		silverChart: [],
 	}),
 
 	mutations: {
@@ -80,6 +80,7 @@ export default {
 
 		SET_CURRENT_ITEM_SELECTED(state, payload) {
 			state.currentItemSelected = payload;
+			state.toggles.cronToggle = false;
 		},
 
 		SET_STATS(state, payload) {
@@ -117,32 +118,6 @@ export default {
 		SET_SILVER_CHART(state, payload) {
 			state.silverChart = payload;
 		},
-
-		// SET_CHANCE(state) {
-
-		// 	let baseChance = this.currentItemSelected.currTier.baseChance;
-		// 	state.chance.softcap = this.currentItemSelected.currTier.softCap;
-
-		// 	let failstackChance = baseChance / 10;
-		// 	let failstackChanceAfterSoftcap = baseChance / 50;
-
-		// 	if (this.failstack > this.softcap) {
-		// 		state.chance.chanceOfSuccess =
-		// 			baseChance +
-		// 			failstackChance * this.softcap +
-		// 			(this.failstack - this.softcap) * failstackChanceAfterSoftcap;
-		// 	} else {
-		// 		state.chance..chanceOfSuccess = baseChance + failstackChance * this.failstack;
-		// 	}
-
-		// 	state.chance..chanceOfSuccess = (this.chanceOfSuccess * 100).toFixed(2);
-		// 	if (this.chanceOfSuccess > 90 && this.currentItemSelected.currTier.baseChance != 1) {
-		// 		state.chance..chanceOfSuccess = (90).toFixed(2);
-		// 	} else if (this.currentItemSelected.currTier.baseChance === 1) {
-		// 		state.chance..chanceOfSuccess = (100).toFixed(2);
-		// 	}
-		// 	state.chance.avgClicks = (100 / this.chanceOfSuccess).toFixed(2);
-		// }
 	},
 	actions: {},
 };

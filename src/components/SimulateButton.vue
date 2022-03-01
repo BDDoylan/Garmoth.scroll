@@ -10,17 +10,21 @@
 				: 'bg-green',
 			'rounded h-18 col-span-1',
 		]"
-		@click="buttonText === 'Enhance' ? skipOrNah() : simulate(simulations.simulationTapAmount), clicked()"
+		@click="buttonText === 'Enhance' ? (skipOrNah(), clicked()) : simulate(simulations.simulationTapAmount)"
 	>
 		<p class="my-3 text-white font-bold">{{ buttonText }}</p>
 	</button>
 </template>
 
 <script>
+import Enhancing from "../mixins/Enhancing";
+
 export default {
 	name: "SimulateButton",
 
 	props: ["buttonText"],
+
+	mixins: [Enhancing],
 
 	computed: {
 		prices: {
@@ -29,60 +33,6 @@ export default {
 			},
 			set(value) {
 				this.$store.commit("SET_PRICES_STORAGE", value);
-			},
-		},
-
-		currentItemSelected: {
-			get() {
-				return this.$store.state.enhance.currentItemSelected;
-			},
-			set(value) {
-				this.$store.commit("SET_CURRENT_ITEM_SELECTED", value);
-			},
-		},
-
-		simulations: {
-			get() {
-				return this.$store.state.enhance.simulations;
-			},
-			set(value) {
-				this.$store.commit("SET_SIMULATIONS", value);
-			},
-		},
-
-		stats: {
-			get() {
-				return this.$store.state.enhance.stats;
-			},
-			set(value) {
-				this.$store.commit("SET_STATS", value);
-			},
-		},
-
-		toggles: {
-			get() {
-				return this.$store.state.enhance.toggles;
-			},
-			set(value) {
-				this.$store.commit("SET_TOGGLES", value);
-			},
-		},
-
-		failstack: {
-			get() {
-				return this.$store.state.enhance.failstack;
-			},
-			set(value) {
-				this.$store.commit("SET_FAILSTACK", value);
-			},
-		},
-
-		displayedItemInformation: {
-			get() {
-				return this.$store.state.enhance.displayedItemInformation;
-			},
-			set(value) {
-				this.$store.commit("SET_DISPLAYED_ITEM_INFO", value);
 			},
 		},
 
@@ -103,24 +53,6 @@ export default {
 				this.$store.commit("SET_FS_SILVER", value);
 			},
 		},
-
-		tierChart: {
-			get() {
-				return this.$store.state.enhance.tierChart;
-			},
-			set(value) {
-				this.$store.commit("SET_TIER_CHART", value);
-			},
-		},
-
-		silverChart: {
-			get() {
-				return this.$store.state.enhance.silverChart;
-			},
-			set(value) {
-				this.$store.commit("SET_SILVER_CHART", value);
-			},
-		},
 	},
 
 	methods: {
@@ -132,44 +64,6 @@ export default {
 					this.toggles.justClicked = false;
 				}, 3000);
 			}
-		},
-
-		addToFailstack(amount) {
-			this.failstack += amount;
-			if (this.failstack <= 0) this.failstack = 0;
-			this.setChance();
-		},
-
-		setChance() {
-			let baseChance = this.currentItemSelected.currTier.baseChance;
-			this.displayedItemInformation.softCap = this.currentItemSelected.currTier.softCap;
-
-			let failstackChance = baseChance / 10;
-			let failstackChanceAfterSoftcap = baseChance / 50;
-
-			if (this.failstack > this.displayedItemInformation.softCap) {
-				this.displayedItemInformation.chanceOfSuccess =
-					baseChance +
-					failstackChance * this.displayedItemInformation.softCap +
-					(this.failstack - this.displayedItemInformation.softCap) * failstackChanceAfterSoftcap;
-			} else {
-				this.displayedItemInformation.chanceOfSuccess = baseChance + failstackChance * this.failstack;
-			}
-
-			this.displayedItemInformation.chanceOfSuccess = (
-				this.displayedItemInformation.chanceOfSuccess * 100
-			).toFixed(2);
-			if (
-				this.displayedItemInformation.chanceOfSuccess > 90 &&
-				this.currentItemSelected.currTier.baseChance != 1
-			) {
-				this.displayedItemInformation.chanceOfSuccess = (90).toFixed(2);
-			} else if (this.currentItemSelected.currTier.baseChance === 1) {
-				this.displayedItemInformation.chanceOfSuccess = (100).toFixed(2);
-			}
-			this.displayedItemInformation.avgClicks = (100 / this.displayedItemInformation.chanceOfSuccess).toFixed(
-				2
-			);
 		},
 
 		degrade() {
@@ -210,7 +104,7 @@ export default {
 			}
 		},
 
-		success(roll) {
+		fail(roll) {
 			this.stats.currentSuccessStreak = 0;
 			this.stats.currentFailStreak++;
 			this.stats.fails++;
@@ -222,7 +116,12 @@ export default {
 				roll: (roll * 100).toFixed(2),
 				failstack: this.failstack,
 				lvlName:
-					this.currentItemSelected.nextTier === null || this.currentItemSelected.nextTier.lvlName === "END"
+					this.currentItemSelected.nextTier === null ||
+					(this.currentItemSelected.nextTier.lvlName === "END" &&
+						this.currentItemSelected.information.chance === 1)
+						? "+3"
+						: this.currentItemSelected.nextTier === null ||
+						  this.currentItemSelected.nextTier.lvlName === "END"
 						? "V"
 						: this.currentItemSelected.nextTier.lvlName,
 			};
@@ -249,37 +148,77 @@ export default {
 							this.currentItemSelected.prevTier = null;
 
 							this.displayedItemInformation.silverSpent +=
-								this.currentItemSelected.currTier.material.materialCost +
-								this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+								this.currentItemSelected.currTier.material.materialCost;
+
+							if (this.currentItemSelected.information.name.includes("Dragon Slayer")) {
+								this.displayedItemInformation.silverSpent += 0;
+							} else {
+								this.displayedItemInformation.silverSpent +=
+									this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+							}
 
 							this.setChance();
 						} else {
 							this.displayedItemInformation.silverSpent +=
-								this.currentItemSelected.currTier.material.materialCost +
-								this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+								this.currentItemSelected.currTier.material.materialCost;
+
+							if (this.currentItemSelected.information.name.includes("Dragon Slayer")) {
+								this.displayedItemInformation.silverSpent += 0;
+							} else {
+								this.displayedItemInformation.silverSpent +=
+									this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+							}
+
 							this.degrade();
 						}
 					} else {
 						this.displayedItemInformation.silverSpent += this.currentItemSelected.currTier.crons * 1126190;
 
 						this.silverChart[temp].silverForCrons += this.currentItemSelected.currTier.crons * 1126190;
+
+						if ([1, 3, 4, 5, 7, 8, 11, 12].includes(this.currentItemSelected.information.chance)) {
+							let rol2 = Math.floor(Math.random() * 101);
+							console.log(rol2);
+							if (rol2 > 60) {
+								this.degrade();
+							}
+						}
 					}
 				} else {
+					if (
+						this.toggles.cronToggle &&
+						this.currentItemSelected.currTier.lvlName === "BASE" &&
+						[1, 3, 4, 5, 7, 8, 11, 12, 17].includes(this.currentItemSelected.information.chance)
+					) {
+						this.displayedItemInformation.silverSpent += this.currentItemSelected.currTier.crons * 1126190;
+						this.silverChart[temp].silverForCrons += this.currentItemSelected.currTier.crons * 1126190;
+					}
+
 					this.displayedItemInformation.silverSpent +=
-						this.currentItemSelected.currTier.material.materialCost +
-						this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+						this.currentItemSelected.currTier.material.materialCost;
+
+					if (this.currentItemSelected.information.name.includes("Dragon Slayer")) {
+						this.displayedItemInformation.silverSpent += 0;
+					} else {
+						this.displayedItemInformation.silverSpent +=
+							this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+					}
 
 					this.addToFailstack(this.currentItemSelected.currTier.failstackGain);
 					this.setChance();
 				}
 
-				this.silverChart[temp].silverForDurability +=
-					this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+				if (this.currentItemSelected.information.name.includes("Dragon Slayer")) {
+					this.silverChart[temp].silverForDurability += 0;
+				} else {
+					this.silverChart[temp].silverForDurability +=
+						this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+				}
 				this.silverChart[temp].silverForMaterial += this.currentItemSelected.currTier.material.materialCost;
 			}
 		},
 
-		fail(roll) {
+		success(roll) {
 			this.stats.currentFailStreak = 0;
 			this.stats.currentSuccessStreak++;
 			this.stats.success++;
@@ -291,7 +230,10 @@ export default {
 				roll: (roll * 100).toFixed(2),
 				failstack: this.failstack,
 				lvlName:
-					this.currentItemSelected.nextTier.lvlName === "END"
+					this.currentItemSelected.nextTier.lvlName === "END" &&
+					this.currentItemSelected.information.chance === 1
+						? "+3"
+						: this.currentItemSelected.nextTier.lvlName === "END"
 						? "V"
 						: this.currentItemSelected.nextTier.lvlName,
 			};
@@ -340,9 +282,9 @@ export default {
 					this.setFsDefaults();
 
 					if (roll >= this.displayedItemInformation.chanceOfSuccess / 100) {
-						this.success(roll);
-					} else {
 						this.fail(roll);
+					} else {
+						this.success(roll);
 					}
 
 					if (this.stats.currentSuccessStreak > this.stats.highestSuccessStreak) {

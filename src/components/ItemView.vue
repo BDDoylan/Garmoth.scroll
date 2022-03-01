@@ -1,7 +1,7 @@
 <template>
 	<div class="flex bg-700 text-0 rounded h-28 2xl:h-28 text-center" @click="open('itemSelector')">
 		<Select />
-        
+
 		<div class="flex-initial w-24 z-10">
 			<div class="mt-6 bg-600 rounded ml-4 p-2 w-20 relative h-16">
 				<img
@@ -46,6 +46,8 @@
 					<span>{{
 						currentItemSelected.currTier.lvlName === "BASE"
 							? ""
+							: currentItemSelected.currTier.lvlName === "END" && currentItemSelected.information.chance === 1
+							? "+3"
 							: currentItemSelected.currTier.lvlName === "END"
 							? "V"
 							: currentItemSelected.currTier.lvlName
@@ -57,6 +59,7 @@
 </template>
 
 <script>
+import Enhancing from "../mixins/Enhancing";
 import Select from "./Select.vue";
 
 export default {
@@ -66,30 +69,6 @@ export default {
 		Select,
 	},
 
-	computed: {
-		currentItemSelected: {
-			get() {
-				return this.$store.state.enhance.currentItemSelected;
-			},
-			set(value) {
-				this.$store.commit("SET_CURRENT_ITEM_SELECTED", value);
-			},
-		},
-
-		toggles: {
-			get() {
-				return this.$store.state.enhance.toggles;
-			},
-			set(value) {
-				this.$store.commit("SET_TOGGLES", value);
-			},
-		},
-	},
-
-	methods: {
-		open(id) {
-			document.getElementById(id).style.display = "flex";
-		},
-	},
+	mixins: [Enhancing],
 };
 </script>

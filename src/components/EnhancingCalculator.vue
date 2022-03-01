@@ -11,8 +11,8 @@
 		<ChanceCalculator />
 	</div>
 	<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 px-4 py-1 w-50%">
-		<!-- <TierChart class="w-50%"></TierChart>
-			<SilverChart class="w-50%"></SilverChart> -->
+		<TierChart class="w-50%"></TierChart>
+		<SilverChart class="w-50%"></SilverChart>
 	</div>
 </template>
 

@@ -84,7 +84,7 @@
 				>
 					<div v-for="(tier, key) in getTierOptions" :key="key">
 						<p
-							@click="setCurrentSelectedItem(key), selectChartData(), close('itemSelector')"
+							@click="setCurrentSelectedItem(key), close('itemSelector')"
 							class="text-white font-bold bg-400 rounded w-14 m-auto text-center my-2 p-2 hover:bg-700 cursor-pointer"
 						>
 							{{ tier }}
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import Enhancing from "../mixins/Enhancing";
 import axios from "axios";
 import Modal from "./Modal.vue";
 
@@ -105,7 +106,7 @@ export default {
 
 	components: { Modal },
 
-	emits: ["chosenItem"],
+	mixins: [Enhancing],
 
 	data() {
 		return {
@@ -249,27 +250,27 @@ export default {
 					fail: 0,
 				},
 				{
-					tier: "pri",
+					tier: "I",
 					success: 0,
 					fail: 0,
 				},
 				{
-					tier: "duo",
+					tier: "II",
 					success: 0,
 					fail: 0,
 				},
 				{
-					tier: "tri",
+					tier: "III",
 					success: 0,
 					fail: 0,
 				},
 				{
-					tier: "tet",
+					tier: "IV",
 					success: 0,
 					fail: 0,
 				},
 				{
-					tier: "pen",
+					tier: "V",
 					success: 0,
 					fail: 0,
 				},
@@ -277,27 +278,27 @@ export default {
 
 			tierChartDataFive: [
 				{
-					tier: "pri",
+					tier: "I",
 					success: 0,
 					fail: 0,
 				},
 				{
-					tier: "duo",
+					tier: "II",
 					success: 0,
 					fail: 0,
 				},
 				{
-					tier: "tri",
+					tier: "III",
 					success: 0,
 					fail: 0,
 				},
 				{
-					tier: "tet",
+					tier: "IV",
 					success: 0,
 					fail: 0,
 				},
 				{
-					tier: "pen",
+					tier: "V",
 					success: 0,
 					fail: 0,
 				},
@@ -428,35 +429,35 @@ export default {
 					silverForFS: 0,
 				},
 				{
-					tier: "pri",
+					tier: "I",
 					silverForDurability: 0,
 					silverForMaterial: 0,
 					silverForCrons: 0,
 					silverForFS: 0,
 				},
 				{
-					tier: "duo",
+					tier: "II",
 					silverForDurability: 0,
 					silverForMaterial: 0,
 					silverForCrons: 0,
 					silverForFS: 0,
 				},
 				{
-					tier: "tri",
+					tier: "III",
 					silverForDurability: 0,
 					silverForMaterial: 0,
 					silverForCrons: 0,
 					silverForFS: 0,
 				},
 				{
-					tier: "tet",
+					tier: "IV",
 					silverForDurability: 0,
 					silverForMaterial: 0,
 					silverForCrons: 0,
 					silverForFS: 0,
 				},
 				{
-					tier: "pen",
+					tier: "V",
 					silverForDurability: 0,
 					silverForMaterial: 0,
 					silverForCrons: 0,
@@ -466,35 +467,35 @@ export default {
 
 			silverChartDataFive: [
 				{
-					tier: "pri",
+					tier: "I",
 					silverForDurability: 0,
 					silverForMaterial: 0,
 					silverForCrons: 0,
 					silverForFS: 0,
 				},
 				{
-					tier: "duo",
+					tier: "II",
 					silverForDurability: 0,
 					silverForMaterial: 0,
 					silverForCrons: 0,
 					silverForFS: 0,
 				},
 				{
-					tier: "tri",
+					tier: "III",
 					silverForDurability: 0,
 					silverForMaterial: 0,
 					silverForCrons: 0,
 					silverForFS: 0,
 				},
 				{
-					tier: "tet",
+					tier: "IV",
 					silverForDurability: 0,
 					silverForMaterial: 0,
 					silverForCrons: 0,
 					silverForFS: 0,
 				},
 				{
-					tier: "pen",
+					tier: "V",
 					silverForDurability: 0,
 					silverForMaterial: 0,
 					silverForCrons: 0,
@@ -587,52 +588,6 @@ export default {
 			},
 		},
 
-		displayedItemInformation: {
-			get() {
-				return this.$store.state.enhance.displayedItemInformation;
-			},
-			set(value) {
-				this.$store.commit("SET_DISPLAYED_ITEM_INFO", value);
-			},
-		},
-
-		failstack: {
-			get() {
-				return this.$store.state.enhance.failstack;
-			},
-			set(value) {
-				this.$store.commit("SET_FAILSTACK", value);
-			},
-		},
-
-		currentItemSelected: {
-			get() {
-				return this.$store.state.enhance.currentItemSelected;
-			},
-			set(value) {
-				this.$store.commit("SET_CURRENT_ITEM_SELECTED", value);
-				this.setChance();
-			},
-		},
-
-		tierChart: {
-			get() {
-				return this.$store.state.enhance.tierChart;
-			},
-			set(value) {
-				this.$store.commit("SET_TIER_CHART", value);
-			},
-		},
-
-		silverChart: {
-			get() {
-				return this.$store.state.enhance.silverChart;
-			},
-			set(value) {
-				this.$store.commit("SET_SILVER_CHART", value);
-			},
-		},
-
 		filteredOptions() {
 			if (this.searchItem.length > 2) {
 				return this.items.filter((item) => {
@@ -699,16 +654,19 @@ export default {
 					id: 752021,
 					cost: 50000 + this.prices[16004].sub_items[0].price + this.prices[16005].sub_items[0].price,
 				},
-				{ id: 756306, cost: 0 },
+				{
+					id: 756306,
+					cost: 0,
+				},
+				{
+					id: 756305,
+					cost: 0,
+				},
 			];
 		},
 	},
 
 	methods: {
-		close(id) {
-			document.getElementById(id).style.display = "none";
-		},
-
 		selectChartData() {
 			let len =
 				this.currentItemSelected.allTiers === null ? null : this.currentItemSelected.allTiers.length - 1;
@@ -736,7 +694,7 @@ export default {
 							? null
 							: this.chance[this.selectedItem.chance].enhancements[index],
 					softCap:
-						this.chance[this.selectedItem.chance].softcap === undefined
+						this.chance[this.selectedItem.chance].softcap === null
 							? null
 							: this.chance[this.selectedItem.chance].softcap[index],
 					crons:
@@ -809,38 +767,9 @@ export default {
 				prevTier: allTiers[key - 1] === undefined ? null : allTiers[key - 1],
 				nextTier: allTiers[key + 1] === undefined ? null : allTiers[key + 1],
 			};
-		},
 
-		setChance() {
-			let baseChance = this.currentItemSelected.currTier.baseChance;
-			this.displayedItemInformation.softCap = this.currentItemSelected.currTier.softCap;
-
-			let failstackChance = baseChance / 10;
-			let failstackChanceAfterSoftcap = baseChance / 50;
-
-			if (this.failstack > this.displayedItemInformation.softCap) {
-				this.displayedItemInformation.chanceOfSuccess =
-					baseChance +
-					failstackChance * this.displayedItemInformation.softCap +
-					(this.failstack - this.displayedItemInformation.softCap) * failstackChanceAfterSoftcap;
-			} else {
-				this.displayedItemInformation.chanceOfSuccess = baseChance + failstackChance * this.failstack;
-			}
-
-			this.displayedItemInformation.chanceOfSuccess = (
-				this.displayedItemInformation.chanceOfSuccess * 100
-			).toFixed(2);
-			if (
-				this.displayedItemInformation.chanceOfSuccess > 90 &&
-				this.currentItemSelected.currTier.baseChance != 1
-			) {
-				this.displayedItemInformation.chanceOfSuccess = (90).toFixed(2);
-			} else if (this.currentItemSelected.currTier.baseChance === 1) {
-				this.displayedItemInformation.chanceOfSuccess = (100).toFixed(2);
-			}
-			this.displayedItemInformation.avgClicks = (100 / this.displayedItemInformation.chanceOfSuccess).toFixed(
-				2
-			);
+			this.selectChartData();
+			this.clearSimulation();
 		},
 	},
 };
