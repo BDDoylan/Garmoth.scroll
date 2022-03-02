@@ -53,6 +53,15 @@ export default {
 				this.$store.commit("SET_FS_SILVER", value);
 			},
 		},
+
+		unusedFs: {
+			get() {
+				return this.$store.state.enhance.unusedFailstackStorage;
+			},
+			set(value) {
+				this.$store.commit("SET_UNUSED_FS", value);
+			},
+		},
 	},
 
 	methods: {
@@ -98,7 +107,12 @@ export default {
 						"S: " ||
 					this.failstack > this.fsDefaults[this.currentItemSelected.currTier.tierNum].stop
 				) {
-					this.failstack = this.fsDefaults[this.currentItemSelected.currTier.tierNum].start;
+					if (this.failstack > this.fsDefaults[this.currentItemSelected.currTier.tierNum].stop) {
+						this.unusedFs.push(this.failstack);
+						this.failstack = this.fsDefaults[this.currentItemSelected.currTier.tierNum].start;
+					} else {
+						this.failstack = this.fsDefaults[this.currentItemSelected.currTier.tierNum].start;
+					}
 				}
 				this.setChance();
 			}

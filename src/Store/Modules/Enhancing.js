@@ -46,6 +46,7 @@ export default {
 			justClicked: false,
 			useFsDefaultsToggle: false,
 			useFsDefaultSilverValuesToggle: false,
+			useUnusedFsToggle: false,
 		},
 
 		fsDefaults: {},
@@ -55,6 +56,8 @@ export default {
 		tierChart: [],
 
 		silverChart: [],
+
+		unusedFailstackStorage: [],
 	}),
 
 	mutations: {
@@ -117,6 +120,10 @@ export default {
 
 		SET_SILVER_CHART(state, payload) {
 			state.silverChart = payload;
+		},
+
+		SET_UNUSED_FS(state, payload) {
+			state.unusedFailstackStorage = payload;
 		},
 	},
 	actions: {},

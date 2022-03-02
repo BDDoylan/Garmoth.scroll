@@ -57,6 +57,20 @@
 			>
 				FS Silver Values
 			</button>
+
+			<UnusedFailstacks />
+			<button
+				:class="[
+					'text-sm ml-2 rounded bg-500 px-1',
+					{
+						'text-green': toggles.useUnusedFsToggle,
+						'text-red': !toggles.useUnusedFsToggle,
+					},
+				]"
+				@click="open('unusedFs')"
+			>
+				Unused Failstacks
+			</button>
 		</div>
 	</div>
 </template>
@@ -65,6 +79,7 @@
 import Enhancing from "../mixins/Enhancing";
 import FSDefaults from "./FSDefaults.vue";
 import FSSilverValues from "./FSSilverValues.vue";
+import UnusedFailstacks from "./UnusedFailstacks.vue";
 
 export default {
 	name: "FailstackPrep",
@@ -72,6 +87,7 @@ export default {
 	components: {
 		FSDefaults,
 		FSSilverValues,
+		UnusedFailstacks,
 	},
 
 	mixins: [Enhancing],
