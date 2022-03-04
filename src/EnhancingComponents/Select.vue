@@ -99,7 +99,7 @@
 <script>
 import Enhancing from "../mixins/Enhancing";
 import axios from "axios";
-import Modal from "./Modal.vue";
+import Modal from "../GeneralComponents/Modal.vue";
 
 export default {
 	name: "Select",

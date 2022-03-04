@@ -21,9 +21,9 @@
 			</button>
 		</div>
 
-		<div class="rounded bg-700 h-90 lg:h-95 2xl:h-81 text-left pb-0 overflow-y-auto">
+		<div class="rounded bg-700 h-90 lg:h-95 2xl:h-90 text-left pb-0 overflow-y-auto">
 			<p
-				v-for="(attempt, key) in simulations.simulationsToDisplay.slice(0, 100).reverse()"
+				v-for="(attempt, key) in simulations.simulationsToDisplay.slice().reverse()"
 				:key="key"
 				:class="['ml-2', { 'text-red': !attempt.state, 'text-green': attempt.state }]"
 			>
@@ -37,7 +37,7 @@
 
 <script>
 import Enhancing from "../mixins/Enhancing";
-import Input from "./Input.vue";
+import Input from "../GeneralComponents/Input.vue";
 import SimulateButton from "./SimulateButton.vue";
 
 export default {

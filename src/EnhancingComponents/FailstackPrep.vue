@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-700 text-0 rounded h-24 2xl:h-36 pb-32 text-center">
+	<div class="bg-700 text-0 h-24 2xl:h-36 pb-32 text-center pt-5">
 		<div class="font-bold mb-3 pt-2">
 			Current Failstack:
 			<input

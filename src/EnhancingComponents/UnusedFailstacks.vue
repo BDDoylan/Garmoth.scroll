@@ -1,7 +1,7 @@
 <template>
 	<Modal id="unusedFs">
 		<div class="w-full bg-600 shadow-sm pl-3 p-3 py-2 text-left focus:outline-none rounded">
-			<div class="text-2xl text-white mb-2 ml-3">
+			<div class="text-2xl text-white mb-2 mx-auto text-center">
 				<p
 					:class="[
 						'inline',
@@ -14,13 +14,13 @@
 					Unused Failstacks
 				</p>
 
-				<label class="switch my-2"
+				<!-- <label class="switch my-2"
 					><input
 						:disabled="[4, 5, 7, 8, 11, 13].includes(this.currentItemSelected.information.chance)"
 						@click="toggles.useUnusedFsToggle = !toggles.useUnusedFsToggle"
 						type="checkbox" />
 					<span class="slider round"></span
-				></label>
+				></label> -->
 			</div>
 
 			<div class="text-center text-white text-xl grid grid-cols-5 gap-2">
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Modal from "./Modal.vue";
+import Modal from "../GeneralComponents/Modal.vue";
 
 export default {
 	name: "UnusedFailstacks",

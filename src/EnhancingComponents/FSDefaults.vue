@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import Modal from "./Modal.vue";
+import Modal from "../GeneralComponents/Modal.vue";
 
 export default {
 	name: "FSDefaults",

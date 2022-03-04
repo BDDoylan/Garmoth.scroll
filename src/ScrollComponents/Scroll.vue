@@ -129,7 +129,7 @@
 </template>
 
 <script>
-import Input from "./Input.vue";
+import Input from "../GeneralComponents/Input.vue";
 
 export default {
 	name: "Scroll",

@@ -1,13 +1,15 @@
 <template>
 	<div class="grid grid-cols-1 my-2 gap-2 2xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-3 text-center">
 		<div class="rounded bg-700 h-14 w-auto font-semibold">
-			<p class="my-3">
-				Success Rate:
-				{{
-					currentItemSelected.currTier.lvlName != "END"
-						? displayedItemInformation.chanceOfSuccess + "%"
-						: "N/A"
-				}}
+			<p :class="['my-3 text-green font-bold', { 'text-red': !toggles.artisanToggle }]">
+				Artisan Memory
+				<label class="switch ml-1"
+					><input
+						:disabled="toggles.justClicked"
+						@click="toggles.artisanToggle = !toggles.artisanToggle"
+						type="checkbox" />
+					<span class="slider round"></span
+				></label>
 			</p>
 		</div>
 
@@ -27,7 +29,7 @@
 					currentItemSelected.allTiers === null ||
 					toggles.justClicked
 				"
-				@click="(failstack = this.displayedItemInformation.softCap), setChance()"
+				@click="(failstack = displayedItemInformation.softCap), setChance()"
 			>
 				Softcap:
 				{{ currentItemSelected.currTier.lvlName != "END" ? displayedItemInformation.softCap : "N/A" }}

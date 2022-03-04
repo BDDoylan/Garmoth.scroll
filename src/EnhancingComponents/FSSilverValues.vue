@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import Modal from "./Modal.vue";
-import Input from "./Input.vue";
+import Modal from "../GeneralComponents/Modal.vue";
+import Input from "../GeneralComponents/Input.vue";
 
 export default {
 	name: "FSSilverValues",

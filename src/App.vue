@@ -1,13 +1,13 @@
 <template>
 	<div class="bg-800 w-full min-h-screen">
 		<!-- <Scrolls title="Scroll Calculator" /> -->
-		<EnhancingCalculator/>
+		<EnhancingCalculator />
 	</div>
 </template>
 
 <script>
-import EnhancingCalculator from './components/EnhancingCalculator.vue';
-import Scrolls from "./components/Scrolls.vue";
+import EnhancingCalculator from "./Pages/EnhancingCalculator.vue";
+import Scrolls from "./Pages/Scrolls.vue";
 
 export default {
 	name: "App",

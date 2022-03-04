@@ -72,6 +72,15 @@ export default {
 				this.$store.commit("SET_SILVER_CHART", value);
 			},
 		},
+
+		unusedFs: {
+			get() {
+				return this.$store.state.enhance.unusedFailstackStorage;
+			},
+			set(value) {
+				this.$store.commit("SET_UNUSED_FS", value);
+			},
+		},
 	},
 
 	methods: {
@@ -126,9 +135,10 @@ export default {
 				data.silverForCrons = 0;
 				data.silverForFS = 0;
 			});
-            this.displayedItemInformation.silverSpent = 0;
-            this.failstack = 0;
-            this.setChance();
+			this.displayedItemInformation.silverSpent = 0;
+			this.failstack = 0;
+			this.unusedFs = [];
+			this.setChance();
 		},
 
 		open(id) {

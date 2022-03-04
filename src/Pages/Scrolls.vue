@@ -12,7 +12,12 @@
 			>
 				KEEP
 			</button>
-			<button @click="restoreDefaultValues()" class="bg-600 text-center text-0 text-2xl inline w-52 mb-10 p-1 rounded">Restore Defaults</button>
+			<button
+				@click="restoreDefaultValues()"
+				class="bg-600 text-center text-0 text-2xl inline w-52 mb-10 p-1 rounded"
+			>
+				Restore Defaults
+			</button>
 			<button
 				@click="keep = false"
 				class="bg-600 text-center text-0 text-2xl inline w-20 mb-10 p-1 rounded"
@@ -21,16 +26,10 @@
 				SELL
 			</button>
 		</div>
-		
+
 		<div class="grid grid-cols-1 gap-4 mx-4 sm:grid-cols-3 pb-3">
 			<template v-for="scroll in allScrolls" :key="scroll.main_key">
-				<Scroll
-					v-if="prices"
-					:scroll="scroll"
-					:prices="prices"
-					:keep="keep"
-					:tax="tax"
-				></Scroll>
+				<Scroll v-if="prices" :scroll="scroll" :prices="prices" :keep="keep" :tax="tax"></Scroll>
 			</template>
 		</div>
 	</div>
@@ -38,7 +37,7 @@
 
 <script>
 import axios from "axios";
-import Scroll from "./Scroll.vue";
+import Scroll from "../ScrollComponents/Scroll.vue";
 
 export default {
 	name: "Scrolls",
@@ -233,9 +232,9 @@ export default {
 
 	methods: {
 		restoreDefaultValues() {
-			localStorage.removeItem('SCROLL_DATA');
+			localStorage.removeItem("SCROLL_DATA");
 			window.location.reload();
-		}
+		},
 	},
 };
 </script>
@@ -246,17 +245,11 @@ export default {
 	font-style: normal;
 	font-weight: 400;
 	src: url("../fonts/poppins-v15-latin-regular.eot"); /* IE9 Compat Modes */
-	src: local(""),
-		url("../fonts/poppins-v15-latin-regular.eot?#iefix")
-			format("embedded-opentype"),
-		/* IE6-IE8 */ url("../fonts/poppins-v15-latin-regular.woff2")
-			format("woff2"),
-		/* Super Modern Browsers */ url("../fonts/poppins-v15-latin-regular.woff")
-			format("woff"),
-		/* Modern Browsers */ url("../fonts/poppins-v15-latin-regular.ttf")
-			format("truetype"),
-		/* Safari, Android, iOS */
-			url("../fonts/poppins-v15-latin-regular.svg#Poppins") format("svg"); /* Legacy iOS */
+	src: local(""), url("../fonts/poppins-v15-latin-regular.eot?#iefix") format("embedded-opentype"),
+		/* IE6-IE8 */ url("../fonts/poppins-v15-latin-regular.woff2") format("woff2"),
+		/* Super Modern Browsers */ url("../fonts/poppins-v15-latin-regular.woff") format("woff"),
+		/* Modern Browsers */ url("../fonts/poppins-v15-latin-regular.ttf") format("truetype"),
+		/* Safari, Android, iOS */ url("../fonts/poppins-v15-latin-regular.svg#Poppins") format("svg"); /* Legacy iOS */
 }
 
 /* Chrome, Safari, Edge, Opera */

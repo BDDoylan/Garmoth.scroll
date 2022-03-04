@@ -8,7 +8,7 @@ export default {
 
 		currentItemSelected: {
 			information: {
-				main_key: 10810,
+				main_key: 0,
 			},
 
 			allTiers: null,
@@ -47,6 +47,7 @@ export default {
 			useFsDefaultsToggle: false,
 			useFsDefaultSilverValuesToggle: false,
 			useUnusedFsToggle: false,
+			artisanToggle: false,
 		},
 
 		fsDefaults: {},

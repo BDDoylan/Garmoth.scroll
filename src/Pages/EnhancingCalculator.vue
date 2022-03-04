@@ -10,22 +10,22 @@
 		<Simulations />
 		<ChanceCalculator />
 	</div>
-	<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 px-4 py-1 w-50%">
-		<TierChart class="w-50%"></TierChart>
-		<SilverChart class="w-50%"></SilverChart>
+	<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 px-4 py-1">
+		<TierChart />
+		<SilverChart />
 	</div>
 </template>
 
 <script>
-import HeaderInformation from "./HeaderInformation.vue";
-import Stats from "./Stats.vue";
-import ItemView from "./ItemView.vue";
-import FailstackPrep from "./FailstackPrep.vue";
-import DisplayedItemInfo from "./DisplayedItemInfo.vue";
-import Simulations from "./Simulations.vue";
-import ChanceCalculator from "./ChanceCalculator.vue";
-import TierChart from "./TierChart.vue";
-import SilverChart from "./SilverChart.vue";
+import HeaderInformation from "../EnhancingComponents/HeaderInformation.vue";
+import Stats from "../EnhancingComponents/Stats.vue";
+import ItemView from "../EnhancingComponents/ItemView.vue";
+import FailstackPrep from "../EnhancingComponents/FailstackPrep.vue";
+import DisplayedItemInfo from "../EnhancingComponents/DisplayedItemInfo.vue";
+import Simulations from "../EnhancingComponents/Simulations.vue";
+import ChanceCalculator from "../EnhancingComponents/ChanceCalculator.vue";
+import TierChart from "../EnhancingComponents/TierChart.vue";
+import SilverChart from "../EnhancingComponents/SilverChart.vue";
 
 export default {
 	name: "EnchancingCalculator",
@@ -39,12 +39,6 @@ export default {
 		ChanceCalculator,
 		TierChart,
 		SilverChart,
-	},
-
-	data() {
-		return {
-			unusedFsStorage: [],
-		};
 	},
 };
 </script>

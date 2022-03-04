@@ -168,7 +168,10 @@ export default {
 								this.displayedItemInformation.silverSpent += 0;
 							} else {
 								this.displayedItemInformation.silverSpent +=
-									this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+									this.prices[44195].sub_items[0].price *
+									(this.toggles.artisanToggle
+										? this.currentItemSelected.currTier.durabilityLoss / 5
+										: this.currentItemSelected.currTier.durabilityLoss);
 							}
 
 							this.setChance();
@@ -180,7 +183,10 @@ export default {
 								this.displayedItemInformation.silverSpent += 0;
 							} else {
 								this.displayedItemInformation.silverSpent +=
-									this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+									this.prices[44195].sub_items[0].price *
+									(this.toggles.artisanToggle
+										? this.currentItemSelected.currTier.durabilityLoss / 5
+										: this.currentItemSelected.currTier.durabilityLoss);
 							}
 
 							this.degrade();
@@ -215,7 +221,10 @@ export default {
 						this.displayedItemInformation.silverSpent += 0;
 					} else {
 						this.displayedItemInformation.silverSpent +=
-							this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+							this.prices[44195].sub_items[0].price *
+							(this.toggles.artisanToggle
+								? this.currentItemSelected.currTier.durabilityLoss / 5
+								: this.currentItemSelected.currTier.durabilityLoss);
 					}
 
 					this.addToFailstack(this.currentItemSelected.currTier.failstackGain);
@@ -226,7 +235,10 @@ export default {
 					this.silverChart[temp].silverForDurability += 0;
 				} else {
 					this.silverChart[temp].silverForDurability +=
-						this.prices[44195].sub_items[0].price * this.currentItemSelected.currTier.durabilityLoss;
+						this.prices[44195].sub_items[0].price *
+						(this.toggles.artisanToggle
+							? this.currentItemSelected.currTier.durabilityLoss / 5
+							: this.currentItemSelected.currTier.durabilityLoss);
 				}
 				this.silverChart[temp].silverForMaterial += this.currentItemSelected.currTier.material.materialCost;
 			}
