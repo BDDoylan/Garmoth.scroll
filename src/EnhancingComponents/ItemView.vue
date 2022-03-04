@@ -42,7 +42,7 @@
 						:src="'https://assets.garmoth.com/items/' + currentItemSelected.information.main_key + '.png'"
 						:class="[
 							'h-12 m-auto rounded-xl',
-							{ 'animate-pulse': currentItemSelected.information.main_key === 10810 },
+							{ 'animate-pulse': currentItemSelected.information.main_key === 0 },
 						]"
 					/>
 					<p
